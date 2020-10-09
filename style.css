@@ -1,9 +1,171 @@
 /* Try to model the stylesheet like a framework as much as possible*/
 /*Use mobile-first approach */
 /* Use rem for efficient responsiveness */
+:root {
+  font-size: 16px;
+  /*Define vars here*/
+  --dark-shade: rgba(0, 0, 0, 0.5);
+  --light-text: #fff;
+  --select-text: rgb(255, 215, 85);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 16px;
 }
+
+#header-home {
+  min-height: 50vh;
+  max-height: 50vh;
+  min-width: 100vw;
+  max-width: 100v;
+  background: url("./img/playa_del_silencio.jpg") no-repeat center / cover;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.nav {
+  height: 3rem;
+  width: 100%;
+  background-color: var(--dark-shade);
+}
+
+.nav:first-child {
+  height: 3rem;
+  text-align: center;
+}
+
+.nav-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.logo-nav {
+  height: 3rem;
+  object-fit: cover;
+}
+
+.hamburger-btn:before {
+  line-height: 3rem;
+  font-size: 2rem;
+}
+
+.hamburger-btn:hover {
+  color: var(--select-text);
+}
+
+/* Flexbox classes */
+.flex {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}
+
+.flex-ac {
+  align-items: center;
+}
+
+.flex-jc-sb {
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.menu-list {
+  list-style-type: none;
+  height: 50vw;
+}
+
+/* .menu-list li {
+  line-height: 3rem;
+} */
+
+.menu-list li a {
+  line-height: 3rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.light-text {
+  color: var(--light-text);
+}
+
+.menu-list li a:hover {
+  text-decoration: underline;
+  color: var(--select-text);
+}
+
+/* Margin classes */
+.my-1 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mx-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.mr-1 {
+  margin-right: 1rem;
+}
+
+.my-2 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.mx-2 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.ml-2 {
+  margin-left: 2rem;
+}
+
+.mr-2 {
+  margin-right: 2rem;
+}
+
+.my-3 {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.mx-3 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.ml-3 {
+  margin-left: 3rem;
+}
+
+.mr-3 {
+  margin-right: 3rem;
+}
+
+/*Media queries*/
+
+/*Take care of nav flex reconfiguration on larger screens*/
