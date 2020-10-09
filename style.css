@@ -1,0 +1,9 @@
+/* Try to model the stylesheet like a framework as much as possible*/
+/*Use mobile-first approach */
+/* Use rem for efficient responsiveness */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
