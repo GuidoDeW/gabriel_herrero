@@ -1,5 +1,6 @@
 const dropdownMenu = document.getElementById("dropdown-menu"),
-  hamburgerBtn = document.getElementById("hamburger-btn");
+  hamburgerBtn = document.getElementById("hamburger-btn"),
+  exploreBtn = document.getElementById("explore-btn");
 
 
 document.body.addEventListener("click", (e)=> {
@@ -9,6 +10,7 @@ document.body.addEventListener("click", (e)=> {
     hamburgerBtn.classList.remove("fa-times")
     hamburgerBtn.classList.add("fa-bars");
     hamburgerBtn.classList.remove("open");
+    exploreBtn.classList.remove("hide");
   };
 });
 
@@ -18,6 +20,7 @@ hamburgerBtn.addEventListener("click", ()=> {
   hamburgerBtn.classList.toggle("fa-bars");
   hamburgerBtn.classList.toggle("fa-times");
   hamburgerBtn.classList.toggle("open");
+  exploreBtn.classList.toggle("hide");
   // dropdownMenu.classList.contains("show") ? hamburgerBtn.classList.add("open") : hamburgerBtn.classList.remove("open");
 });
 
