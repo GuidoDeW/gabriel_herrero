@@ -10,7 +10,7 @@
       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Gabriel Herrero</title>
   </head>
   <!-- Note: possibly, flex-column and flex (-row) classes will have to be reconsidered;
   e.g. flex-smallscreen-column, flex-mediumscreen-row etc. to accomodate 
@@ -23,19 +23,19 @@ media queries-->
         <img src="logo/gh_logo_5.png" class="logo-nav" />
         <!-- Display hamburger icon on small screens and change navbar flex props / display / animation accordingly; remove hamburger icon 
         on larger screens and display ul as horizontal flex container-->
-        <i class="fas fa-bars light-text hamburger-btn mr-1"></i>
+        <i id="hamburger-btn" class="fas fa-bars light-text hamburger-btn mr-1"></i>
       </div>
-      <ul class="flex flex-column hide flex-jc-sb menu-list">
-        <li class="ml-1 light-text"><a href="#">Home</a></li>
-        <li class="ml-1 light-text"><a href="#">Work</a></li>
-        <li class="ml-1 light-text"><a href="#">About</a></li>
-        <li class="my-1 light-text"><a href="#">Contact</a></li>
+      <ul id="dropdown-menu" class="flex flex-column hide flex-jc-sb menu-list">
+        <li class="my-1 light-text"><a href="#" class="navlink light-text current">Home</a></li>
+        <li class="my-1 light-text"><a href="#" class="navlink light-text">Work</a></li>
+        <li class="my-1 light-text"><a href="#" class="navlink light-text">About</a></li>
+        <li class="my-1 light-text"><a href="#" class="navlink light-text">Contact</a></li>
       </ul>
     </nav>
     <header id="header-home" class="flex">
       <!-- Add "hide" class when hamburger menu drops down-->
       <div id="welcome">
-        <h1>Gabriel Herrero</h1>
+        <h1 class="light-text">Gabriel Herrero</h1>
         <a href="#" class="btn btn-light">Explore</a>
       </div>
     </header>
