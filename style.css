@@ -267,7 +267,8 @@
 }
 
 .hamburger-btn {
-  transition: color var(--swift-color-change);
+  transition: color var(--swift-color-change),
+    transform var(--swift-color-change);
 }
 
 .hamburger-btn:before {
@@ -278,6 +279,10 @@
 
 .hamburger-btn:hover {
   color: var(--select-text);
+}
+
+.hamburger-btn.open {
+  transform: rotateZ(90deg);
 }
 
 #dropdown-menu {
