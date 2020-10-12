@@ -3,10 +3,15 @@
 /* Use rem for efficient responsiveness */
 :root {
   font-size: 16px;
-  /*Define vars here*/
+  /*Color vars*/
   --dark-shade: rgba(0, 0, 0, 0.5);
+  --light-bg: #fff;
+  --select-bg: rgba(255, 215, 85);
   --light-text: #fff;
+  --dark-text: rgb(0, 0, 0);
   --select-text: rgb(255, 215, 85);
+  /*Transition vars*/
+  --swift-color-change: 0.2s;
 }
 
 * {
@@ -215,7 +220,7 @@
 }
 
 .hamburger-btn {
-  transition: color 0.2s;
+  transition: color var(--swift-color-change);
 }
 
 .hamburger-btn:before {
@@ -224,27 +229,27 @@
   cursor: pointer;
 }
 
-.hamburger-btn:hover,
-.hamburger-btn.open {
+.hamburger-btn:hover {
   color: var(--select-text);
 }
 
 #dropdown-menu {
   background-color: inherit;
-  transition: min-height 0.2s linear 0s;
-  -webkit-transition: min-height 0.2s linear 0s;
-  -moz-transition: min-height 0.2s linear 0s;
+  transition: min-height var(--swift-color-change) linear 0s;
+  -webkit-transition: min-height var(--swift-color-change) linear 0s;
+  -moz-transition: min-height var(--swift-color-change) linear 0s;
 }
 
 #dropdown-menu li {
-  transition: opacity 0.2s linear 0s;
-  -webkit-transition: opacity 0.2s linear 0s;
-  -moz-transition: opacity 0.2s linear 0s;
+  transition: opacity var(--swift-color-change) linear 0s;
+  -webkit-transition: opacity var(--swift-color-change) linear 0s;
+  -moz-transition: opacity var(--swift-color-change) linear 0s;
 }
 
 #dropdown-menu.hide {
   /* display: none; */
   min-height: 0;
+  max-height: 0;
   width: 100%;
 }
 
@@ -253,17 +258,42 @@
 }
 
 #dropdown-menu.show {
-  /* display: flex; */
   min-height: calc(50vh - 3rem);
-  /* height: 50vh; */
+  max-height: calc(50vh - 3rem);
 }
 
 #dropdown-menu.show li {
   opacity: 1;
 }
 
+/* Button styling */
+.btn {
+  display: none;
+  text-decoration: none;
+  margin: 1rem 0;
+  padding: 1rem 2rem;
+  transition: background-color var(--swift-color-change);
+}
+
+.btn-light {
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+}
+
+.btn-light:hover {
+  background-color: var(--select-bg);
+}
+
 /* Animations */
 
 /*Media queries*/
+
+/* Adjust navbar layout according to min-width and min-height combo (to avoid 
+the dropped-down menu not fitting within 50vh) */
+@media screen and (min-width: 769px) {
+  .btn {
+    display: inline-block;
+  }
+}
 
 /*Take care of nav flex reconfiguration on larger screens*/
