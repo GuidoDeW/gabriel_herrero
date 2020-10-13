@@ -5,6 +5,7 @@
   font-size: 16px;
   /*Color vars*/
   --dark-shade: rgba(0, 0, 0, 0.5);
+  --no-bg-shade: rgba(35, 10, 60, 0.8);
   --light-bg: #fff;
   --select-bg: rgba(255, 215, 85);
   --light-text: #fff;
@@ -55,8 +56,24 @@
   align-items: center;
 }
 
+.flex-ae {
+  align-items: flex-end;
+}
+
+.flex-jc-c {
+  justify-content: center;
+}
+
 .flex-jc-sb {
   justify-content: space-between;
+}
+
+.flex-jc-se {
+  justify-content: space-evenly;
+}
+
+.flex-jc-end {
+  justify-content: flex-end;
 }
 
 .flex-column,
@@ -64,12 +81,17 @@
   flex-direction: column;
 }
 
+.flex-horizontal {
+  flex-direction: row;
+}
+
 /* Color classes */
 .light-text {
   color: var(--light-text);
 }
 
-.menu-list {
+/* List classes*/
+.list-st-none {
   list-style-type: none;
 }
 
@@ -253,7 +275,7 @@
   transition: color var(--swift-color-change) linear 0s;
 }
 
-/* Dropdown menu styling */
+/* Navbar styling */
 .nav {
   height: 3rem;
   position: absolute;
@@ -348,6 +370,37 @@
 
 .btn-light:hover {
   background-color: var(--select-bg);
+}
+
+/* Footer styling */
+.footer {
+  width: 100vw;
+  /* height: 3rem; */
+  background-color: var(--no-bg-shade);
+  color: var(--light-text);
+}
+
+.footer ul {
+  align-items: center;
+}
+
+.social-link {
+  color: var(--light-text);
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.social-link {
+  transition: color var(--swift-color-change) linear 0s;
+}
+
+.social-link:hover {
+  color: var(--select-text);
+}
+
+.footer span {
+  font-size: 1rem;
+  line-height: 1rem;
 }
 
 /* Animations */
