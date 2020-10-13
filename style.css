@@ -12,6 +12,7 @@
   --select-text: rgb(255, 215, 85);
   /*Transition vars*/
   --swift-color-change: 0.2s;
+  --swift-transform: 0.2s;
 }
 
 * {
@@ -40,8 +41,13 @@
   height: 100%;
 }
 
+/* Display classes */
+.display-none {
+  display: none;
+}
+
 /* Flexbox classes */
-.flex {
+.display-flex {
   display: flex;
 }
 
@@ -65,18 +71,18 @@
 
 .menu-list {
   list-style-type: none;
-  /* height: 50vh; */
 }
 
 .navlink {
-  /* color: var(--light-text); */
   line-height: 3rem;
   font-size: 1.5rem;
+  pointer-events: none;
   text-decoration: none;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--swift-color-change) linear 0s;
 }
 
 .navlink:hover {
-  text-decoration: underline;
   color: var(--select-text);
 }
 
@@ -242,10 +248,14 @@
   padding-right: 3rem;
 }
 
+/* Transition classes */
+.swift-color-change {
+  transition: color var(--swift-color-change) linear 0s;
+}
+
 /* Dropdown menu styling */
 .nav {
   height: 3rem;
-  /* max-height: 50vh; */
   position: absolute;
   width: 100%;
   background-color: var(--dark-shade);
@@ -253,15 +263,8 @@
 
 .nav:first-child {
   height: 3rem;
-  /* flex-basis: 1; */
   text-align: center;
 }
-/* 
-.nav-fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-} */
 
 .logo-nav {
   height: 3rem;
@@ -269,8 +272,7 @@
 }
 
 .hamburger-btn {
-  transition: color var(--swift-color-change),
-    transform var(--swift-color-change);
+  transition: transform var(--swift-transform);
 }
 
 .hamburger-btn:before {
@@ -284,18 +286,17 @@
 }
 
 .hamburger-btn.open {
-  transform: rotateZ(90deg);
+  transform: rotateZ(-90deg);
 }
 
 #dropdown-menu {
   background-color: inherit;
-  transition: min-height var(--swift-color-change) linear 0s;
-  -webkit-transition: min-height var(--swift-color-change) linear 0s;
-  -moz-transition: min-height var(--swift-color-change) linear 0s;
+  transition: min-height var(--swift-transform) linear 0s;
+  -webkit-transition: min-height var(--swift-transform) linear 0s;
+  -moz-transition: min-height var(--swift-transform) linear 0s;
 }
 
-#dropdown-menu li,
-#explore-btn {
+#dropdown-menu li {
   transition: opacity var(--swift-color-change) linear 0s;
   -webkit-transition: opacity var(--swift-color-change) linear 0s;
   -moz-transition: opacity var(--swift-color-change) linear 0s;
@@ -306,7 +307,6 @@
 }
 
 #dropdown-menu {
-  /* display: none; */
   min-height: 0;
   max-height: 0;
   width: 100%;
@@ -325,7 +325,11 @@
   opacity: 1;
 }
 
-#xplore-btn {
+#dropdown-menu.show li .navlink {
+  pointer-events: initial;
+}
+
+#explore-btn {
   visibility: hidden;
 }
 
@@ -334,7 +338,7 @@
   display: none;
   text-decoration: none;
   padding: 1rem 2rem;
-  transition: background-color var(--swift-color-change);
+  transition: background-color var(--swift-color-change) linear 0s;
 }
 
 .btn-light {
@@ -358,15 +362,15 @@ the dropped-down menu not fitting within 50vh) */
     visibility: hidden;
   }
 
-  .nav .flex {
+  .nav .display-flex {
     flex-basis: 0;
   }
 
-  .nav .flex:first-child {
+  .nav .display-flex:first-child {
     flex-grow: 2;
   }
 
-  .nav .flex:last-child {
+  .nav .display-flex:last-child {
     flex-grow: 1;
   }
 
@@ -375,7 +379,6 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   #dropdown-menu {
-    background-color: transparent;
     transition: min-height 0s;
     -webkit-transition: min-height 0s;
     -moz-transition: min-height 0s;
@@ -395,12 +398,14 @@ the dropped-down menu not fitting within 50vh) */
     margin-bottom: 0;
   }
 
+  .navlink {
+    pointer-events: initial;
+  }
   .flex-turner {
     flex-direction: row;
   }
 
   /* Header styling */
-
   .btn {
     display: inline-block;
   }

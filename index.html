@@ -18,21 +18,21 @@ media queries-->
   <body>
     <!-- Header with background and enter button -->
     <!-- Hamburger navbar that expands to list on larger screens (make it sticky / remove from header?)-->
-    <nav class="flex flex-turner nav nav-fixed">
-      <div class="flex flex-jc-sb">
+    <nav class="display-flex flex-turner nav nav-fixed">
+      <div class="display-flex flex-jc-sb">
         <img src="logo/gh_logo_5.png" class="logo-nav" />
         <!-- Display hamburger icon on small screens and change navbar flex props / display / animation accordingly; remove hamburger icon 
         on larger screens and display ul as horizontal flex container-->
-        <i id="hamburger-btn" class="fas fa-bars light-text hamburger-btn mr-1"></i>
+        <i id="hamburger-btn" class="fas fa-bars light-text hamburger-btn swift-color-change mr-1"></i>
       </div>
-      <ul id="dropdown-menu" class="flex flex-turner hide flex-jc-sb menu-list">
-        <li class="light-text"><a href="#" class="navlink light-text current">Home</a></li>
-        <li class="light-text"><a href="#" class="navlink light-text">Work</a></li>
-        <li class="light-text"><a href="#" class="navlink light-text">About</a></li>
-        <li class="light-text"><a href="#" class="navlink light-text">Contact</a></li>
+      <ul id="dropdown-menu" class="display-flex flex-turner flex-jc-sb menu-list">
+        <li class="light-text"><a href="#" class="navlink light-text swift-color-change current">Home</a></li>
+        <li class="light-text"><a href="#" class="navlink light-text swift-color-change">Work</a></li>
+        <li class="light-text"><a href="#" class="navlink light-text swift-color-change">About</a></li>
+        <li class="light-text"><a href="#" class="navlink light-text swift-color-change">Contact</a></li>
       </ul>
     </nav>
-    <header id="header-home" class="flex">
+    <header id="header-home" class="display-flex">
       <!-- Add "hide" class when hamburger menu drops down-->
       <div id="welcome">
         <!-- Consider applying fade effect to both title and button -->
@@ -44,7 +44,7 @@ media queries-->
       </div>
     </header>
     <!-- Specializations overview -->
-    <section class="flex flex-horizontal">
+    <section class="display-flex flex-horizontal">
       <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi maiores
         id, ipsum quam recusandae, error minus eligendi aspernatur laudantium
@@ -62,7 +62,7 @@ media queries-->
       <img src="" alt="" />
     </section>
     <!-- Some photos and introductory text (flex-wrap: wrap-reverse)-->
-    <section class="flex flex-horizontal flex-wrap-reverse">
+    <section class="display-flex flex-horizontal flex-wrap-reverse">
       <div>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus ut
         autem officia neque deleniti quos, odio commodi eveniet veritatis
@@ -80,7 +80,7 @@ media queries-->
       <img src="" alt="" />
     </section>
     <!-- Footer with social media links -->
-    <footer class="flex flex-horizontal flex-center">
+    <footer class="display-flex flex-horizontal flex-center">
       <div id="social">
         <ul>
           <li>
