@@ -1,6 +1,7 @@
 /* Try to model the stylesheet like a framework as much as possible*/
 /*Use mobile-first approach */
 /* Use rem for efficient responsiveness */
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap");
 :root {
   font-size: 16px;
   /*Color vars*/
@@ -17,6 +18,7 @@
 }
 
 * {
+  font-family: "Raleway", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -32,6 +34,10 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+
+#welcome h1 {
+  text-shadow: 0 0 2px var(--select-text);
 }
 
 .full-width {
@@ -104,7 +110,7 @@
   transition: text-decoration-color var(--swift-color-change) linear 0s;
 }
 
-.navlink:hover {
+.navlink:not(.current):hover {
   color: var(--select-text);
 }
 
@@ -312,10 +318,20 @@
 }
 
 #dropdown-menu {
-  background-color: inherit;
-  transition: min-height var(--swift-transform) linear 0s;
+  background: inherit;
+  /* min-height: 0;
+  max-height: 0; */
+  /* z-index: -1; */
+  opacity: 0;
+  min-height: calc(50vh - 3rem);
+  max-height: calc(50vh - 3rem);
+  width: 100%;
+  /* transition: min-height var(--swift-transform) linear 0s;
   -webkit-transition: min-height var(--swift-transform) linear 0s;
-  -moz-transition: min-height var(--swift-transform) linear 0s;
+  -moz-transition: min-height var(--swift-transform) linear 0s; */
+  transition: opacity var(--swift-color-change) linear 0s;
+  -webkit-transition: opacity var(--swift-color-change) linear 0s;
+  -moz-transition: opacity var(--swift-color-change) linear 0s;
 }
 
 #dropdown-menu li {
@@ -328,19 +344,13 @@
   margin-bottom: 1rem;
 }
 
-#dropdown-menu {
-  min-height: 0;
-  max-height: 0;
-  width: 100%;
-}
-
 #dropdown-menu li {
   opacity: 0;
 }
 
 #dropdown-menu.show {
-  min-height: calc(50vh - 3rem);
-  max-height: calc(50vh - 3rem);
+  /* z-index: 1; */
+  opacity: 1;
 }
 
 #dropdown-menu.show li {
@@ -352,12 +362,13 @@
 }
 
 #explore-btn {
-  visibility: hidden;
+  display: none;
+  /* visibility: hidden; */
 }
 
 /* Button styling */
 .btn {
-  display: none;
+  /* display: none; */
   text-decoration: none;
   padding: 1rem 2rem;
   transition: background-color var(--swift-color-change) linear 0s;
@@ -409,7 +420,7 @@
 
 /* Adjust navbar layout according to min-width and min-height combo (to avoid 
 the dropped-down menu not fitting within 50vh) */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 568px) {
   /* Navbar styling */
   #hamburger-btn {
     visibility: hidden;
@@ -427,20 +438,20 @@ the dropped-down menu not fitting within 50vh) */
     flex-grow: 1;
   }
 
-  #explore-btn {
-    visibility: visible;
-  }
-
   #dropdown-menu {
-    transition: min-height 0s;
+    opacity: 1;
+    background-color: transparent;
+    min-height: inherit;
+    max-height: inherit;
+    /* transition: min-height 0s;
     -webkit-transition: min-height 0s;
-    -moz-transition: min-height 0s;
+    -moz-transition: min-height 0s; */
   }
 
-  #dropdown-menu.show {
+  /* #dropdown-menu.show {
     min-height: 0;
     max-height: 0;
-  }
+  } */
 
   #dropdown-menu li {
     margin: 0 1rem;
@@ -454,14 +465,25 @@ the dropped-down menu not fitting within 50vh) */
   .navlink {
     pointer-events: initial;
   }
+
+  /* Header styling */
+  #explore-btn {
+    display: inline-block;
+    /* visibility: visible; */
+  }
+
   .flex-turner {
     flex-direction: row;
   }
-
-  /* Header styling */
-  .btn {
-    display: inline-block;
-  }
 }
 
+@media screen and (orientation: landscape) and (max-width: 992px) {
+  #welcome {
+    margin-top: 3rem;
+  }
+
+  #explore-btn {
+    display: none;
+  }
+}
 /*Take care of nav flex reconfiguration on larger screens*/

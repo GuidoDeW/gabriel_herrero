@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -20,7 +21,7 @@ media queries-->
     <!-- Hamburger navbar that expands to list on larger screens (make it sticky / remove from header?)-->
     <nav class="display-flex flex-turner nav nav-fixed">
       <div class="display-flex flex-jc-sb">
-        <img src="logo/gh_logo_5.png" class="logo-nav" />
+        <img src="logo/gh_logo_small.png" class="logo-nav" />
         <!-- Display hamburger icon on small screens and change navbar flex props / display / animation accordingly; remove hamburger icon 
         on larger screens and display ul as horizontal flex container-->
         <i id="hamburger-btn" class="fas fa-bars light-text hamburger-btn swift-color-change mr-1"></i>
@@ -32,7 +33,7 @@ media queries-->
         <li class="light-text"><a href="#" class="navlink light-text swift-color-change">Contact</a></li>
       </ul>
     </nav>
-    <header id="header-home" class="display-flex">
+    <header id="header-home" class="display-flex flex-column flex-jc-c flex-ac">
       <!-- Add "hide" class when hamburger menu drops down-->
       <div id="welcome">
         <!-- Consider applying fade effect to both title and button -->
