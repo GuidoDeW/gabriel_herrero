@@ -103,6 +103,10 @@ h2 {
   justify-content: center;
 }
 
+.flex-jc-start {
+  justify-content: flex-start;
+}
+
 .flex-jc-sb {
   justify-content: space-between;
 }
@@ -521,6 +525,14 @@ Turn this into framework classes as much as possible. */
   line-height: 1rem;
 }
 
+/* Gallery styling */
+#gallery img {
+  display: block;
+  max-height: 50vw;
+  max-width: 90vw;
+  height: auto;
+  width: auto;
+}
 /* Animations */
 
 /*Media queries*/
@@ -618,6 +630,24 @@ the dropped-down menu not fitting within 50vh) */
   #home-info div img {
     max-height: 30vw;
     width: 50%;
+  }
+
+  /* Gallery styling */
+
+  #gallery img {
+    max-height: 25vw;
+    max-width: 45vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  /* Gallery styling */
+
+  #gallery img {
+    min-height: 17vw;
+    min-width: 30%;
+    max-height: 17vw;
+    max-width: 30%;
   }
 }
 
