@@ -15,6 +15,7 @@
   /*Transition vars*/
   --swift-color-change: 0.2s;
   --swift-transform: 0.2s;
+  /* Screen size vars */
 }
 
 * {
@@ -26,6 +27,10 @@
 
 body {
   overflow-x: hidden;
+}
+
+h3 {
+  line-height: 2rem;
 }
 
 #header-home {
@@ -341,7 +346,8 @@ body {
   background-color: var(--dark-shade);
 }
 
-.nav.flex-turner {
+.nav.flex-turner-s-col {
+  /*flex-turner-nav-col*/
   flex-direction: column;
 }
 
@@ -352,11 +358,10 @@ body {
 
 .logo-nav {
   height: 3rem;
-  object-fit: cover;
 }
 
 .hamburger-btn {
-  transition: transform var(--swift-transform);
+  transition: transform var(--swift-transform), color var(--swift-color-change);
 }
 
 .hamburger-btn:before {
@@ -375,11 +380,11 @@ body {
 
 .navlink {
   line-height: 3rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   pointer-events: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  transition: text-decoration-color var(--swift-color-change) linear 0s;
+  transition: color var(--swift-color-change) linear 0s;
 }
 
 .navlink:not(.current):hover {
@@ -392,22 +397,17 @@ body {
 
 #dropdown-menu {
   background: inherit;
-  /* min-height: 0;
-  max-height: 0; */
-  /* z-index: -1; */
   opacity: 0;
   min-height: calc(50vh - 3rem);
   max-height: calc(50vh - 3rem);
   width: 100%;
-  /* transition: min-height var(--swift-transform) linear 0s;
-  -webkit-transition: min-height var(--swift-transform) linear 0s;
-  -moz-transition: min-height var(--swift-transform) linear 0s; */
   transition: opacity var(--swift-color-change) linear 0s;
   -webkit-transition: opacity var(--swift-color-change) linear 0s;
   -moz-transition: opacity var(--swift-color-change) linear 0s;
 }
 
-#dropdown-menu.flex-turner {
+#dropdown-menu.flex-turner-s-col {
+  /*flex-turner-s-col*/
   flex-direction: column;
 }
 
@@ -444,7 +444,7 @@ body {
 }
 
 /* Specs styling */
-#specs.flex-turner {
+#specs.flex-turner-s-col {
   flex-direction: column;
 }
 
@@ -464,13 +464,18 @@ Turn this into framework classes as much as possible. */
   max-width: 100%;
 }
 
-#home-info div.flex-turner {
+#home-info div.flex-turner-s-col {
+  /*flex-turner-s-col*/
   flex-direction: column;
 }
 
+/* #home-info div.flex-turner-s-col:nth-child(even) {
+  flex-direction: column-reverse;
+} */
+
 #home-info div div,
 #home-info div img {
-  width: 90%;
+  width: 100%;
   flex-basis: 0;
   flex-grow: 1;
   flex-shrink: 1;
@@ -478,10 +483,6 @@ Turn this into framework classes as much as possible. */
 
 #home-info div img {
   max-height: 50vw;
-}
-
-#home-info div:last-child {
-  flex-direction: column-reverse;
 }
 
 /* Footer styling */
@@ -556,6 +557,7 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   .navlink {
+    font-size: 1.5rem;
     pointer-events: initial;
   }
 
@@ -564,19 +566,19 @@ the dropped-down menu not fitting within 50vh) */
     display: inline-block;
   }
 
-  .nav.flex-turner,
-  #dropdown-menu.flex-turner {
+  .nav.flex-turner-s-col,
+  #dropdown-menu.flex-turner-s-col {
     flex-direction: row;
   }
 }
 
 @media screen and (min-width: 768px) {
   /* Specs styling */
-  #specs {
+  /* #specs {
     margin-top: 1rem;
-  }
+  } */
 
-  #specs.flex-turner {
+  #specs.flex-turner-s-col {
     flex-direction: row;
   }
 
@@ -595,17 +597,18 @@ the dropped-down menu not fitting within 50vh) */
     max-width: 100%;
   }
 
-  #home-info div.flex-turner {
+  #home-info div.flex-turner-s-col:nth-child(odd) {
     flex-direction: row;
+  }
+
+  #home-info div.flex-turner-s-col:nth-child(even) {
+    flex-direction: row-reverse;
   }
 
   #home-info div div,
   #home-info div img {
-    width: 50%;
-  }
-
-  #home-info div img {
     max-height: 30vw;
+    width: 50%;
   }
 }
 
