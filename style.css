@@ -2,6 +2,7 @@
 /*Use mobile-first approach */
 /* Use rem for efficient responsiveness */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap");
+
 :root {
   font-size: 16px;
   /*Color vars*/
@@ -15,7 +16,6 @@
   /*Transition vars*/
   --swift-color-change: 0.2s;
   --swift-transform: 0.2s;
-  /* Screen size vars */
 }
 
 * {
@@ -29,8 +29,12 @@ body {
   overflow-x: hidden;
 }
 
-h3 {
-  line-height: 2rem;
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.7rem;
 }
 
 #header-home {
@@ -121,6 +125,10 @@ h3 {
 
 .flex-basis-1 {
   flex-basis: 1;
+}
+
+.flex-equal-flex {
+  flex: 1 1 0;
 }
 
 .flex-w {
@@ -444,14 +452,18 @@ h3 {
 }
 
 /* Specs styling */
-#specs.flex-turner-s-col {
+#specs div.flex-turner-s-col {
   flex-direction: column;
 }
 
-#specs div {
+#specs div div {
   border-bottom: 1px solid var(--dark-text);
 }
 
+.spec-icon:before {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 /* Home info styling */
 
 /* Refactor home info styling.
@@ -460,8 +472,8 @@ Turn this into framework classes as much as possible. */
   max-width: 100%;
 }
 
-#home-info {
-  max-width: 100%;
+#home-info h3 {
+  line-height: 2rem;
 }
 
 #home-info div.flex-turner-s-col {
@@ -469,16 +481,9 @@ Turn this into framework classes as much as possible. */
   flex-direction: column;
 }
 
-/* #home-info div.flex-turner-s-col:nth-child(even) {
-  flex-direction: column-reverse;
-} */
-
 #home-info div div,
 #home-info div img {
   width: 100%;
-  flex-basis: 0;
-  flex-grow: 1;
-  flex-shrink: 1;
 }
 
 #home-info div img {
@@ -574,19 +579,15 @@ the dropped-down menu not fitting within 50vh) */
 
 @media screen and (min-width: 768px) {
   /* Specs styling */
-  /* #specs {
-    margin-top: 1rem;
-  } */
-
-  #specs.flex-turner-s-col {
+  #specs div.flex-turner-s-col {
     flex-direction: row;
   }
 
-  #specs div {
+  #specs div div {
     border-bottom-color: transparent;
   }
 
-  #specs div:nth-of-type(2) {
+  #specs div div:nth-of-type(2) {
     border-width: 0px 1px;
     border-style: solid;
     border-color: var(--dark-text);
@@ -603,6 +604,14 @@ the dropped-down menu not fitting within 50vh) */
 
   #home-info div.flex-turner-s-col:nth-child(even) {
     flex-direction: row-reverse;
+  }
+
+  #home-info div:nth-of-type(odd) div p {
+    border-left: solid 1px var(--dark-text);
+  }
+
+  #home-info div:nth-of-type(even) div p {
+    border-right: solid 1px var(--dark-text);
   }
 
   #home-info div div,
