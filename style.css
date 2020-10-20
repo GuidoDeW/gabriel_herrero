@@ -526,8 +526,18 @@ Turn this into framework classes as much as possible. */
 }
 
 /* Gallery styling */
-#gallery img {
-  display: block;
+
+.gallery-item img {
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  /* overflow: hidden; */
+}
+
+.gallery-item {
+  /* display: block; */
+  overflow: hidden;
   max-height: 50vw;
   max-width: 90vw;
   height: auto;
@@ -634,7 +644,7 @@ the dropped-down menu not fitting within 50vh) */
 
   /* Gallery styling */
 
-  #gallery img {
+  .gallery-item {
     max-height: 25vw;
     max-width: 45vw;
   }
@@ -643,7 +653,7 @@ the dropped-down menu not fitting within 50vh) */
 @media screen and (min-width: 1024px) {
   /* Gallery styling */
 
-  #gallery img {
+  .gallery-item {
     min-height: 17vw;
     min-width: 30%;
     max-height: 17vw;
