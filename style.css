@@ -7,6 +7,7 @@
   font-size: 16px;
   /*Color vars*/
   --dark-shade: rgba(0, 0, 0, 0.5);
+  --light-shade: rgba(255, 255, 255, 0.5);
   --no-bg-shade: rgba(35, 10, 60, 0.8);
   --light-bg: #fff;
   --select-bg: rgba(255, 215, 85);
@@ -16,6 +17,7 @@
   /*Transition vars*/
   --swift-color-change: 0.2s;
   --swift-transform: 0.2s;
+  --intermediate-transform: 0.5s;
 }
 
 * {
@@ -514,6 +516,8 @@ Turn this into framework classes as much as possible. */
 
 .social-link {
   transition: color var(--swift-color-change) linear 0s;
+  -webkit-transition: color var(--swift-color-change) linear 0s;
+  -moz-transition: color var(--swift-color-change) linear 0s;
 }
 
 .social-link:hover {
@@ -530,21 +534,63 @@ Turn this into framework classes as much as possible. */
 .gallery-item {
   /* display: block; */
   position: relative;
+  /* z-index: 1; */
   overflow: hidden;
   min-height: 50vw;
   max-height: 50vw;
   min-width: 90vw;
+  /* border: 1px solid var(--dark-shade); */
   /* height: auto;
   width: auto; */
 }
 
 .gallery-item img {
   position: absolute;
-  bottom: 0;
+  /* z-index: 0; */
+  /* margin: 0 auto; */
   /* object-fit: contain; */
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 100%;
   width: 100%;
+}
+
+.gallery-item-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-150%);
+  opacity: 0;
+  transition: all var(--intermediate-transform);
+  -webkit-transition: all var(--intermediate-transform);
+  -moz-transition: all var(--intermediate-transform);
+  z-index: 1;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.gallery-item:before {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform: translateX(-100%);
+  transition: transform var(--intermediate-transform);
+  -webkit-transition: transform var(--intermediate-transform);
+  -moz-transition: transform var(--intermediate-transform);
+  background-color: var(--light-shade);
+}
+
+.gallery-item:hover:before {
+  transform: translateX(0);
+}
+
+.gallery-item:hover .gallery-item-text {
+  opacity: 1;
+  transform: translateX(-50%);
+  cursor: pointer;
 }
 /* Animations */
 
