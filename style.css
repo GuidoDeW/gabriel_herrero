@@ -16,6 +16,7 @@
   --select-text: rgb(255, 215, 85);
   /*Transition vars*/
   --swift-color-change: 0.2s;
+  --intermediate-color-change: 0.5s;
   --swift-transform: 0.2s;
   --intermediate-transform: 0.5s;
 }
@@ -539,25 +540,16 @@ Turn this into framework classes as much as possible. */
 }
 
 .gallery-item {
-  /* display: block; */
   position: relative;
-  /* z-index: 1; */
   overflow: hidden;
   min-height: 60vw;
   max-height: 60vw;
   min-width: 90vw;
   max-width: 90vw;
-  /* border: 1px solid var(--dark-shade); */
-  /* height: auto;
-  width: auto; */
 }
 
 .gallery-item img {
   position: absolute;
-  /* z-index: 0; */
-  /* margin: 0 auto; */
-  /* object-fit: contain; */
-  /* overflow: hidden; */
   height: 100%;
   width: 100%;
 }
@@ -602,32 +594,36 @@ Turn this into framework classes as much as possible. */
 }
 
 /* Carousel styling */
-#gallery.carousel-show:before {
-  z-index: 2;
-  content: "";
+#carousel-container {
+  display: flex;
+  z-index: 0;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  opacity: 0;
+  width: 100vw;
   height: 100vh;
+  transition: opacity var(--swift-color-change) linear 0s;
+  --webkit-transition: opacity var(--swift-color-change) linear 0s;
+  --moz-transition: opacity var(--swift-color-change) linear 0s;
+}
+
+#carousel-container.carousel-show {
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
   background-color: var(--light-shade);
 }
 
 #img-carousel {
   display: none;
-}
-
-#img-carousel.carousel-show {
-  display: inline;
-  z-index: 3;
-  position: fixed;
+  position: relative;
   height: fit-content;
   width: fit-content;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border: 5px solid var(--dark-shade);
-  /* overflow: hidden; */
+}
+
+#carousel-container.carousel-show #img-carousel {
+  display: flex;
 }
 
 #carousel-img {
@@ -660,6 +656,8 @@ Turn this into framework classes as much as possible. */
   margin-right: 0.5rem;
   margin-left: 0.5rem;
   transition: color var(--swift-color-change);
+  --webkit-transition: color var(--swift-color-change);
+  --moz-transition: color var(--swift-color-change);
 }
 
 .carousel-btn:hover {
@@ -670,6 +668,10 @@ Turn this into framework classes as much as possible. */
   position: absolute;
   top: 0;
   transition: color var(--swift-color-change), transform var(--swift-transform);
+  --webkit-transition: color var(--swift-color-change),
+    transform var(--swift-transform);
+  --moz-transition: color var(--swift-color-change),
+    transform var(--swift-transform);
 }
 
 #carousel-close-btn:hover {

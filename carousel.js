@@ -1,6 +1,7 @@
 const galleryItems = document.querySelectorAll(".gallery-item"),
 imgSources = Array.from(document.querySelectorAll(".gallery-img")).map((img) => { return img.attributes.src.value}),
 gallery = document.getElementById("gallery"),
+carouselContainer = document.getElementById("carousel-container"),
 carousel = document.getElementById("img-carousel"),
 carouselImg = document.getElementById("carousel-img"),
 prevBtn = document.getElementById("carousel-prev-btn"),
@@ -40,16 +41,22 @@ function prevImg() {
 
 function openCarousel() {
   gallery.classList.add("carousel-show");
-  carousel.classList.add("carousel-show");
+  carouselContainer.classList.add("carousel-show");
 }
 
 function closeCarousel() {
-  carousel.classList.remove("carousel-show");
+  carouselContainer.classList.remove("carousel-show");
   gallery.classList.remove("carousel-show");
 }
 
+document.body.addEventListener("click", (e)=> {
+  if(e.target === closeBtn || (!carousel.contains(e.target) && !e.target.classList.contains("gallery-item-text"))) {
+    closeCarousel();
+  }
+})
+
 document.body.addEventListener("keydown", (e) => {
-  if(carousel.classList.contains("carousel-show")) {
+  if(carouselContainer.classList.contains("carousel-show")) {
     if(e.key === 39 || e.keyCode === 39) {
       nextImg();
     } 
