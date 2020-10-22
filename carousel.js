@@ -29,6 +29,26 @@ const galleryIndex = (function () {
   }
 })();
 
+//
+const swipeParams = (function(){
+  let swipeStart = 0;
+  let swipeEnd = 0;
+  return {
+    setSwipeStart: (startPoint) => {
+      swipeStart = startPoint;
+    },
+    getSwipeStart: () => {
+      return swipeStart;
+    },
+    setSwipeEnd: (endPoint) => {
+      swipeEnd = endPoint;
+    },
+    getSwipeEnd: () => {
+      return swipeEnd;
+    }
+  }
+})();
+
 function nextImg () {
   galleryIndex.current() >  0 ? galleryIndex.decrease() : galleryIndex.set(imgSources.length - 1);
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
@@ -53,7 +73,7 @@ document.body.addEventListener("click", (e)=> {
   if(e.target === closeBtn || (!carousel.contains(e.target) && !e.target.classList.contains("gallery-item-text"))) {
     closeCarousel();
   }
-})
+});
 
 document.body.addEventListener("keydown", (e) => {
   if(carouselContainer.classList.contains("carousel-show")) {
@@ -69,6 +89,23 @@ document.body.addEventListener("keydown", (e) => {
       closeCarousel();
     }
   }
+});
+
+//Swipe event handler (configured for a swipe across at least 25% of viewport width)
+carousel.addEventListener("touchstart", (e) => {
+  if(e.target !== closeBtn && e.target !== nextBtn && e.target !== prevBtn){
+  e.preventDefault();
+  swipeParams.setSwipeStart(e.touches[0].clientX);
+  document.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    swipeParams.setSwipeEnd(e.changedTouches[0].clientX);
+    if(swipeParams.getSwipeStart() - swipeParams.getSwipeEnd() > document.body.clientWidth / 4) {
+      prevImg();
+    } 
+    if(swipeParams.getSwipeEnd() - swipeParams.getSwipeStart() > document.body.clientWidth / 4) {
+      nextImg();
+    }
+  }, {once: true})}
 });
 
 closeBtn.addEventListener("click", closeCarousel);
