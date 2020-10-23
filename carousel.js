@@ -49,12 +49,12 @@ const swipeParams = (function(){
   }
 })();
 
-function nextImg () {
+function prevImg () {
   galleryIndex.current() >  0 ? galleryIndex.decrease() : galleryIndex.set(imgSources.length - 1);
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
 }
 
-function prevImg() {
+function nextImg() {
   galleryIndex.current() <  imgSources.length - 1 ? galleryIndex.increase() : galleryIndex.reset();
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
 }
@@ -100,10 +100,10 @@ carousel.addEventListener("touchstart", (e) => {
     e.preventDefault();
     swipeParams.setSwipeEnd(e.changedTouches[0].clientX);
     if(swipeParams.getSwipeStart() - swipeParams.getSwipeEnd() > document.body.clientWidth / 4) {
-      prevImg();
+      nextImg();
     } 
     if(swipeParams.getSwipeEnd() - swipeParams.getSwipeStart() > document.body.clientWidth / 4) {
-      nextImg();
+      prevImg();
     }
   }, {once: true})}
 });
