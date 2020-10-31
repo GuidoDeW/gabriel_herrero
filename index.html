@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -24,16 +27,37 @@ media queries-->
         <img src="logo/gh_logo_small.png" class="logo-nav object-fit-cover" />
         <!-- Display hamburger icon on small screens and change navbar flex props / display / animation accordingly; remove hamburger icon 
         on larger screens and display ul as horizontal flex container-->
-        <i id="hamburger-btn" class="fas fa-bars light-text hamburger-btn swift-color-change mr-1"></i>
+        <i
+          id="hamburger-btn"
+          class="fas fa-bars light-text hamburger-btn swift-color-change mr-1"
+        ></i>
       </div>
-      <ul id="dropdown-menu" class="display-flex flex-turner-s-col flex-jc-sb list-st-none">
-        <li class="light-text"><a href="#" class="navlink light-text swift-color-change current">Home</a></li>
-        <li class="light-text"><a href="#" class="navlink light-text swift-color-change">Work</a></li>
-        <li class="light-text"><a href="#" class="navlink light-text swift-color-change">About</a></li>
-        <li class="light-text"><a href="#" class="navlink light-text swift-color-change">Contact</a></li>
+      <ul
+        id="dropdown-menu"
+        class="display-flex flex-turner-s-col flex-jc-sb list-st-none"
+      >
+        <li class="light-text">
+          <a href="#" class="navlink light-text swift-color-change current"
+            >Home</a
+          >
+        </li>
+        <li class="light-text">
+          <a href="gallery.html" class="navlink light-text swift-color-change"
+            >Work</a
+          >
+        </li>
+        <li class="light-text">
+          <a href="#" class="navlink light-text swift-color-change">About</a>
+        </li>
+        <li class="light-text">
+          <a href="#" class="navlink light-text swift-color-change">Contact</a>
+        </li>
       </ul>
     </nav>
-    <header id="header-home" class="display-flex flex-column flex-jc-c flex-ac">
+    <header
+      id="header"
+      class="header-home display-flex flex-column flex-jc-c flex-ac"
+    >
       <!-- Add "hide" class when hamburger menu drops down-->
       <div id="welcome">
         <!-- Consider applying fade effect to both title and button -->
@@ -41,74 +65,110 @@ media queries-->
         <!-- The hover malfunction is not a problem; the button will only 
         display one screens large enough to support a horizontal nav menu
       anyway!-->
-        <a href="#" id="explore-btn" class="btn btn-light">Explore</a>
+        <a href="gallery.html" id="explore-btn" class="btn btn-light"
+          >Explore</a
+        >
       </div>
     </header>
     <!-- Specializations overview -->
-    <section id="specs" class="dark-text display-flex flex-column flex-ac flex-jc-c my-1">
-    <!-- h3 { line-height: 2rem }-->
-    <h2 class="text-ac">Specializations</h2>
-    <div class="display-flex flex-turner-s-col flex-jc-c">
-      <div class="text-ac py-1 px-1 flex-equal-flex">
-        <!-- Just use the icons by themselves, without h tags-->
-        <i class="fas fa-tree spec-icon"></i>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, enim.</p>
+    <section
+      id="specs"
+      class="dark-text display-flex flex-column flex-ac flex-jc-c my-1"
+    >
+      <!-- h3 { line-height: 2rem }-->
+      <h2 class="text-ac">Specializations</h2>
+      <div class="display-flex flex-turner-s-col flex-jc-c">
+        <div class="text-ac py-1 px-1 flex-equal-flex">
+          <!-- Just use the icons by themselves, without h tags-->
+          <i class="fas fa-tree spec-icon"></i>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Consequatur, enim.
+          </p>
+        </div>
+        <div class="text-ac py-1 px-1 flex-equal-flex">
+          <i class="fas fa-camera-retro spec-icon"></i>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id maxime
+            tempora esse! Iure esse quam dolor eum suscipit est obcaecati?
+          </p>
+        </div>
+        <div class="text-ac py-1 px-1 flex-equal-flex">
+          <i class="fas fa-pen-alt spec-icon"></i>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Consequatur, enim.
+          </p>
+        </div>
       </div>
-      <div class="text-ac py-1 px-1 flex-equal-flex">
-        <i class="fas fa-camera-retro spec-icon"></i>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id maxime tempora esse! Iure esse quam dolor eum suscipit est obcaecati?</p>
-      </div>
-      <div class="text-ac py-1 px-1 flex-equal-flex">
-        <i class="fas fa-pen-alt spec-icon"></i>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur, enim.</p>
-      </div>
-    </div>
-  
     </section>
     <!-- Home info -->
-    <section id="home-info" class="dark-text display-flex flex-column flex-jc flex-ac my-1">
-     <!-- h3 { line-height: 2rem }-->
+    <section
+      id="home-info"
+      class="dark-text display-flex flex-column flex-jc flex-ac my-1"
+    >
+      <!-- h3 { line-height: 2rem }-->
       <div class="display-flex flex-turner-s-col flex-ac flex-jc-se">
-        <img src="./img/spanish_landscape.jpg" alt="" class="object-fit-cover py-1 px-2 my-1 flex-equal-flex"/>
+        <img
+          src="./img/spanish_landscape.jpg"
+          alt=""
+          class="object-fit-cover py-1 px-2 my-1 flex-equal-flex"
+        />
         <div class="py-1 px-2 my-1 flex-equal-flex">
           <h3 class="text-ac">Title</h3>
-         <p class="px-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati harum sapiente eveniet mollitia omnis. Esse placeat fuga, velit aliquid, labore rem ipsam magnam corporis minima incidunt ipsum recusandae quo reiciendis temporibus dicta molestias autem iste saepe! Adipisci consequuntur dicta debitis!</p>
+          <p class="px-1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
+            harum sapiente eveniet mollitia omnis. Esse placeat fuga, velit
+            aliquid, labore rem ipsam magnam corporis minima incidunt ipsum
+            recusandae quo reiciendis temporibus dicta molestias autem iste
+            saepe! Adipisci consequuntur dicta debitis!
+          </p>
         </div>
       </div>
       <div class="display-flex flex-turner-s-col flex-ac flex-jc-se">
-        <img src="./img/skuleskogen_sweden.jpg" alt="" class="object-fit-cover py-1 px-2 my-1 flex-equal-flex"/>
+        <img
+          src="./img/skuleskogen_sweden.jpg"
+          alt=""
+          class="object-fit-cover py-1 px-2 my-1 flex-equal-flex"
+        />
         <div class="py-1 px-2 my-1 flex-equal-flex">
           <h3 class="text-ac">Title</h3>
-          <p class="px-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi dolorum, aliquid enim corrupti dolores illo laborum molestias perspiciatis deleniti commodi molestiae maiores a autem est impedit assumenda quo! Quibusdam facilis sequi cupiditate, assumenda qui obcaecati optio eius dolorem tempora ducimus!</p>
+          <p class="px-1">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
+            dolorum, aliquid enim corrupti dolores illo laborum molestias
+            perspiciatis deleniti commodi molestiae maiores a autem est impedit
+            assumenda quo! Quibusdam facilis sequi cupiditate, assumenda qui
+            obcaecati optio eius dolorem tempora ducimus!
+          </p>
         </div>
       </div>
     </section>
-  
-   
-  
+
     <!-- Footer with social media links -->
     <footer class="footer display-flex flex-column">
-        <ul class="display-flex flex-ac flex-jc-se full-width list-st-none my-1">
-          <li>
-            <a href="#" class="social-link"><i class="fab fa-facebook "></i></a>
-          </li>
-          <li>
-            <a href="#" class="social-link"><i class="fab fa-instagram "></i></a>
-          </li>
-          <li>
-            <a href="#" class="social-link"><i class="fab fa-youtube "></i></a>
-          </li>
-          <li>
-            <a href="#" class="social-link"><i class="fab fa-tumblr"></i></a>
-          </li>
-          <!-- <li>
+      <ul class="display-flex flex-ac flex-jc-se full-width list-st-none my-1">
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-tumblr"></i></a>
+        </li>
+        <!-- <li>
             <a href="#" class="social-link"><i class="fab fa-pinterest "></i></a>
           </li> -->
-          <li>
-            <a href="#" class="social-link"><i class="fab fa-wordpress "></i></a>
-          </li>
-        </ul>
-        <span style="font-size: 1rem" class="display-flex flex-jc-c">&copy; Gabriel Herrero</span>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-wordpress"></i></a>
+        </li>
+      </ul>
+      <span style="font-size: 1rem" class="display-flex flex-jc-c"
+        >&copy; Gabriel Herrero</span
+      >
     </footer>
     <script defer src="script.js"></script>
   </body>

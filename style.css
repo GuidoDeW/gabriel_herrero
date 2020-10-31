@@ -40,11 +40,10 @@ h2 {
   font-size: 1.7rem;
 }
 
-#header-home {
+#header {
   min-height: 50vh;
   max-height: 50vh;
   min-width: 100vw;
-  max-width: 100v;
   background: url("./img/playa_del_silencio.jpg") no-repeat center / cover;
   overflow: hidden;
   text-align: center;
