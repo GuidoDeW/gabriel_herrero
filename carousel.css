@@ -1,0 +1,85 @@
+/* Carousel styling */
+#carousel-container {
+  display: flex;
+  z-index: 0;
+  position: fixed;
+  opacity: 0;
+  width: 100vw;
+  height: 100vh;
+  transition: opacity var(--swift-color-change) linear 0s;
+  --webkit-transition: opacity var(--swift-color-change) linear 0s;
+  --moz-transition: opacity var(--swift-color-change) linear 0s;
+}
+
+#carousel-container.carousel-show {
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  background-color: var(--light-shade);
+}
+
+#img-carousel {
+  display: none;
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+  border: 5px solid var(--dark-shade);
+}
+
+#carousel-container.carousel-show #img-carousel {
+  display: flex;
+}
+
+#carousel-img {
+  object-fit: contain;
+  display: block;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.carousel-nav {
+  font-size: 2rem;
+  color: transparent;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  top: 0;
+  justify-content: center;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+.carousel-nav:hover .carousel-btn:not(#carousel-close-btn) {
+  color: var(--light-shade);
+}
+
+.carousel-btn {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  transition: color var(--swift-color-change);
+  --webkit-transition: color var(--swift-color-change);
+  --moz-transition: color var(--swift-color-change);
+}
+
+.carousel-btn:hover {
+  cursor: pointer;
+}
+
+#carousel-close-btn {
+  position: absolute;
+  top: 0;
+  transition: color var(--swift-color-change), transform var(--swift-transform);
+  --webkit-transition: color var(--swift-color-change),
+    transform var(--swift-transform);
+  --moz-transition: color var(--swift-color-change),
+    transform var(--swift-transform);
+}
+
+#carousel-close-btn:hover {
+  color: var(--light-shade);
+  transform: rotateZ(-90deg);
+}
