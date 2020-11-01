@@ -644,6 +644,10 @@ the dropped-down menu not fitting within 50vh) */
     display: inline-block;
   }
 
+  #welcome h1.not-main {
+    padding-bottom: 3rem;
+  }
+
   .nav.flex-turner-s-col,
   #dropdown-menu.flex-turner-s-col {
     flex-direction: row;
@@ -726,5 +730,9 @@ the dropped-down menu not fitting within 50vh) */
 
   #explore-btn {
     display: none;
+  }
+
+  #welcome h1.not-main {
+    padding-bottom: 0;
   }
 }

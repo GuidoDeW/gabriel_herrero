@@ -53,9 +53,9 @@ const swipeParams = (function () {
 })();
 
 function newImg(direction) {
-  // carousel.classList.add("new-img");
   carousel.style.opacity = "0";
   setTimeout(() => {
+    carousel.classList.remove("transform-transition");
     if (direction === "prev") {
       galleryIndex.current() > 0
         ? galleryIndex.decrease()
@@ -66,7 +66,6 @@ function newImg(direction) {
         : galleryIndex.reset();
     }
     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-    // carousel.classList.remove("new-img");
     carousel.style.opacity = "1";
   }, 250);
 }

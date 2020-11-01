@@ -23,17 +23,14 @@
 }
 
 #img-carousel {
-  position: relative;
   height: fit-content;
   width: fit-content;
   border: 5px solid var(--dark-shade);
   opacity: 1;
   transition: opacity 0.25s;
+  --webkit-transition: opacity 0.25s;
+  --moz-transition: opacity 0.25s;
 }
-
-/* #img-carousel.new-img {
-  opacity: 0;
-} */
 
 #carousel-img {
   object-fit: contain;
