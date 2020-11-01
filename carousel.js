@@ -33,20 +33,20 @@ const galleryIndex = (function () {
   };
 })();
 
-const browseLock = (function () {
-  let isLocked = false;
-  return {
-    locked: () => {
-      return isLocked;
-    },
-    lock: () => {
-      isLocked = true;
-    },
-    unlock: () => {
-      isLocked = false;
-    },
-  };
-})();
+// const browseLock = (function () {
+//   let isLocked = false;
+//   return {
+//     locked: () => {
+//       return isLocked;
+//     },
+//     lock: () => {
+//       isLocked = true;
+//     },
+//     unlock: () => {
+//       isLocked = false;
+//     },
+//   };
+// })();
 
 //
 const swipeParams = (function () {
@@ -69,30 +69,30 @@ const swipeParams = (function () {
 })();
 
 function newImg(direction) {
-  if (browseLock.locked()) {
-    return;
-  } else {
-    browseLock.lock();
-    setTimeout(() => {
-      if (direction === "prev") {
-        galleryIndex.current() > 0
-          ? galleryIndex.decrease()
-          : galleryIndex.set(imgSources.length - 1);
-      } else {
-        galleryIndex.current() < imgSources.length - 1
-          ? galleryIndex.increase()
-          : galleryIndex.reset();
-      }
-      carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+  // if (browseLock.locked()) {
+  //   return;
+  // } else {
+  //   browseLock.lock();
+  carousel.style.opacity = "0";
+  setTimeout(() => {
+    if (direction === "prev") {
+      galleryIndex.current() > 0
+        ? galleryIndex.decrease()
+        : galleryIndex.set(imgSources.length - 1);
+    } else {
+      galleryIndex.current() < imgSources.length - 1
+        ? galleryIndex.increase()
+        : galleryIndex.reset();
+    }
+    carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
 
-      setTimeout(() => {
-        browseLock.unlock();
-      }, 250);
-      carousel.style.opacity = "1";
-    }, 250);
-    carousel.style.opacity = "0";
-  }
+    // setTimeout(() => {
+    //   browseLock.unlock();
+    // }, 250);
+    carousel.style.opacity = "1";
+  }, 250);
 }
+// }
 
 function openCarousel() {
   gallery.classList.add("carousel-show");
