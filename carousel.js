@@ -53,7 +53,8 @@ const swipeParams = (function () {
 })();
 
 function newImg(direction) {
-  carousel.classList.add("new-img");
+  // carousel.classList.add("new-img");
+  carousel.style.opacity = "0";
   setTimeout(() => {
     if (direction === "prev") {
       galleryIndex.current() > 0
@@ -64,10 +65,9 @@ function newImg(direction) {
         ? galleryIndex.increase()
         : galleryIndex.reset();
     }
-    (async () => {
-      await carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-      carousel.classList.remove("new-img");
-    })();
+    carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+    // carousel.classList.remove("new-img");
+    carousel.style.opacity = "1";
   }, 250);
 }
 

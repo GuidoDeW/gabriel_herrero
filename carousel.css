@@ -31,9 +31,9 @@
   transition: opacity 0.25s;
 }
 
-#img-carousel.new-img {
+/* #img-carousel.new-img {
   opacity: 0;
-}
+} */
 
 #carousel-img {
   object-fit: contain;
