@@ -64,8 +64,10 @@ function newImg(direction) {
         ? galleryIndex.increase()
         : galleryIndex.reset();
     }
-    carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-    carousel.classList.remove("new-img");
+    (async () => {
+      await carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+      carousel.classList.remove("new-img");
+    })();
   }, 250);
 }
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="script.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <title>Gabriel Herrero | Contact</title>
+  </head>
+  <body>
+    <nav class="display-flex flex-turner-s-col nav nav-fixed">
+      <div class="display-flex flex-jc-sb">
+        <img src="logo/gh_logo_small.png" class="logo-nav object-fit-cover" />
+        <!-- Display hamburger icon on small screens and change navbar flex props / display / animation accordingly; remove hamburger icon 
+        on larger screens and display ul as horizontal flex container-->
+        <i
+          id="hamburger-btn"
+          class="fas fa-bars light-text hamburger-btn swift-color-change mr-1"
+        ></i>
+      </div>
+      <ul
+        id="dropdown-menu"
+        class="display-flex flex-turner-s-col flex-jc-sb list-st-none"
+      >
+        <li class="light-text">
+          <a href="index.html" class="navlink light-text swift-color-change"
+            >Home</a
+          >
+        </li>
+        <li class="light-text">
+          <a href="gallery.html" class="navlink light-text swift-color-change"
+            >Work</a
+          >
+        </li>
+        <li class="light-text">
+          <a href="about.html" class="navlink light-text swift-color-change"
+            >About</a
+          >
+        </li>
+        <li class="light-text">
+          <a
+            href="contact.html"
+            class="navlink light-text swift-color-change current"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <header id="header" class="display-flex flex-column flex-jc-c flex-ac">
+      <!-- Add "hide" class when hamburger menu drops down-->
+      <div id="welcome">
+        <!-- Consider applying fade effect to both title and button -->
+        <h1 class="light-text my-2">Contact Me</h1>
+      </div>
+    </header>
+
+    <footer class="footer display-flex flex-column">
+      <ul class="display-flex flex-ac flex-jc-se full-width list-st-none my-1">
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-tumblr"></i></a>
+        </li>
+        <li>
+          <a href="#" class="social-link"><i class="fab fa-wordpress"></i></a>
+        </li>
+      </ul>
+      <span style="font-size: 1rem" class="display-flex flex-jc-c"
+        >&copy; Gabriel Herrero</span
+      >
+    </footer>
+  </body>
+</html>

@@ -23,7 +23,6 @@
 }
 
 #img-carousel {
-  /* display: none; */
   position: relative;
   height: fit-content;
   width: fit-content;
@@ -35,9 +34,6 @@
 #img-carousel.new-img {
   opacity: 0;
 }
-/* #carousel-container.carousel-show #img-carousel {
-  display: flex;
-} */
 
 #carousel-img {
   object-fit: contain;
