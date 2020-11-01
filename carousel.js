@@ -33,22 +33,6 @@ const galleryIndex = (function () {
   };
 })();
 
-// const browseLock = (function () {
-//   let isLocked = false;
-//   return {
-//     locked: () => {
-//       return isLocked;
-//     },
-//     lock: () => {
-//       isLocked = true;
-//     },
-//     unlock: () => {
-//       isLocked = false;
-//     },
-//   };
-// })();
-
-//
 const swipeParams = (function () {
   let swipeStart = 0;
   let swipeEnd = 0;
@@ -69,11 +53,7 @@ const swipeParams = (function () {
 })();
 
 function newImg(direction) {
-  // if (browseLock.locked()) {
-  //   return;
-  // } else {
-  //   browseLock.lock();
-  carousel.style.opacity = "0";
+  carousel.classList.add("new-img");
   setTimeout(() => {
     if (direction === "prev") {
       galleryIndex.current() > 0
@@ -85,14 +65,9 @@ function newImg(direction) {
         : galleryIndex.reset();
     }
     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-
-    // setTimeout(() => {
-    //   browseLock.unlock();
-    // }, 250);
-    carousel.style.opacity = "1";
+    carousel.classList.remove("new-img");
   }, 250);
 }
-// }
 
 function openCarousel() {
   gallery.classList.add("carousel-show");
