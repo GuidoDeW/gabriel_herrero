@@ -28,6 +28,7 @@
   height: fit-content;
   width: fit-content;
   border: 5px solid var(--dark-shade);
+  transition: opacity 0.25s;
 }
 
 /* #carousel-container.carousel-show #img-carousel {
@@ -86,3 +87,7 @@
   color: var(--light-shade);
   transform: rotateZ(-90deg);
 }
+
+/* .carousel-browse {
+  animation: fade-in-out 1s ;
+} */
