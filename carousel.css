@@ -8,9 +8,9 @@
   width: 100vw;
   height: 100vh;
   transform: translateX(-150vw);
-  transition: opacity var(--swift-color-change) linear 0s;
-  --webkit-transition: opacity var(--swift-color-change) linear 0s;
-  --moz-transition: opacity var(--swift-color-change) linear 0s;
+  transition: opacity var(--swift-color-change) 0s;
+  --webkit-transition: opacity var(--swift-color-change) 0s;
+  --moz-transition: opacity var(--swift-color-change) 0s;
 }
 
 #carousel-container.carousel-show {
@@ -23,13 +23,18 @@
 }
 
 #img-carousel {
+  position: relative;
   height: fit-content;
   width: fit-content;
   border: 5px solid var(--dark-shade);
-  opacity: 1;
-  transition: opacity 0.25s;
-  --webkit-transition: opacity 0.25s;
-  --moz-transition: opacity 0.25s;
+  /* opacity: 1; */
+  transition: opacity 0.3s;
+  --webkit-transition: opacity 0.3s;
+  --moz-transition: opacity 0.3s;
+}
+
+.transparent {
+  opacity: 0;
 }
 
 #carousel-img {

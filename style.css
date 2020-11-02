@@ -332,7 +332,7 @@ h2 {
   /* display: none; */
   text-decoration: none;
   padding: 1rem 2rem;
-  transition: background-color var(--swift-color-change) linear 0s;
+  transition: background-color var(--swift-color-change) 0s;
 }
 
 .btn-light {
@@ -346,7 +346,7 @@ h2 {
 
 /* Transition classes */
 .swift-color-change {
-  transition: color var(--swift-color-change) linear 0s;
+  transition: color var(--swift-color-change) 0s;
 }
 
 /* Image styling */
@@ -404,7 +404,7 @@ h2 {
   pointer-events: none;
   text-decoration: none;
   text-decoration-color: transparent;
-  transition: color var(--swift-color-change) linear 0s;
+  transition: color var(--swift-color-change) 0s;
 }
 
 .navlink:not(.current):hover {
@@ -421,9 +421,9 @@ h2 {
   min-height: calc(50vh - 3rem);
   max-height: calc(50vh - 3rem);
   width: 100%;
-  transition: opacity var(--swift-color-change) linear 0s;
-  -webkit-transition: opacity var(--swift-color-change) linear 0s;
-  -moz-transition: opacity var(--swift-color-change) linear 0s;
+  transition: opacity var(--swift-color-change) 0s;
+  -webkit-transition: opacity var(--swift-color-change) 0s;
+  -moz-transition: opacity var(--swift-color-change) 0s;
 }
 
 #dropdown-menu.flex-turner-s-col {
@@ -432,9 +432,9 @@ h2 {
 }
 
 #dropdown-menu li {
-  transition: opacity var(--swift-color-change) linear 0s;
-  -webkit-transition: opacity var(--swift-color-change) linear 0s;
-  -moz-transition: opacity var(--swift-color-change) linear 0s;
+  transition: opacity var(--swift-color-change) 0s;
+  -webkit-transition: opacity var(--swift-color-change) 0s;
+  -moz-transition: opacity var(--swift-color-change) 0s;
 }
 
 #dropdown-menu li:last-child {
@@ -478,27 +478,26 @@ h2 {
 }
 /* Home info styling */
 
-/* Refactor home info styling.
-Turn this into framework classes as much as possible. */
-#home-info {
+/* Info sections styling */
+.info {
   max-width: 100%;
 }
 
-#home-info h3 {
+.info h3 {
   line-height: 2rem;
 }
 
-#home-info div.flex-turner-s-col {
+.info div.flex-turner-s-col {
   /*flex-turner-s-col*/
   flex-direction: column;
 }
 
-#home-info div div,
-#home-info div img {
+.info div div,
+.info div img {
   width: 100%;
 }
 
-#home-info div img {
+.info div img {
   max-height: 50vw;
 }
 
@@ -521,9 +520,9 @@ Turn this into framework classes as much as possible. */
 }
 
 .social-link {
-  transition: color var(--swift-color-change) linear 0s;
-  -webkit-transition: color var(--swift-color-change) linear 0s;
-  -moz-transition: color var(--swift-color-change) linear 0s;
+  transition: color var(--swift-color-change) 0s;
+  -webkit-transition: color var(--swift-color-change) 0s;
+  -moz-transition: color var(--swift-color-change) 0s;
 }
 
 .social-link:hover {
@@ -592,6 +591,11 @@ Turn this into framework classes as much as possible. */
   opacity: 1;
   transform: translateX(-50%);
   cursor: pointer;
+}
+
+/* About page styling */
+#about-info img:last-of-type {
+  object-position: center 60%;
 }
 
 /* Animations */
@@ -671,28 +675,28 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   /* Home info styling */
-  #home-info {
+  .info {
     max-width: 100%;
   }
 
-  #home-info div.flex-turner-s-col:nth-child(odd) {
+  .info div.flex-turner-s-col:nth-child(odd) {
     flex-direction: row;
   }
 
-  #home-info div.flex-turner-s-col:nth-child(even) {
+  .info div.flex-turner-s-col:nth-child(even) {
     flex-direction: row-reverse;
   }
 
-  #home-info div:nth-of-type(odd) div p {
+  .info div:nth-of-type(odd) div p {
     border-left: solid 1px var(--dark-text);
   }
 
-  #home-info div:nth-of-type(even) div p {
+  .info div:nth-of-type(even) div p {
     border-right: solid 1px var(--dark-text);
   }
 
-  #home-info div div,
-  #home-info div img {
+  .info div div,
+  .info div img {
     max-height: 30vw;
     width: 50%;
   }

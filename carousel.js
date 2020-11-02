@@ -53,21 +53,22 @@ const swipeParams = (function () {
 })();
 
 function newImg(direction) {
-  carousel.style.opacity = "0";
+  // carousel.style.opacity = "0";
+  carousel.classList.add("transparent");
+  if (direction === "prev") {
+    galleryIndex.current() > 0
+      ? galleryIndex.decrease()
+      : galleryIndex.set(imgSources.length - 1);
+  } else {
+    galleryIndex.current() < imgSources.length - 1
+      ? galleryIndex.increase()
+      : galleryIndex.reset();
+  }
   setTimeout(() => {
-    carousel.classList.remove("transform-transition");
-    if (direction === "prev") {
-      galleryIndex.current() > 0
-        ? galleryIndex.decrease()
-        : galleryIndex.set(imgSources.length - 1);
-    } else {
-      galleryIndex.current() < imgSources.length - 1
-        ? galleryIndex.increase()
-        : galleryIndex.reset();
-    }
     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-    carousel.style.opacity = "1";
-  }, 250);
+    // carousel.style.opacity = "1";
+    carousel.classList.remove("transparent");
+  }, 300);
 }
 
 function openCarousel() {
