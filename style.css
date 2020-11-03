@@ -619,7 +619,9 @@ h2 {
   min-width: 50vw;
   max-width: 90vw;
   background-color: var(--dark-shade);
-  border-radius: 15px;
+  /* border-radius: 15px; */
+  border: 5px dashed var(--light-shade);
+  border-style: dashed none;
   color: var(--light-text);
   transition: all var(--swift-color-change);
 }
@@ -627,11 +629,9 @@ h2 {
 .work-method-item:hover {
   background-color: var(--select-text-shade);
   color: var(--dark-text);
+  border-color: var(--dark-shade);
   /* font-weight: bold; */
-  transform: scale(1.1);
-}
-
-.work-method-item:hover i {
+  /* transform: scale(1.1); */
 }
 
 /* Animations */
@@ -700,6 +700,7 @@ the dropped-down menu not fitting within 50vh) */
 
   .work-method-item {
     min-width: 20vw;
+    max-width: 20vw;
     /* border-radius: 0; */
   }
 }
@@ -763,6 +764,13 @@ the dropped-down menu not fitting within 50vh) */
     min-width: 30vw;
     max-height: 20vw;
     max-width: 30vw;
+  }
+
+  #work-method {
+    margin-top: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-position: 0 68%;
   }
 }
 
