@@ -8,12 +8,13 @@
   /*Color vars*/
   --dark-shade: rgba(0, 0, 0, 0.5);
   --light-shade: rgba(255, 255, 255, 0.5);
-  --no-bg-shade: rgba(35, 10, 60, 0.8);
+  --no-bg-shade: rgba(75, 40, 110, 0.8);
   --light-bg: #fff;
   --select-bg: rgba(255, 215, 85);
   --light-text: #fff;
   --dark-text: rgb(0, 0, 0);
   --select-text: rgb(255, 215, 85);
+  --select-text-shade: rgb(255, 215, 85, 0.5);
   /*Transition vars*/
   --swift-color-change: 0.2s;
   --intermediate-color-change: 0.5s;
@@ -128,6 +129,10 @@ h2 {
 }
 
 .flex-column {
+  flex-direction: column;
+}
+
+.flex-turner-s-col {
   flex-direction: column;
 }
 
@@ -327,6 +332,27 @@ h2 {
   padding-right: 3rem;
 }
 
+/* Font size classes */
+.fs-rem-1 {
+  font-size: 1rem;
+}
+
+.fs-rem-2 {
+  font-size: 2rem;
+}
+
+.fs-rem-3 {
+  font-size: 3rem;
+}
+
+.fs-rem-4 {
+  font-size: 4rem;
+}
+
+.fs-rem-5 {
+  font-size: 5rem;
+}
+
 /* Button styling */
 .btn {
   /* display: none; */
@@ -364,11 +390,6 @@ h2 {
   position: absolute;
   width: 100%;
   background-color: var(--dark-shade);
-}
-
-.nav.flex-turner-s-col {
-  /*flex-turner-nav-col*/
-  flex-direction: column;
 }
 
 .nav:first-child {
@@ -426,11 +447,6 @@ h2 {
   -moz-transition: opacity var(--swift-color-change) 0s;
 }
 
-#dropdown-menu.flex-turner-s-col {
-  /*flex-turner-s-col*/
-  flex-direction: column;
-}
-
 #dropdown-menu li {
   transition: opacity var(--swift-color-change) 0s;
   -webkit-transition: opacity var(--swift-color-change) 0s;
@@ -464,10 +480,6 @@ h2 {
 }
 
 /* Specs styling */
-#specs div.flex-turner-s-col {
-  flex-direction: column;
-}
-
 #specs div div {
   border-bottom: 1px solid var(--dark-text);
 }
@@ -485,11 +497,6 @@ h2 {
 
 .info h3 {
   line-height: 2rem;
-}
-
-.info div.flex-turner-s-col {
-  /*flex-turner-s-col*/
-  flex-direction: column;
 }
 
 .info div div,
@@ -587,6 +594,10 @@ h2 {
   transform: translateX(0);
 }
 
+.gallery-item-text:hover {
+  text-shadow: 0 0 2px var(--dark-shade);
+}
+
 .gallery-item:hover .gallery-item-text {
   opacity: 1;
   transform: translateX(-50%);
@@ -596,6 +607,31 @@ h2 {
 /* About page styling */
 #about-info img:last-of-type {
   object-position: center 60%;
+}
+
+#work-method {
+  background: url("./personal-img/gabriel-at-work.jpg") no-repeat center / cover;
+  background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: overlay;
+}
+
+.work-method-item {
+  min-width: 50vw;
+  max-width: 90vw;
+  background-color: var(--dark-shade);
+  border-radius: 15px;
+  color: var(--light-text);
+  transition: all var(--swift-color-change);
+}
+
+.work-method-item:hover {
+  background-color: var(--select-text-shade);
+  color: var(--dark-text);
+  /* font-weight: bold; */
+  transform: scale(1.1);
+}
+
+.work-method-item:hover i {
 }
 
 /* Animations */
@@ -653,8 +689,18 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   .nav.flex-turner-s-col,
-  #dropdown-menu.flex-turner-s-col {
+  #dropdown-menu.flex-turner-s-col,
+  #work-method.flex-turner-s-col {
     flex-direction: row;
+  }
+
+  #work-method {
+    background-position-y: 70%;
+  }
+
+  .work-method-item {
+    min-width: 20vw;
+    /* border-radius: 0; */
   }
 }
 
@@ -702,23 +748,16 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   /* Gallery styling */
-
   .gallery-item {
     min-height: 30vw;
     min-width: 45vw;
     max-height: 30vw;
     max-width: 45vw;
-    /* min-width: calc(50% - 3rem);
-    max-width: calc(50% - 3rem);
-    max-height: 100%; */
   }
-
-  /* Carousel styling */
 }
 
 @media screen and (min-width: 1024px) {
   /* Gallery styling */
-
   .gallery-item {
     min-height: 20vw;
     min-width: 30vw;
