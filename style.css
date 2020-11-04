@@ -565,7 +565,7 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateX(-150%);
+  transform: translate(-150%, -50%);
   opacity: 0;
   transition: all var(--intermediate-transform);
   -webkit-transition: all var(--intermediate-transform);
@@ -600,10 +600,9 @@ h2 {
 
 .gallery-item:hover .gallery-item-text {
   opacity: 1;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   cursor: pointer;
 }
-
 /* About page styling */
 #about-info img:last-of-type {
   object-position: center 60%;
