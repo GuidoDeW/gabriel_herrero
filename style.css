@@ -565,7 +565,7 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-150%, -50%);
+  transform: translate(-50%, -50%);
   opacity: 0;
   transition: all var(--intermediate-transform);
   -webkit-transition: all var(--intermediate-transform);
@@ -612,9 +612,11 @@ h2 {
   background: url("./personal-img/gabriel-at-work.jpg") no-repeat center / cover;
   background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: overlay;
+  min-height: 100%;
 }
 
 .work-method-item {
+  position: relative;
   min-width: 50vw;
   max-width: 90vw;
   background-color: var(--dark-shade);
@@ -625,12 +627,43 @@ h2 {
   transition: all var(--swift-color-change);
 }
 
+.work-method-text {
+  position: absolute;
+  text-align: center;
+  min-width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all var(--intermediate-transform);
+  -webkit-transition: all var(--intermediate-transform);
+  -moz-transition: all var(--intermediate-transform);
+  z-index: 1;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
 .work-method-item:hover {
   background-color: var(--select-text-shade);
   color: var(--dark-text);
   border-color: var(--dark-shade);
-  /* font-weight: bold; */
-  /* transform: scale(1.1); */
+  cursor: pointer;
+}
+
+.work-method-step {
+  transition: all var(--intermediate-transform);
+  -webkit-transition: all var(--intermediate-transform);
+  -moz-transition: all var(--intermediate-transform);
+}
+
+.work-method-item:hover .work-method-step {
+  opacity: 0;
+}
+
+.work-method-item:hover .work-method-text {
+  opacity: 1;
 }
 
 /* Animations */
@@ -688,19 +721,8 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   .nav.flex-turner-s-col,
-  #dropdown-menu.flex-turner-s-col,
-  #work-method.flex-turner-s-col {
+  #dropdown-menu.flex-turner-s-col {
     flex-direction: row;
-  }
-
-  #work-method {
-    background-position-y: 70%;
-  }
-
-  .work-method-item {
-    min-width: 20vw;
-    max-width: 20vw;
-    /* border-radius: 0; */
   }
 }
 
@@ -753,6 +775,20 @@ the dropped-down menu not fitting within 50vh) */
     min-width: 45vw;
     max-height: 30vw;
     max-width: 45vw;
+  }
+
+  /* Work method styling */
+  #work-method.flex-turner-s-col {
+    flex-direction: row;
+  }
+
+  #work-method {
+    background-position-y: 70%;
+  }
+
+  .work-method-item {
+    min-width: 20vw;
+    max-width: 20vw;
   }
 }
 
