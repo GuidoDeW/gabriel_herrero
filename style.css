@@ -624,7 +624,14 @@ h2 {
   border: 5px dashed var(--light-shade);
   border-style: dashed none;
   color: var(--light-text);
-  transition: all var(--swift-color-change);
+  transition: opacity var(--swift-color-change);
+  -webkit-transition: opacity var(--swift-color-change);
+  -moz-transition: opacity var(--swift-color-change);
+}
+
+.work-method-item input {
+  position: absolute;
+  visibility: hidden;
 }
 
 .work-method-text {
@@ -658,8 +665,12 @@ h2 {
   -moz-transition: all var(--intermediate-transform);
 }
 
-.work-method-item:hover .work-method-step {
+.work-method-item:hover .work-method-step p {
   opacity: 0;
+}
+
+.work-method-item:hover .work-method-step i {
+  opacity: 0.2;
 }
 
 .work-method-item:hover .work-method-text {
