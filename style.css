@@ -652,7 +652,10 @@ h2 {
   user-select: none;
 }
 
-.work-method-item:hover {
+/* Add "highlighted" class on click, remove on click outside the item 
+or on click on other work-method-item div*/
+.work-method-item:hover,
+.work-method-item.highlighted {
   background-color: var(--select-text-shade);
   color: var(--dark-text);
   border-color: var(--dark-shade);
@@ -665,15 +668,18 @@ h2 {
   -moz-transition: all var(--intermediate-transform);
 }
 
-.work-method-item:hover .work-method-step p {
+.work-method-item:hover .work-method-step p,
+.work-method-item.highlighted .work-method-step p {
   opacity: 0;
 }
 
-.work-method-item:hover .work-method-step i {
+.work-method-item:hover .work-method-step i,
+.work-method-item.highlighted .work-method-step i {
   opacity: 0.2;
 }
 
-.work-method-item:hover .work-method-text {
+.work-method-item:hover .work-method-text,
+.work-method-item.highlighted .work-method-text {
   opacity: 1;
 }
 
