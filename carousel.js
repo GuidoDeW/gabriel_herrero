@@ -65,9 +65,11 @@ function newImg(direction) {
       : galleryIndex.reset();
   }
   setTimeout(() => {
-    carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-    // carousel.style.opacity = "1";
-    carousel.classList.remove("transparent");
+    for (let i = 0; i <= 1; i++) {
+      i === 0
+        ? carouselImg.setAttribute("src", imgSources[galleryIndex.current()])
+        : carousel.classList.remove("transparent");
+    }
   }, 300);
 }
 

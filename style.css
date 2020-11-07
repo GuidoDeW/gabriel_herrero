@@ -617,7 +617,7 @@ h2 {
 
 .work-method-item {
   position: relative;
-  min-width: 50vw;
+  min-width: 90vw;
   max-width: 90vw;
   background-color: var(--dark-shade);
   /* border-radius: 15px; */
@@ -629,22 +629,18 @@ h2 {
   -moz-transition: opacity var(--swift-color-change);
 }
 
-.work-method-item input {
-  position: absolute;
-  visibility: hidden;
-}
-
 .work-method-text {
   position: absolute;
-  text-align: center;
-  min-width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 90%;
+  max-height: 100%;
+  overflow: hidden;
   opacity: 0;
-  transition: all var(--intermediate-transform);
-  -webkit-transition: all var(--intermediate-transform);
-  -moz-transition: all var(--intermediate-transform);
+  transition: opacity var(--intermediate-color-change);
+  -webkit-transition: opacity var(--intermediate-color-change);
+  -moz-transition: opacity var(--intermediate-color-change);
   z-index: 1;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
@@ -678,7 +674,7 @@ or on click on other work-method-item div*/
   opacity: 0.2;
 }
 
-.work-method-item:hover .work-method-text,
+/* .work-method-item:hover .work-method-text, */
 .work-method-item.highlighted .work-method-text {
   opacity: 1;
 }
