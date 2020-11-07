@@ -53,7 +53,6 @@ const swipeParams = (function () {
 })();
 
 function newImg(direction) {
-  // carousel.style.opacity = "0";
   carousel.classList.add("transparent");
   if (direction === "prev") {
     galleryIndex.current() > 0
@@ -64,12 +63,11 @@ function newImg(direction) {
       ? galleryIndex.increase()
       : galleryIndex.reset();
   }
+
   setTimeout(() => {
-    for (let i = 0; i <= 1; i++) {
-      i === 0
-        ? carouselImg.setAttribute("src", imgSources[galleryIndex.current()])
-        : carousel.classList.remove("transparent");
-    }
+    Promise.resolve(
+      carouselImg.setAttribute("src", imgSources[galleryIndex.current()])
+    ).then(carousel.classList.remove("transparent"));
   }, 300);
 }
 
