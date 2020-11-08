@@ -153,6 +153,8 @@ galleryItems.forEach((item, index) =>
   })
 );
 
+//Almost correct; add contingency so img cannot move away from border (how can this be mathematically
+// predicted, and how must the formula change in this case?)
 carouselImg.addEventListener("click", (e) => {
   if (carouselImg.classList.contains("zoomed")) {
     carouselImg.classList.remove("zoomed");
@@ -163,23 +165,16 @@ carouselImg.addEventListener("click", (e) => {
     const heightScale = carouselImg.naturalHeight / carouselImg.offsetHeight;
     const widthScale = carouselImg.naturalWidth / carouselImg.offsetWidth;
     const coordinates = [e.clientX, e.clientY];
-    // console.log(`${co0rdinates * widthScale}`);
+    // console.log(`Absolute x coordinate: ${e.clientX}`);
+    // console.log(`Left offset for rendered width: ${origins.left}`);
+    // console.log(`Rendered img width: ${carouselImg.offsetWidth}`);
+    // console.log(`Actual img width: ${carouselImg.naturalWidth}`);
     // console.log(coordinates[0] - carouselImg.offsetWidth);
-    console.log(`Absolute x coordinate: ${e.clientX}`);
-    console.log(`Left offset for rendered width: ${origins.left}`);
-    console.log(`Rendered img width: ${carouselImg.offsetWidth}`);
-    console.log(`Actual img width: ${carouselImg.naturalWidth}`);
-    // console.log((carouselImg.offsetWidth - coordinates[0]) * widthScale);
-    // translateX(${
-    //   (carouselImg.offsetWidth - coordinates[0]) * widthScale
-    // }px)
-    carouselImg.style.transform = ` scale(${heightScale}, ${widthScale}) `;
-    console.log(
-      `Left offset after scaling: ${carouselImg.getBoundingClientRect().left}`
-    );
+    carouselImg.style.transform = `translateX(${
+      (carouselImg.offsetWidth - e.clientX) * widthScale + origins.x / 2
+    }px) scale(${heightScale}, ${widthScale}) `;
   }
+  // console.log(
+  //   `Left offset after scaling: ${carouselImg.getBoundingClientRect().left}`
+  // );
 });
-
-// document.body.addEventListener("click", (e) => {
-//   console.log(Math.round(e.clientX));
-// });
