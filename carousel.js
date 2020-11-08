@@ -152,3 +152,34 @@ galleryItems.forEach((item, index) =>
     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
   })
 );
+
+carouselImg.addEventListener("click", (e) => {
+  if (carouselImg.classList.contains("zoomed")) {
+    carouselImg.classList.remove("zoomed");
+    carouselImg.style.transform = "";
+  } else {
+    carouselImg.classList.add("zoomed");
+    const origins = carouselImg.getBoundingClientRect();
+    const heightScale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+    const widthScale = carouselImg.naturalWidth / carouselImg.offsetWidth;
+    const coordinates = [e.clientX, e.clientY];
+    // console.log(`${co0rdinates * widthScale}`);
+    // console.log(coordinates[0] - carouselImg.offsetWidth);
+    console.log(`Absolute x coordinate: ${e.clientX}`);
+    console.log(`Left offset for rendered width: ${origins.left}`);
+    console.log(`Rendered img width: ${carouselImg.offsetWidth}`);
+    console.log(`Actual img width: ${carouselImg.naturalWidth}`);
+    // console.log((carouselImg.offsetWidth - coordinates[0]) * widthScale);
+    // translateX(${
+    //   (carouselImg.offsetWidth - coordinates[0]) * widthScale
+    // }px)
+    carouselImg.style.transform = ` scale(${heightScale}, ${widthScale}) `;
+    console.log(
+      `Left offset after scaling: ${carouselImg.getBoundingClientRect().left}`
+    );
+  }
+});
+
+// document.body.addEventListener("click", (e) => {
+//   console.log(Math.round(e.clientX));
+// });
