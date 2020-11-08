@@ -153,6 +153,11 @@ galleryItems.forEach((item, index) =>
   })
 );
 
+/* https://stackoverflow.com/questions/42741960/how-do-you-zoom-into-a-specific-point-no-canvas 
+
+https://stackoverflow.com/questions/60190965/zoom-scale-at-mouse-position
+
+https://stackoverflow.com/questions/30002361/image-zoom-centered-on-mouse-position */
 //Almost correct; add contingency so img cannot move away from border (how can this be mathematically
 // predicted, and how must the formula change in this case?)
 carouselImg.addEventListener("click", (e) => {
@@ -162,18 +167,39 @@ carouselImg.addEventListener("click", (e) => {
   } else {
     carouselImg.classList.add("zoomed");
     const origins = carouselImg.getBoundingClientRect();
-    const heightScale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-    const widthScale = carouselImg.naturalWidth / carouselImg.offsetWidth;
-    const coordinates = [e.clientX, e.clientY];
+    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+    console.log(scale);
+    // const transX =
+    //   (carouselImg.offsetWidth - e.clientX) * scale + e.clientX / scale;
+    // const transY =
+    //   (carouselImg.offsetHeight - e.clientY) * scale - e.clientY / scale;
+
+    const transX = (e.clientX - origins.x) * (scale - 1) + origins.x;
+    const transY = (e.clientY - origins.y) * (scale - 1) + origins.y;
+
+    // const transX =
+    //   (scale - 1) * origins.x
+    // const transY =
+    //   (carouselImg.offsetHeight - e.clientY) * scale + e.clientY / scale;
     // console.log(`Absolute x coordinate: ${e.clientX}`);
     // console.log(`Left offset for rendered width: ${origins.left}`);
     // console.log(`Rendered img width: ${carouselImg.offsetWidth}`);
     // console.log(`Actual img width: ${carouselImg.naturalWidth}`);
     // console.log(coordinates[0] - carouselImg.offsetWidth);
-    carouselImg.style.transform = `translateX(${
-      (carouselImg.offsetWidth - e.clientX) * widthScale + origins.x / 2
-    }px) scale(${heightScale}, ${widthScale}) `;
+
+    // carouselImg.style.transform = `translateX(${
+    //   (carouselImg.offsetWidth - e.clientX) * widthScale + origins.x / 2
+    // }px) scale(${heightScale}, ${widthScale}) `;
+
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
   }
+
+  /*
+  -Take click coordinates
+  -
+  
+  */
+  // (e.clientX - origins.x) * widthScale;
   // console.log(
   //   `Left offset after scaling: ${carouselImg.getBoundingClientRect().left}`
   // );
