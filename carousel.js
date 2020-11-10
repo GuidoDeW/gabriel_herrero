@@ -153,13 +153,54 @@ galleryItems.forEach((item, index) =>
   })
 );
 
-/* https://stackoverflow.com/questions/42741960/how-do-you-zoom-into-a-specific-point-no-canvas 
+carouselImg.addEventListener("click", (e) => {
+  if (carouselImg.classList.contains("zoomed")) {
+    carouselImg.classList.remove("zoomed");
+    carouselImg.style.transform = "";
+  } else {
+    carouselImg.classList.add("zoomed");
 
-https://stackoverflow.com/questions/60190965/zoom-scale-at-mouse-position
+    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
 
-https://stackoverflow.com/questions/30002361/image-zoom-centered-on-mouse-position */
+    const transX =
+      e.clientX <= window.innerWidth / 2
+        ? (window.innerWidth -
+            carousel.offsetWidth -
+            (window.innerWidth - carouselImg.naturalWidth)) /
+            2 -
+          scale * (e.clientX - carousel.getBoundingClientRect().x)
+        : (window.innerWidth -
+            carousel.offsetWidth -
+            (window.innerWidth - carouselImg.naturalWidth)) /
+            2 -
+          (e.clientX - carousel.getBoundingClientRect().x) * scale +
+          carousel.offsetWidth;
+
+    const transY =
+      e.clientY <= window.innerHeight / 2
+        ? (window.innerHeight -
+            carousel.offsetHeight -
+            (window.innerHeight - carouselImg.naturalHeight)) /
+            2 -
+          scale * (e.clientY + carousel.getBoundingClientRect().top)
+        : (window.innerHeight -
+            carousel.offsetHeight -
+            (window.innerHeight - carouselImg.naturalHeight)) /
+            2 -
+          (e.clientY * scale - carousel.getBoundingClientRect().top) +
+          carousel.offsetHeight;
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+  }
+});
+
+//https://stackoverflow.com/questions/42741960/how-do-you-zoom-into-a-specific-point-no-canvas
+
+//https://stackoverflow.com/questions/60190965/zoom-scale-at-mouse-position
+
+//https://stackoverflow.com/questions/30002361/image-zoom-centered-on-mouse-position
 //Almost correct; add contingency so img cannot move away from border (how can this be mathematically
 // predicted, and how must the formula change in this case?)
+/*
 carouselImg.addEventListener("click", (e) => {
   if (carouselImg.classList.contains("zoomed")) {
     carouselImg.classList.remove("zoomed");
@@ -174,8 +215,8 @@ carouselImg.addEventListener("click", (e) => {
     // const transY =
     //   (carouselImg.offsetHeight - e.clientY) * scale - e.clientY / scale;
 
-    const transX = (e.clientX - origins.x) * (scale - 1) + origins.x;
-    const transY = (e.clientY - origins.y) * (scale - 1) + origins.y;
+    // const transX = (e.clientX - origins.x) * (scale - 1) + origins.x;
+    // const transY = (e.clientY - origins.y) * (scale - 1) + origins.y;
 
     // const transX =
     //   (scale - 1) * origins.x
@@ -190,17 +231,39 @@ carouselImg.addEventListener("click", (e) => {
     // carouselImg.style.transform = `translateX(${
     //   (carouselImg.offsetWidth - e.clientX) * widthScale + origins.x / 2
     // }px) scale(${heightScale}, ${widthScale}) `;
+    const transX =
+      e.clientX <= window.innerWidth / 2
+        ? (window.innerWidth -
+            carousel.offsetWidth -
+            (window.innerWidth - carouselImg.naturalWidth)) /
+            2 -
+          scale * (e.clientX - carousel.getBoundingClientRect().x)
+        : (window.innerWidth -
+            carousel.offsetWidth -
+            (window.innerWidth - carouselImg.naturalWidth)) /
+            2 -
+          (e.clientX - carousel.getBoundingClientRect().x) * scale +
+          carousel.offsetWidth;
 
+    const transY =
+      e.clientY <= window.innerHeight / 2
+        ? (window.innerHeight -
+            carousel.offsetHeight -
+            (window.innerHeight - carouselImg.naturalHeight)) /
+            2 -
+          scale * (e.clientY - carousel.getBoundingClientRect().y)
+        : (window.innerHeight -
+            carousel.offsetHeight -
+            (window.innerHeight - carouselImg.naturalHeight)) /
+            2 -
+          scale * (e.clientY - carousel.getBoundingClientRect().y) +
+          carousel.offsetHeight;
     carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
   }
 
-  /*
-  -Take click coordinates
-  -
-  
-  */
   // (e.clientX - origins.x) * widthScale;
   // console.log(
   //   `Left offset after scaling: ${carouselImg.getBoundingClientRect().left}`
   // );
 });
+*/
