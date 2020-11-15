@@ -54,6 +54,7 @@
 }
 
 .carousel-nav {
+  z-index: 3;
   font-size: 2rem;
   color: transparent;
   position: absolute;

@@ -57,6 +57,11 @@ function changeImg(callback) {
   callback();
 }
 
+function zoomOut() {
+  carouselImg.classList.remove("zoomed");
+  carouselImg.style.transform = "";
+}
+
 function newImg(direction) {
   carousel.classList.add("transparent");
   if (direction === "prev") {
@@ -70,6 +75,7 @@ function newImg(direction) {
   }
 
   setTimeout(() => {
+    zoomOut();
     changeImg(() => {
       carousel.classList.remove("transparent");
     });
@@ -84,6 +90,7 @@ function openCarousel() {
 function closeCarousel() {
   carouselContainer.classList.remove("carousel-show");
   gallery.classList.remove("carousel-show");
+  zoomOut();
 }
 
 document.body.addEventListener("click", (e) => {
@@ -160,40 +167,26 @@ galleryItems.forEach((item, index) =>
 
 carouselImg.addEventListener("click", (e) => {
   if (carouselImg.classList.contains("zoomed")) {
-    carouselImg.classList.remove("zoomed");
-    carouselImg.style.transform = "";
+    zoomOut();
   } else {
     carouselImg.classList.add("zoomed");
 
     const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-
     const transX =
-      e.clientX <= window.innerWidth / 2
-        ? (window.innerWidth -
-            carousel.offsetWidth -
-            (window.innerWidth - carouselImg.naturalWidth)) /
-            2 -
-          scale * (e.clientX - carousel.getBoundingClientRect().x)
-        : (window.innerWidth -
-            carousel.offsetWidth -
-            (window.innerWidth - carouselImg.naturalWidth)) /
-            2 -
-          (e.clientX - carousel.getBoundingClientRect().x) * scale +
-          carousel.offsetWidth;
-
+      e.clientX -
+      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
+        2 +
+        (e.clientX -
+          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
+          scale);
     const transY =
-      e.clientY <= window.innerHeight / 2
-        ? (window.innerHeight -
-            carousel.offsetHeight -
-            (window.innerHeight - carouselImg.naturalHeight)) /
-            2 -
-          scale * (e.clientY + carousel.getBoundingClientRect().top)
-        : (window.innerHeight -
-            carousel.offsetHeight -
-            (window.innerHeight - carouselImg.naturalHeight)) /
-            2 -
-          (e.clientY * scale - carousel.getBoundingClientRect().top) +
-          carousel.offsetHeight;
+      e.clientY -
+      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
+        2 +
+        (e.clientY -
+          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
+          scale);
+
     carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
   }
 });
