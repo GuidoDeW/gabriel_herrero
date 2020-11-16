@@ -254,6 +254,16 @@ h2 {
 }
 
 /* Padding classes */
+.py-h {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.px-h {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .py-1 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -358,7 +368,12 @@ h2 {
   /* display: none; */
   text-decoration: none;
   padding: 1rem 2rem;
-  transition: background-color var(--swift-color-change) 0s;
+  transition: all var(--swift-color-change) 0s;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
 }
 
 .btn-light {
@@ -603,6 +618,7 @@ h2 {
   transform: translate(-50%, -50%);
   cursor: pointer;
 }
+
 /* About page styling */
 #about-info img:last-of-type {
   object-position: center 60%;
@@ -631,6 +647,36 @@ h2 {
   border-color: var(--dark-shade);
   /* font-weight: bold; */
   /* transform: scale(1.1); */
+}
+
+/* Contact page styling */
+input,
+textarea {
+  font-size: 1rem;
+  border: 1px solid var(--dark-text);
+}
+
+.input-field {
+  width: 90vw;
+  resize: none;
+}
+
+.input-field:focus {
+  outline: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#contact-submit-btn:active {
+  border-color: var(--dark-shade);
 }
 
 /* Animations */
@@ -702,6 +748,11 @@ the dropped-down menu not fitting within 50vh) */
     max-width: 20vw;
     /* border-radius: 0; */
   }
+
+  /* Contact page styling */
+  .input-field {
+    max-width: 50vw;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -753,6 +804,11 @@ the dropped-down menu not fitting within 50vh) */
     min-width: 45vw;
     max-height: 30vw;
     max-width: 45vw;
+  }
+
+  /* Contact page styling */
+  .input-field {
+    max-width: 25vw;
   }
 }
 

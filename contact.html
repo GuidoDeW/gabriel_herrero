@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer src="script.js"></script>
+    <script defer src="contact.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
       rel="stylesheet"
@@ -63,6 +64,50 @@
         <h1 class="light-text my-2 not-main">Contact Me</h1>
       </div>
     </header>
+
+    <!-- Contact form-->
+    <h2 class="text-ac my-1">Your Story</h2>
+    <p class="text-ac">
+      Send me a message and I will get back in touch with you as soon as
+      possible.
+    </p>
+    <form
+      id="contact-form"
+      class="display-flex flex-turner-s-col flex-ac flex-jc-se py-1"
+    >
+      <label for="name">Name</label>
+      <input
+        class="my-1 px-h py-h input-field"
+        name="name"
+        type="text"
+        required
+      />
+      <label for="company">Company</label>
+      <input class="my-1 px-h py-h input-field" name="company" type="text" />
+      <label for="email">Email</label>
+      <input
+        class="my-1 px-h py-h input-field"
+        name="email "
+        type="email"
+        required
+      />
+      <label for="phone">Phone</label>
+      <input class="my-1 px-h py-h input-field" name="phone" type="number" />
+      <label for="message">Message</label>
+      <textarea
+        class="my-1 px-h py-h input-field"
+        name="message"
+        id=""
+        cols="30"
+        rows="10"
+      ></textarea>
+      <input
+        id="contact-submit-btn"
+        class="btn btn-light"
+        type="submit"
+        value="Submit"
+      />
+    </form>
 
     <footer class="footer display-flex flex-column">
       <ul class="display-flex flex-ac flex-jc-se full-width list-st-none my-1">
