@@ -52,6 +52,11 @@ const swipeParams = (function () {
   };
 })();
 
+function changeImg(callback) {
+  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+  callback();
+}
+
 function newImg(direction) {
   carousel.classList.add("transparent");
   if (direction === "prev") {
@@ -65,9 +70,9 @@ function newImg(direction) {
   }
 
   setTimeout(() => {
-    Promise.resolve(
-      carouselImg.setAttribute("src", imgSources[galleryIndex.current()])
-    ).then(carousel.classList.remove("transparent"));
+    changeImg(() => {
+      carousel.classList.remove("transparent");
+    });
   }, 300);
 }
 
