@@ -53,7 +53,7 @@ const swipeParams = (function () {
 })();
 
 function changeImg(callback) {
-  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+  carousel.classList.remove("transparent");
   callback();
 }
 
@@ -77,7 +77,7 @@ function newImg(direction) {
   setTimeout(() => {
     zoomOut();
     changeImg(() => {
-      carousel.classList.remove("transparent");
+      carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
     });
   }, 300);
 }
