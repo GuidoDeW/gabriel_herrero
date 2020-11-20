@@ -87,8 +87,16 @@ h2 {
 }
 
 /*Text classes */
+.text-as {
+  text-align: start;
+}
+
 .text-ac {
   text-align: center;
+}
+
+.text-ae {
+  text-align: end;
 }
 
 /* Flexbox classes */
@@ -496,7 +504,7 @@ h2 {
 
 /* Specs styling */
 #specs div div {
-  border-bottom: 1px solid var(--dark-text);
+  border-bottom: 1px solid var(--dark-shade);
 }
 
 .spec-icon:before {
@@ -651,9 +659,11 @@ h2 {
 
 /* Contact page styling */
 input,
-textarea {
+textarea,
+select {
   font-size: 1rem;
-  border: 1px solid var(--dark-text);
+  border: 1px solid var(--dark-shade);
+  /* box-shadow: 0px 0px 1px 1px var(--dark-shade); */
 }
 
 .input-field {
@@ -679,6 +689,9 @@ input[type="number"] {
   border-color: var(--dark-shade);
 }
 
+.incorrect-field::placeholder {
+  color: rgba(255, 0, 0, 0.8);
+}
 /* Animations */
 
 /*Media queries*/
@@ -768,7 +781,7 @@ the dropped-down menu not fitting within 50vh) */
   #specs div div:nth-of-type(2) {
     border-width: 0px 1px;
     border-style: solid;
-    border-color: var(--dark-text);
+    border-color: var(--dark-shade);
   }
 
   /* Home info styling */
@@ -785,11 +798,11 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   .info div:nth-of-type(odd) div p {
-    border-left: solid 1px var(--dark-text);
+    border-left: solid 1px var(--dark-shade);
   }
 
   .info div:nth-of-type(even) div p {
-    border-right: solid 1px var(--dark-text);
+    border-right: solid 1px var(--dark-shade);
   }
 
   .info div div,
