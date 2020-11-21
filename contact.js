@@ -49,6 +49,13 @@ submitBtn.addEventListener("click", (e) => {
     ) {
       incorrectFields.push(field);
       field.setAttribute("placeholder", "Please enter a valid email address.");
+    } else if (
+      field.name === "phone" &&
+      field.value.trim().length > 0 &&
+      !/^\+?([\.\s\-\(]*\d+[\.\s\-\)]*)+$/g.test(field.value)
+    ) {
+      incorrectFields.push(field);
+      field.setAttribute("placeholder", "Please enter a valid phone number.");
     }
   });
 
