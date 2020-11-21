@@ -33,7 +33,8 @@ inputFields.forEach((field) => {
 
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  let incorrectFields = [];
+  const incorrectFields = [];
+
   //Check required fields
   inputFields.forEach((field) => {
     if (
@@ -87,3 +88,28 @@ returnBtn.addEventListener("click", () => {
 // without having to reload the whole page.
 
 // Finally, save input to LS so as to allow reloads without progress loss.
+
+// Possible Regex to limit the accepted input for phone field: ^\+?(\.?\s?\-?\(?\d+\)?\s?\.?)+
+// (Does not ensure that correct phone numbers are entered, but eliminates letters and most punctuation marks)
+
+// if (field.name === "phone") {
+//   field.addEventListener("keypress", (e) => {
+//     if (
+//       field.name === "phone" &&
+//       !/^\+?(\.?\s?\-?\(?\d+\)?\s?\.?)+/g.test(
+//         field.value + String.fromCharCode(e.charCode)
+//       )
+//     ) {
+//       e.preventDefault();
+//     }
+//   });
+// }
+
+// else if (
+//   field.name === "phone" &&
+//   field.value.trim().length > 0 &&
+//   !/^\+?(\.?\s?\-?\(?\d+\)?\s?\.?)+/g.test(field.value)
+// ) {
+//   incorrectFields.push(field);
+//   field.setAttribute("placeholder", "Please enter a valid phone number.");
+// }
