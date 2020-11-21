@@ -1,5 +1,8 @@
-const submitBtn = document.getElementById("contact-submit-btn"),
-  inputFields = document.querySelectorAll(".input-field");
+const contactForm = document.getElementById("contact-form"),
+  submitBtn = document.getElementById("contact-submit-btn"),
+  inputFields = document.querySelectorAll(".input-field"),
+  submissionMsg = document.getElementById("submission-msg"),
+  returnBtn = document.getElementById("return-btn");
 
 inputFields.forEach((field) => {
   // Check LS and fill previously filled-out fields
@@ -53,10 +56,14 @@ submitBtn.addEventListener("click", (e) => {
     incorrectFields.forEach((field) => {
       field.classList.add("incorrect-field");
       field.value = "";
+      localStorage.removeItem(`input-${[...inputFields].indexOf(field)}`);
     });
   } else {
+    contactForm.classList.add("form-submitted");
+    submissionMsg.classList.add("form-submitted");
     // Remove LS items upon successful submit (without affecting LS items from other apps)
     inputFields.forEach((field) => {
+      field.value = "";
       if (
         localStorage.getItem(`input-${[...inputFields].indexOf(field)}`) !==
         null
@@ -64,8 +71,12 @@ submitBtn.addEventListener("click", (e) => {
         localStorage.removeItem(`input-${[...inputFields].indexOf(field)}`);
       }
     });
-    alert("Thank you!");
   }
+});
+
+returnBtn.addEventListener("click", () => {
+  submissionMsg.classList.remove("form-submitted");
+  contactForm.classList.remove("form-submitted");
 });
 
 // use regexs to check for correct input. Replace required attribute

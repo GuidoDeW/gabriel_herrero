@@ -376,6 +376,7 @@ h2 {
   /* display: none; */
   text-decoration: none;
   padding: 1rem 2rem;
+  font-size: 1rem;
   transition: all var(--swift-color-change) 0s;
   cursor: pointer;
 }
@@ -660,7 +661,8 @@ h2 {
 /* Contact page styling */
 input,
 textarea,
-select {
+select,
+#return-btn {
   font-size: 1rem;
   border: 1px solid var(--dark-shade);
   /* box-shadow: 0px 0px 1px 1px var(--dark-shade); */
@@ -685,12 +687,26 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-#contact-submit-btn:active {
+#contact-submit-btn:active,
+#return-btn:active {
   border-color: var(--dark-shade);
 }
 
 .incorrect-field::placeholder {
   color: rgba(255, 0, 0, 0.8);
+}
+
+#submission-msg {
+  position: absolute;
+  visibility: hidden;
+}
+
+#contact-form.form-submitted {
+  visibility: hidden;
+}
+
+#submission-msg.form-submitted {
+  visibility: visible;
 }
 /* Animations */
 

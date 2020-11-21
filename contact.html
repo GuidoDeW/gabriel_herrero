@@ -71,25 +71,26 @@
       Send me a message and I will get back in touch with you as soon as
       possible.
     </p>
-    <form
-      id="contact-form"
-      class="display-flex flex-column flex-ac flex-jc-se py-1"
-    >
-      <label for="name">Name</label>
-      <input
-        class="my-1 px-h py-h input-field required-field"
-        name="name"
-        type="text"
-      />
-      <label for="email">Email</label>
-      <input
-        class="my-1 px-h py-h input-field required-field"
-        name="email"
-        type="email"
-      />
-      <label for="phone">Phone</label>
-      <input class="my-1 px-h py-h input-field" name="phone" type="tel" />
-      <label for="country" placeholder="">Country</label>
+    <section class="display-flex flex-column flex-ac flex-jc-c">
+      <form
+        id="contact-form"
+        class="display-flex flex-column flex-ac flex-jc-se py-1"
+      >
+        <label for="name">Name*</label>
+        <input
+          class="my-1 px-h py-h input-field required-field"
+          name="name"
+          type="text"
+        />
+        <label for="email">Email*</label>
+        <input
+          class="my-1 px-h py-h input-field required-field"
+          name="email"
+          type="email"
+        />
+        <label for="phone">Phone</label>
+        <input class="my-1 px-h py-h input-field" name="phone" type="tel" />
+        <!-- <label for="country" placeholder="">Country</label>
       <select class="my-1 px-h py-h input-field" name="country">
         <option value="--">--</option>
         <option value="Afghanistan">Afghanistan</option>
@@ -344,25 +345,33 @@
         <option value="Zaire">Zaire</option>
         <option value="Zambia">Zambia</option>
         <option value="Zimbabwe">Zimbabwe</option>
-      </select>
-      <label for="company">Company</label>
-      <input class="my-1 px-h py-h input-field" name="company" type="text" />
-      <label for="message">Message</label>
-      <textarea
-        class="my-1 px-h py-h input-field"
-        name="message"
-        id=""
-        cols="30"
-        rows="10"
-      ></textarea>
-      <input
-        id="contact-submit-btn"
-        class="btn btn-light"
-        type="submit"
-        value="Submit"
-      />
-    </form>
-
+      </select> -->
+        <label for="company">Company</label>
+        <input class="my-1 px-h py-h input-field" name="company" type="text" />
+        <label for="message">Message*</label>
+        <textarea
+          class="my-1 px-h py-h input-field required-field"
+          name="message"
+          id=""
+          cols="30"
+          rows="10"
+        ></textarea>
+        <input
+          id="contact-submit-btn"
+          class="btn btn-light"
+          type="submit"
+          value="Submit"
+        />
+      </form>
+      <div
+        id="submission-msg"
+        class="display-flex flex-column flex-ac flex-jc-c"
+      >
+        <h3 class="text-ac my-1">Thank you!</h3>
+        <!-- <input id="contact-submit-btn" class="btn btn-light" value="Return" /> -->
+        <button id="return-btn" class="btn btn-light mb-1">Return</button>
+      </div>
+    </section>
     <footer class="footer display-flex flex-column">
       <ul class="display-flex flex-ac flex-jc-se full-width list-st-none my-1">
         <li>
