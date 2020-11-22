@@ -26,6 +26,7 @@
   position: relative;
   height: fit-content;
   width: fit-content;
+  overflow: hidden;
   border: 5px solid var(--dark-shade);
   /* opacity: 1; */
   transition: opacity 0.3s;
@@ -44,7 +45,16 @@
   max-height: 90vh;
 }
 
+#carousel-img:hover {
+  cursor: zoom-in;
+}
+
+#carousel-img.zoomed {
+  cursor: zoom-out;
+}
+
 .carousel-nav {
+  z-index: 3;
   font-size: 2rem;
   color: transparent;
   position: absolute;

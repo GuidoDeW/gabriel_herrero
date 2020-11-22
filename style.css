@@ -617,7 +617,7 @@ h2 {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-150%, -50%);
+  transform: translate(-50%, -50%);
   opacity: 0;
   transition: all var(--intermediate-transform);
   -webkit-transition: all var(--intermediate-transform);
@@ -665,25 +665,61 @@ h2 {
   background: url("./personal-img/gabriel-at-work.jpg") no-repeat center / cover;
   background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: overlay;
+  min-height: 100%;
 }
 
 .work-method-item {
-  min-width: 50vw;
+  position: relative;
+  min-width: 90vw;
   max-width: 90vw;
   background-color: var(--dark-shade);
-  /* border-radius: 15px; */
-  border: 5px dashed var(--light-shade);
+  /* border-radius: 10px; */
+  border: 5px var(--light-shade);
   border-style: dashed none;
   color: var(--light-text);
-  transition: all var(--swift-color-change);
+  transition: all var(--intermediate-color-change);
+  -webkit-transition: all var(--intermediate-color-change);
+  -moz-transition: all var(--intermediate-color-change);
 }
 
-.work-method-item:hover {
+.work-method-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--intermediate-color-change);
+  -webkit-transition: opacity var(--intermediate-color-change);
+  -moz-transition: opacity var(--intermediate-color-change);
+  z-index: 1;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
+}
+
+.work-method-item:hover,
+.work-method-item.highlighted {
   background-color: var(--select-text-shade);
   color: var(--dark-text);
   border-color: var(--dark-shade);
-  /* font-weight: bold; */
-  /* transform: scale(1.1); */
+  cursor: pointer;
+}
+
+.work-method-item.highlighted .work-method-step p {
+  opacity: 0;
+}
+
+.work-method-item:hover .work-method-step,
+.work-method-item.highlighted .work-method-step {
+  opacity: 0.2;
+}
+
+.work-method-item.highlighted .work-method-text {
+  opacity: 1;
 }
 
 /* Contact page styling */
@@ -794,8 +830,7 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   .nav.flex-turner-s-col,
-  #dropdown-menu.flex-turner-s-col,
-  #work-method.flex-turner-s-col {
+  #dropdown-menu.flex-turner-s-col {
     flex-direction: row;
   }
 
@@ -872,22 +907,35 @@ the dropped-down menu not fitting within 50vh) */
   #contact * {
     max-width: 25vw;
   }
-}
-
-@media screen and (min-width: 1024px) {
-  /* Gallery styling */
-  .gallery-item {
-    min-height: 20vw;
-    min-width: 30vw;
-    max-height: 20vw;
-    max-width: 30vw;
+  /* Work method styling */
+  #work-method.flex-turner-s-col {
+    flex-direction: row;
   }
 
   #work-method {
-    margin-top: 1rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    background-position: 0 68%;
+    background-position-y: 70%;
+  }
+
+  .work-method-item {
+    min-width: 20vw;
+    max-width: 20vw;
+  }
+
+  @media screen and (min-width: 1024px) {
+    /* Gallery styling */
+    .gallery-item {
+      min-height: 20vw;
+      min-width: 30vw;
+      max-height: 20vw;
+      max-width: 30vw;
+    }
+
+    #work-method {
+      margin-top: 1rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+      background-position: 0 68%;
+    }
   }
 }
 

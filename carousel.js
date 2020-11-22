@@ -52,8 +52,17 @@ const swipeParams = (function () {
   };
 })();
 
+function changeImg(callback) {
+  carousel.classList.remove("transparent");
+  callback();
+}
+
+function zoomOut() {
+  carouselImg.classList.remove("zoomed");
+  carouselImg.style.transform = "";
+}
+
 function newImg(direction) {
-  // carousel.style.opacity = "0";
   carousel.classList.add("transparent");
   if (direction === "prev") {
     galleryIndex.current() > 0
@@ -66,11 +75,10 @@ function newImg(direction) {
   }
 
   setTimeout(() => {
-    for (let i = 0; i <= 1; i++) {
-      i === 0
-        ? carouselImg.setAttribute("src", imgSources[galleryIndex.current()])
-        : carousel.classList.remove("transparent");
-    }
+    zoomOut();
+    changeImg(() => {
+      carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+    });
   }, 300);
 }
 
@@ -82,6 +90,7 @@ function openCarousel() {
 function closeCarousel() {
   carouselContainer.classList.remove("carousel-show");
   gallery.classList.remove("carousel-show");
+  zoomOut();
 }
 
 document.body.addEventListener("click", (e) => {
@@ -155,3 +164,104 @@ galleryItems.forEach((item, index) =>
     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
   })
 );
+
+carouselImg.addEventListener("click", (e) => {
+  if (carouselImg.classList.contains("zoomed")) {
+    zoomOut();
+  } else {
+    carouselImg.classList.add("zoomed");
+
+    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+    const transX =
+      e.clientX -
+      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
+        2 +
+        (e.clientX -
+          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
+          scale);
+    const transY =
+      e.clientY -
+      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
+        2 +
+        (e.clientY -
+          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
+          scale);
+
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+  }
+});
+
+//https://stackoverflow.com/questions/42741960/how-do-you-zoom-into-a-specific-point-no-canvas
+
+//https://stackoverflow.com/questions/60190965/zoom-scale-at-mouse-position
+
+//https://stackoverflow.com/questions/30002361/image-zoom-centered-on-mouse-position
+//Almost correct; add contingency so img cannot move away from border (how can this be mathematically
+// predicted, and how must the formula change in this case?)
+/*
+carouselImg.addEventListener("click", (e) => {
+  if (carouselImg.classList.contains("zoomed")) {
+    carouselImg.classList.remove("zoomed");
+    carouselImg.style.transform = "";
+  } else {
+    carouselImg.classList.add("zoomed");
+    const origins = carouselImg.getBoundingClientRect();
+    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+    console.log(scale);
+    // const transX =
+    //   (carouselImg.offsetWidth - e.clientX) * scale + e.clientX / scale;
+    // const transY =
+    //   (carouselImg.offsetHeight - e.clientY) * scale - e.clientY / scale;
+
+    // const transX = (e.clientX - origins.x) * (scale - 1) + origins.x;
+    // const transY = (e.clientY - origins.y) * (scale - 1) + origins.y;
+
+    // const transX =
+    //   (scale - 1) * origins.x
+    // const transY =
+    //   (carouselImg.offsetHeight - e.clientY) * scale + e.clientY / scale;
+    // console.log(`Absolute x coordinate: ${e.clientX}`);
+    // console.log(`Left offset for rendered width: ${origins.left}`);
+    // console.log(`Rendered img width: ${carouselImg.offsetWidth}`);
+    // console.log(`Actual img width: ${carouselImg.naturalWidth}`);
+    // console.log(coordinates[0] - carouselImg.offsetWidth);
+
+    // carouselImg.style.transform = `translateX(${
+    //   (carouselImg.offsetWidth - e.clientX) * widthScale + origins.x / 2
+    // }px) scale(${heightScale}, ${widthScale}) `;
+    const transX =
+      e.clientX <= window.innerWidth / 2
+        ? (window.innerWidth -
+            carousel.offsetWidth -
+            (window.innerWidth - carouselImg.naturalWidth)) /
+            2 -
+          scale * (e.clientX - carousel.getBoundingClientRect().x)
+        : (window.innerWidth -
+            carousel.offsetWidth -
+            (window.innerWidth - carouselImg.naturalWidth)) /
+            2 -
+          (e.clientX - carousel.getBoundingClientRect().x) * scale +
+          carousel.offsetWidth;
+
+    const transY =
+      e.clientY <= window.innerHeight / 2
+        ? (window.innerHeight -
+            carousel.offsetHeight -
+            (window.innerHeight - carouselImg.naturalHeight)) /
+            2 -
+          scale * (e.clientY - carousel.getBoundingClientRect().y)
+        : (window.innerHeight -
+            carousel.offsetHeight -
+            (window.innerHeight - carouselImg.naturalHeight)) /
+            2 -
+          scale * (e.clientY - carousel.getBoundingClientRect().y) +
+          carousel.offsetHeight;
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+  }
+
+  // (e.clientX - origins.x) * widthScale;
+  // console.log(
+  //   `Left offset after scaling: ${carouselImg.getBoundingClientRect().left}`
+  // );
+});
+*/
