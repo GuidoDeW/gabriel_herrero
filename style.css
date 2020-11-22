@@ -99,6 +99,10 @@ h2 {
   text-align: end;
 }
 
+.text-aj {
+  text-align: justify;
+}
+
 /* Flexbox classes */
 .display-flex {
   display: flex;
@@ -134,6 +138,30 @@ h2 {
 
 .flex-jc-end {
   justify-content: flex-end;
+}
+
+.flex-as-s {
+  align-self: flex-start;
+}
+
+.flex-as-c {
+  align-self: center;
+}
+
+.flex-as-e {
+  align-self: flex-end;
+}
+
+.flex-js-s {
+  justify-self: flex-start;
+}
+
+.flex-js-c {
+  justify-self: center;
+}
+
+.flex-js-s {
+  justify-self: flex-end;
 }
 
 .flex-column {
@@ -668,7 +696,8 @@ select,
   /* box-shadow: 0px 0px 1px 1px var(--dark-shade); */
 }
 
-.input-field {
+.input-field,
+#contact * {
   width: 90vw;
   resize: none;
 }
@@ -698,16 +727,18 @@ input[type="number"] {
 
 #submission-msg {
   position: absolute;
-  visibility: hidden;
 }
 
+#submission-msg.form-pending,
 #contact-form.form-submitted {
   visibility: hidden;
 }
 
-#submission-msg.form-submitted {
-  visibility: visible;
+#contact-form.form-submitted *,
+#submission-msg.form-pending * {
+  transition: all 0s;
 }
+
 /* Animations */
 
 /*Media queries*/
@@ -779,7 +810,8 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   /* Contact page styling */
-  .input-field {
+  .input-field,
+  #contact * {
     max-width: 50vw;
   }
 }
@@ -836,7 +868,8 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   /* Contact page styling */
-  .input-field {
+  .input-field,
+  #contact * {
     max-width: 25vw;
   }
 }

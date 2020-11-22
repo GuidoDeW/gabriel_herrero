@@ -66,15 +66,18 @@
     </header>
 
     <!-- Contact form-->
-    <h2 class="text-ac my-1">Your Story</h2>
-    <p class="text-ac">
-      Send me a message and I will get back in touch with you as soon as
-      possible.
-    </p>
+    <div id="contact" class="display-flex flex-column flex-ac flex-jc-c">
+      <h2 class="text-ac my-1">Your Story</h2>
+      <p class="text-aj">
+        Would you like to know more about my projects, work with me, or simply
+        have a coffee? Send me a message and I will get back in touch with you
+        as soon as possible.
+      </p>
+    </div>
     <section class="display-flex flex-column flex-ac flex-jc-c">
       <form
         id="contact-form"
-        class="display-flex flex-column flex-ac flex-jc-se py-1"
+        class="display-flex flex-column flex-as flex-jc-se py-1"
       >
         <label for="name">Name*</label>
         <input
@@ -358,14 +361,14 @@
         ></textarea>
         <input
           id="contact-submit-btn"
-          class="btn btn-light"
+          class="btn btn-light flex-as-c"
           type="submit"
           value="Submit"
         />
       </form>
       <div
         id="submission-msg"
-        class="display-flex flex-column flex-ac flex-jc-c"
+        class="display-flex flex-column flex-ac flex-jc-c form-pending"
       >
         <h3 class="text-ac my-1">Thank you!</h3>
         <!-- <input id="contact-submit-btn" class="btn btn-light" value="Return" /> -->

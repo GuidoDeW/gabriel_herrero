@@ -68,7 +68,7 @@ submitBtn.addEventListener("click", (e) => {
     });
   } else {
     contactForm.classList.add("form-submitted");
-    submissionMsg.classList.add("form-submitted");
+    submissionMsg.classList.remove("form-pending");
     // Remove LS items upon successful submit (without affecting LS items from other apps)
     inputFields.forEach((field) => {
       field.value = "";
@@ -83,7 +83,7 @@ submitBtn.addEventListener("click", (e) => {
 });
 
 returnBtn.addEventListener("click", () => {
-  submissionMsg.classList.remove("form-submitted");
+  submissionMsg.classList.add("form-pending");
   contactForm.classList.remove("form-submitted");
 });
 
