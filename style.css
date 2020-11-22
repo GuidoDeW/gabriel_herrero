@@ -844,10 +844,10 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   /* Contact page styling */
-  .input-field,
+  /* .input-field,
   #contact * {
-    max-width: 50vw;
-  }
+    max-width: 80vw;
+  } */
 }
 
 @media screen and (min-width: 768px) {
@@ -904,7 +904,7 @@ the dropped-down menu not fitting within 50vh) */
   /* Contact page styling */
   .input-field,
   #contact * {
-    max-width: 25vw;
+    max-width: 50vw;
   }
   /* Work method styling */
 
