@@ -2,9 +2,7 @@ const workMethodItems = document.querySelectorAll(".work-method-item");
 
 workMethodItems.forEach((item) => {
   item.addEventListener("click", () => {
-    item.classList.contains("highlighted")
-      ? item.classList.remove("highlighted")
-      : item.classList.add("highlighted");
+    item.classList.toggle("highlighted");
   });
 });
 

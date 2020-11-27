@@ -5,7 +5,6 @@ const contactForm = document.getElementById("contact-form"),
   returnBtn = document.getElementById("return-btn");
 
 inputFields.forEach((field) => {
-  // Check LS and fill previously filled-out fields
   if (
     localStorage.getItem(`input-${[...inputFields].indexOf(field)}`) !== null
   ) {
@@ -14,7 +13,6 @@ inputFields.forEach((field) => {
     );
   }
 
-  // Store field input to LS
   field.addEventListener("input", () => {
     localStorage.setItem(
       `input-${[...inputFields].indexOf(field)}`,
@@ -22,7 +20,6 @@ inputFields.forEach((field) => {
     );
   });
 
-  // Wipe invalid input and error msg on focus
   field.addEventListener("focus", (e) => {
     if (e.target.classList.contains("incorrect-field")) {
       e.target.classList.remove("incorrect-field");
@@ -35,7 +32,6 @@ submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const incorrectFields = [];
 
-  //Check required fields
   inputFields.forEach((field) => {
     if (
       field.classList.contains("required-field") &&
@@ -60,7 +56,6 @@ submitBtn.addEventListener("click", (e) => {
   });
 
   if (incorrectFields.length > 0) {
-    // Wipe fields with invalid input and show error msg
     incorrectFields.forEach((field) => {
       field.classList.add("incorrect-field");
       field.value = "";
@@ -69,9 +64,9 @@ submitBtn.addEventListener("click", (e) => {
   } else {
     contactForm.classList.add("form-submitted");
     submissionMsg.classList.remove("form-pending");
-    // Remove LS items upon successful submit (without affecting LS items from other apps)
     inputFields.forEach((field) => {
       field.value = "";
+      field.setAttribute("placeholder", "");
       if (
         localStorage.getItem(`input-${[...inputFields].indexOf(field)}`) !==
         null
@@ -86,37 +81,3 @@ returnBtn.addEventListener("click", () => {
   submissionMsg.classList.add("form-pending");
   contactForm.classList.remove("form-submitted");
 });
-
-// use regexs to check for correct input. Replace required attribute
-// with class (or alter behaviour of required input fields) to display
-// red text inside empty required fields upon submit.
-// Upon succesful submit, replace form with text (and perhaps an img)
-// and a button allowing the user to send another message (reload the form)
-// without having to reload the whole page.
-
-// Finally, save input to LS so as to allow reloads without progress loss.
-
-// Possible Regex to limit the accepted input for phone field: ^\+?(\.?\s?\-?\(?\d+\)?\s?\.?)+
-// (Does not ensure that correct phone numbers are entered, but eliminates letters and most punctuation marks)
-
-// if (field.name === "phone") {
-//   field.addEventListener("keypress", (e) => {
-//     if (
-//       field.name === "phone" &&
-//       !/^\+?(\.?\s?\-?\(?\d+\)?\s?\.?)+/g.test(
-//         field.value + String.fromCharCode(e.charCode)
-//       )
-//     ) {
-//       e.preventDefault();
-//     }
-//   });
-// }
-
-// else if (
-//   field.name === "phone" &&
-//   field.value.trim().length > 0 &&
-//   !/^\+?(\.?\s?\-?\(?\d+\)?\s?\.?)+/g.test(field.value)
-// ) {
-//   incorrectFields.push(field);
-//   field.setAttribute("placeholder", "Please enter a valid phone number.");
-// }
