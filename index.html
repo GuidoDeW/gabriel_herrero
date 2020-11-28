@@ -17,17 +17,10 @@
     />
     <title>Gabriel Herrero</title>
   </head>
-  <!-- Note: possibly, flex-column and flex (-row) classes will have to be reconsidered;
-  e.g. flex-smallscreen-column, flex-mediumscreen-row etc. to accomodate 
-media queries-->
   <body>
-    <!-- Header with background and enter button -->
-    <!-- Hamburger navbar that expands to list on larger screens (make it sticky / remove from header?)-->
     <nav class="display-flex flex-turner-s-col nav nav-fixed">
       <div class="display-flex flex-jc-sb">
         <img src="logo/gh_logo_small.png" class="logo-nav object-fit-cover" />
-        <!-- Display hamburger icon on small screens and change navbar flex props / display / animation accordingly; remove hamburger icon 
-        on larger screens and display ul as horizontal flex container-->
         <i
           id="hamburger-btn"
           class="fas fa-bars light-text hamburger-btn swift-color-change mr-1"
@@ -63,13 +56,8 @@ media queries-->
       id="header"
       class="header-home display-flex flex-column flex-jc-c flex-ac"
     >
-      <!-- Add "hide" class when hamburger menu drops down-->
       <div id="welcome">
-        <!-- Consider applying fade effect to both title and button -->
         <h1 class="light-text my-2">Gabriel Herrero</h1>
-        <!-- The hover malfunction is not a problem; the button will only 
-        display one screens large enough to support a horizontal nav menu
-      anyway!-->
         <a href="gallery.html" id="explore-btn" class="btn btn-light"
           >Explore</a
         >
@@ -82,7 +70,7 @@ media queries-->
     >
       <!-- h3 { line-height: 2rem }-->
       <h2 class="text-ac mb-1">Specializations</h2>
-      <div class="display-flex flex-turner-s-col flex-jc-c">
+      <div class="display-flex flex-turner-m-col flex-jc-c">
         <div class="text-ac py-1 px-1 flex-equal-flex">
           <!-- Just use the icons by themselves, without h tags-->
           <i class="fas fa-tree spec-icon mb-1"></i>
@@ -113,7 +101,7 @@ media queries-->
       class="info dark-text display-flex flex-column flex-jc flex-ac my-1"
     >
       <!-- h3 { line-height: 2rem }-->
-      <div class="display-flex flex-turner-s-col flex-ac flex-jc-se">
+      <div class="display-flex flex-turner-m-col flex-ac flex-jc-se">
         <img
           src="./img/skuleskogen_sweden.jpg"
           alt=""
@@ -130,7 +118,7 @@ media queries-->
           </p>
         </div>
       </div>
-      <div class="display-flex flex-turner-s-col flex-ac flex-jc-se">
+      <div class="display-flex flex-turner-m-col flex-ac flex-jc-se">
         <img
           src="./img/spanish_landscape.jpg"
           alt=""
@@ -139,16 +127,11 @@ media queries-->
         <div class="py-1 px-2 flex-equal-flex">
           <h3 class="text-ac">Title</h3>
           <p class="px-1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-            dolorum, aliquid enim corrupti dolores illo laborum molestias
-            perspiciatis deleniti commodi molestiae maiores a autem est impedit
-            assumenda quo! Quibusdam facilis sequi cupiditate, assumenda qui
-            obcaecati optio eius dolorem tempora ducimus! Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Optio ex qui sed quae
-            perspiciatis sunt repellendus ducimus nostrum quisquam deserunt
-            minus ipsam, repudiandae non ipsa soluta? Necessitatibus est
-            corporis adipisci non officiis nesciunt sunt voluptatibus quia
-            doloremque qui. Harum, voluptas?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+            aliquid autem omnis sit officia voluptate sunt fugit, provident iure
+            id neque ipsum consequatur deleniti nobis unde, repudiandae dolorem
+            consequuntur totam quibusdam ut dolore, delectus at. Temporibus
+            numquam id nisi atque!
           </p>
         </div>
       </div>

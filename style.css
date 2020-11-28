@@ -1,6 +1,3 @@
-/* Try to model the stylesheet like a framework as much as possible*/
-/*Use mobile-first approach */
-/* Use rem for efficient responsiveness */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap");
 
 :root {
@@ -136,7 +133,7 @@ h2 {
   justify-content: space-evenly;
 }
 
-.flex-jc-end {
+.flex-jc-e {
   justify-content: flex-end;
 }
 
@@ -168,7 +165,9 @@ h2 {
   flex-direction: column;
 }
 
-.flex-turner-s-col {
+.flex-turner-s-col,
+.flex-turner-m-col,
+.flex-turner-l-col {
   flex-direction: column;
 }
 
@@ -833,8 +832,7 @@ the dropped-down menu not fitting within 50vh) */
     padding-bottom: 3rem;
   }
 
-  .nav.flex-turner-s-col,
-  #dropdown-menu.flex-turner-s-col {
+  .flex-turner-s-col {
     flex-direction: row;
   }
 
@@ -846,18 +844,16 @@ the dropped-down menu not fitting within 50vh) */
     min-width: 50vw;
     max-width: 50vw;
   }
-
-  /* Contact page styling */
-  /* .input-field,
-  #contact * {
-    max-width: 80vw;
-  } */
 }
 
 @media screen and (min-width: 768px) {
   /* Specs styling */
-  #specs div.flex-turner-s-col {
+  .flex-turner-m-col {
     flex-direction: row;
+  }
+
+  #about-info .flex-turner-m-col:nth-child(even) {
+    flex-direction: row-reverse;
   }
 
   #specs div div {
@@ -875,11 +871,7 @@ the dropped-down menu not fitting within 50vh) */
     max-width: 100%;
   }
 
-  .info div.flex-turner-s-col:nth-child(odd) {
-    flex-direction: row;
-  }
-
-  .info div.flex-turner-s-col:nth-child(even) {
+  .info .flex-turner-m-col:nth-child(even) {
     flex-direction: row-reverse;
   }
 
@@ -932,7 +924,7 @@ the dropped-down menu not fitting within 50vh) */
       background-position: 0 68%;
     }
 
-    #work-method.flex-turner-s-col {
+    .flex-turner-l-col {
       flex-direction: row;
     }
 
