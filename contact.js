@@ -1,6 +1,7 @@
 const contactForm = document.getElementById("contact-form"),
   submitBtn = document.getElementById("contact-submit-btn"),
   inputFields = document.querySelectorAll(".input-field"),
+  errorMsgs = document.querySelectorAll(".incorrect-field-text"),
   submissionMsg = document.getElementById("submission-msg"),
   returnBtn = document.getElementById("return-btn");
 
@@ -19,13 +20,6 @@ inputFields.forEach((field) => {
       JSON.stringify(field.value)
     );
   });
-
-  field.addEventListener("focus", (e) => {
-    if (e.target.classList.contains("incorrect-field")) {
-      e.target.classList.remove("incorrect-field");
-      e.target.setAttribute("placeholder", "");
-    }
-  });
 });
 
 submitBtn.addEventListener("click", (e) => {
@@ -38,35 +32,37 @@ submitBtn.addEventListener("click", (e) => {
       field.value.trim().length === 0
     ) {
       incorrectFields.push(field);
-      field.setAttribute("placeholder", "Please fill out this field.");
+      errorMsgs[[...inputFields].indexOf(field)].innerText =
+        "Please fill out this field.";
     } else if (
       field.name === "email" &&
       !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(field.value)
     ) {
       incorrectFields.push(field);
-      field.setAttribute("placeholder", "Please enter a valid email address.");
+      errorMsgs[[...inputFields].indexOf(field)].innerText =
+        "Please enter a valid email address.";
     } else if (
       field.name === "phone" &&
       field.value.trim().length > 0 &&
       !/^\+?([\.\s\-\(]*\d+[\.\s\-\)]*)+$/g.test(field.value)
     ) {
       incorrectFields.push(field);
-      field.setAttribute("placeholder", "Please enter a valid phone number.");
+      errorMsgs[[...inputFields].indexOf(field)].innerText =
+        "Please enter a valid phone number.";
     }
   });
 
   if (incorrectFields.length > 0) {
     incorrectFields.forEach((field) => {
       field.classList.add("incorrect-field");
-      field.value = "";
       localStorage.removeItem(`input-${[...inputFields].indexOf(field)}`);
     });
   } else {
+    errorMsgs.forEach((msg) => (msg.innerHTML = "&nbsp;"));
     contactForm.classList.add("form-submitted");
     submissionMsg.classList.remove("form-pending");
     inputFields.forEach((field) => {
       field.value = "";
-      field.setAttribute("placeholder", "");
       if (
         localStorage.getItem(`input-${[...inputFields].indexOf(field)}`) !==
         null
