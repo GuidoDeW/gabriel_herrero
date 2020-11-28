@@ -855,6 +855,10 @@ the dropped-down menu not fitting within 50vh) */
     flex-direction: row-reverse;
   }
 
+  /* #specs div p {
+    text-align: justify;
+  } */
+
   #specs div div {
     border-bottom-color: transparent;
   }
