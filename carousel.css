@@ -1,6 +1,8 @@
 /* Carousel styling */
 #carousel-container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 0;
   position: fixed;
   top: 0;
@@ -15,8 +17,8 @@
 
 #carousel-container.carousel-show {
   z-index: 2;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   opacity: 1;
   transform: translateX(0);
   background-color: var(--light-shade);
@@ -60,28 +62,27 @@
 }
 
 .carousel-nav {
-  z-index: 3;
-  font-size: 2rem;
-  color: transparent;
-  position: absolute;
+  /* z-index: 3; */
+  /* padding: 1rem; */
+  /* color: transparent; */
   display: flex;
   flex-direction: column;
-  height: 100%;
-  top: 0;
+  min-height: 100%;
+  /* top: 1rem; */
   justify-content: center;
 }
 
-.carousel-next {
-  right: 0;
-}
-
 .carousel-nav:hover .carousel-btn:not(#carousel-close-btn) {
-  color: var(--light-shade);
+  color: var(--dark-shade);
 }
 
 .carousel-btn {
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
+  /* margin-right: 0.5rem;
+  margin-left: 0.5rem; */
+  color: var(--dark-shade);
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 2rem;
   transition: color var(--swift-color-change);
   --webkit-transition: color var(--swift-color-change);
   --moz-transition: color var(--swift-color-change);
@@ -91,9 +92,18 @@
   cursor: pointer;
 }
 
+/* #carousel-prev-btn:before,
+#carousel-next-btn:before {
+  justify-self: center;
+} */
+
 #carousel-close-btn {
   position: absolute;
   top: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 1rem;
+  /* justify-self: flex-start; */
   transition: color var(--swift-color-change), transform var(--swift-transform);
   --webkit-transition: color var(--swift-color-change),
     transform var(--swift-transform);
@@ -102,6 +112,6 @@
 }
 
 #carousel-close-btn:hover {
-  color: var(--light-shade);
+  color: var(--dark-shade);
   transform: rotateZ(-90deg);
 }

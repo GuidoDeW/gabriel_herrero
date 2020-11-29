@@ -52,18 +52,12 @@ const swipeParams = (function () {
   };
 })();
 
-function changeImg(callback) {
-  carousel.classList.remove("transparent");
-  callback();
-}
-
 function zoomOut() {
   carouselImg.classList.remove("zoomed");
   carouselImg.style.transform = "";
 }
 
 function newImg(direction) {
-  carousel.classList.add("transparent");
   if (direction === "prev") {
     galleryIndex.current() > 0
       ? galleryIndex.decrease()
@@ -73,13 +67,8 @@ function newImg(direction) {
       ? galleryIndex.increase()
       : galleryIndex.reset();
   }
-
-  setTimeout(() => {
-    zoomOut();
-    changeImg(() => {
-      carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-    });
-  }, 300);
+  zoomOut();
+  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
 }
 
 function openCarousel() {
