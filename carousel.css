@@ -1,13 +1,13 @@
 /* Carousel styling */
 #carousel-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   z-index: 0;
   position: fixed;
   top: 0;
   opacity: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   transform: translateX(-150vw);
   transition: opacity var(--swift-color-change) 0s;
@@ -48,6 +48,10 @@
   transition: transform 0s;
   --webkit-transition: transform 0s;
   --moz-transition: transform 0s;
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none;
 }
 
 #carousel-img:hover {
@@ -62,36 +66,62 @@
 }
 
 .carousel-nav {
-  /* z-index: 3; */
-  /* padding: 1rem; */
-  /* color: transparent; */
+  position: absolute;
+  z-index: 3;
+  /* margin: 0 1rem; */
+  color: transparent;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  /* top: 1rem; */
+  min-height: 100vh;
+  top: 0;
   justify-content: center;
 }
 
-.carousel-nav:hover .carousel-btn:not(#carousel-close-btn) {
+/* .carousel-nav {
+ 
+  
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  
+  justify-content: center;
+} */
+
+/* .carousel-nav:hover .carousel-btn:not(#carousel-close-btn) {
   color: var(--dark-shade);
-}
+} */
 
 .carousel-btn {
   /* margin-right: 0.5rem;
   margin-left: 0.5rem; */
-  color: var(--dark-shade);
+  /* color: var(--dark-shade); */
+  z-index: 2;
+  /* position: absolute; */
+  color: transparent;
   margin: 1rem;
-  padding: 1rem;
-  font-size: 2rem;
+  /* padding: 1rem; */
+  font-size: 3rem;
   transition: color var(--swift-color-change);
   --webkit-transition: color var(--swift-color-change);
   --moz-transition: color var(--swift-color-change);
 }
 
+/* .carousel-btn:not(#carousel-prev-btn) {
+  margin-right: 2rem;
+} */
+
 .carousel-btn:hover {
+  color: var(--dark-shade);
   cursor: pointer;
 }
 
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
 /* #carousel-prev-btn:before,
 #carousel-next-btn:before {
   justify-self: center;
@@ -100,9 +130,11 @@
 #carousel-close-btn {
   position: absolute;
   top: 0;
+
   right: 0;
+  z-index: 4;
   margin: 1rem;
-  padding: 1rem;
+  /* padding: 1rem; */
   /* justify-self: flex-start; */
   transition: color var(--swift-color-change), transform var(--swift-transform);
   --webkit-transition: color var(--swift-color-change),
@@ -112,6 +144,6 @@
 }
 
 #carousel-close-btn:hover {
-  color: var(--dark-shade);
+  /* color: var(--dark-shade); */
   transform: rotateZ(-90deg);
 }

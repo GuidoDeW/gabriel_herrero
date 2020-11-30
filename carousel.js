@@ -72,6 +72,7 @@ function newImg(direction) {
 }
 
 function openCarousel() {
+  // carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
   gallery.classList.add("carousel-show");
   carouselContainer.classList.add("carousel-show");
 }
@@ -83,7 +84,7 @@ function closeCarousel() {
 }
 
 document.body.addEventListener("click", (e) => {
-  if (e.target === closeBtn) {
+  if (e.target === closeBtn || e.target === carouselContainer) {
     closeCarousel();
   }
 });
@@ -144,9 +145,9 @@ nextBtn.addEventListener("click", () => {
 
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
-    openCarousel();
     galleryIndex.set(index);
     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+    openCarousel();
   })
 );
 
