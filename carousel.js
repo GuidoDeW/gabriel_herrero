@@ -52,10 +52,11 @@ const swipeParams = (function () {
   };
 })();
 
-function changeImg(callback) {
-  carousel.classList.remove("transparent");
-  callback();
-}
+// function changeImg(callback) {
+//   carousel.classList.remove("transparent");
+//   carouselImg.classList.remove("transparent");
+//   callback();
+// }
 
 function zoomOut() {
   carouselImg.classList.remove("zoomed");
@@ -63,7 +64,7 @@ function zoomOut() {
 }
 
 function newImg(direction) {
-  carousel.classList.add("transparent");
+  // carouselImg.classList.add("transparent");
   if (direction === "prev") {
     galleryIndex.current() > 0
       ? galleryIndex.decrease()
@@ -74,12 +75,23 @@ function newImg(direction) {
       : galleryIndex.reset();
   }
 
+  const newSrc = imgSources[galleryIndex.current()];
+  // carouselImg.classList.add("transparent");
+  carousel.classList.add("transparent");
+
   setTimeout(() => {
     zoomOut();
-    changeImg(() => {
-      carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-    });
+    carouselImg.setAttribute("src", newSrc);
+    // carouselImg.classList.remove("transparent");
+    carousel.classList.remove("transparent");
   }, 300);
+
+  // setTimeout(() => {
+  //   zoomOut();
+  //   changeImg(() => {
+  //     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+  //   });
+  // }, 300);
 }
 
 function openCarousel() {
