@@ -83,11 +83,7 @@ function closeCarousel() {
 }
 
 document.body.addEventListener("click", (e) => {
-  if (
-    e.target === closeBtn ||
-    (!carousel.contains(e.target) &&
-      !e.target.classList.contains("gallery-item-text"))
-  ) {
+  if (e.target === closeBtn) {
     closeCarousel();
   }
 });
