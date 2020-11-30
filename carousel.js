@@ -52,9 +52,59 @@ const swipeParams = (function () {
   };
 })();
 
+function isInsideElement(e, element) {
+  const elementCoordinates = element.getBoundingClientRect();
+  if (
+    (e.changedTouches[0].clientY || e.clientY) >= elementCoordinates.top &&
+    (e.changedTouches[0].clientX || e.clientX) <= elementCoordinates.right &&
+    (e.changedTouches[0].clientY || e.clientY) <= elementCoordinates.bottom &&
+    (e.changedTouches[0].clientX || e.clientX) >= elementCoordinates.left
+  ) {
+    return true;
+  }
+}
+
+function imgZoom(e) {
+  if (carouselImg.classList.contains("zoomed")) {
+    zoomOut();
+  } else {
+    carouselImg.classList.add("zoomed");
+
+    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+    const transX =
+      (e.clientX || e.changedTouches[0].clientX) -
+      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
+        2 +
+        ((e.clientX || e.changedTouches[0].clientX) -
+          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
+          scale);
+    const transY =
+      (e.clientY || e.changedTouches[0].clientY) -
+      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
+        2 +
+        ((e.clientY || e.changedTouches[0].clientY) -
+          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
+          scale);
+
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+  }
+}
+
 function zoomOut() {
   carouselImg.classList.remove("zoomed");
   carouselImg.style.transform = "";
+}
+
+function openCarousel() {
+  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+  gallery.classList.add("carousel-show");
+  carouselContainer.classList.add("carousel-show");
+}
+
+function closeCarousel() {
+  carouselContainer.classList.remove("carousel-show");
+  gallery.classList.remove("carousel-show");
+  zoomOut();
 }
 
 function newImg(direction) {
@@ -69,18 +119,6 @@ function newImg(direction) {
   }
   zoomOut();
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-}
-
-function openCarousel() {
-  // carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-  gallery.classList.add("carousel-show");
-  carouselContainer.classList.add("carousel-show");
-}
-
-function closeCarousel() {
-  carouselContainer.classList.remove("carousel-show");
-  gallery.classList.remove("carousel-show");
-  zoomOut();
 }
 
 document.body.addEventListener("click", (e) => {
@@ -102,7 +140,7 @@ nextBtn.addEventListener("click", () => {
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
     galleryIndex.set(index);
-    carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+    // carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
     openCarousel();
   })
 );
@@ -123,17 +161,38 @@ document.body.addEventListener("keydown", (e) => {
   }
 });
 
+document.addEventListener("touchend", (e) => {
+  if (carouselContainer.classList.contains("carousel-show")) {
+    if (isInsideElement(e, carousel)) {
+      console.log("First touchend detected");
+      if (carouselImg.classList.contains("zoomed")) {
+        zoomOut();
+      } else {
+        const firstTouch = new Date().getTime();
+        document.addEventListener(
+          "touchend",
+          (e) => {
+            const secondTouch = new Date().getTime();
+            if (
+              isInsideElement(e, carousel) &&
+              secondTouch - firstTouch <= 300
+            ) {
+              console.log("Second touchend detected");
+              imgZoom(e);
+            }
+          },
+          { once: true }
+        );
+      }
+    }
+  }
+});
+
 //Swipe event handler (configured for a swipe across at least 25% of viewport width)
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
   if (carouselContainer.classList.contains("carousel-show")) {
-    const carouselCoordinates = carousel.getBoundingClientRect();
-    if (
-      e.touches[0].clientY >= carouselCoordinates.top &&
-      e.touches[0].clientX <= carouselCoordinates.right &&
-      e.touches[0].clientY <= carouselCoordinates.bottom &&
-      e.touches[0].clientX >= carouselCoordinates.left
-    ) {
+    if (isInsideElement(e, carousel)) {
       swipeParams.setSwipeStart(e.touches[0].clientX);
       document.addEventListener(
         "touchend",
@@ -161,31 +220,7 @@ document.addEventListener("touchstart", (e) => {
 
 carouselImg.addEventListener("click", (e) => {
   if (!carouselImg.classList.contains("touched")) {
-    if (carouselImg.classList.contains("zoomed")) {
-      zoomOut();
-    } else {
-      carouselImg.classList.add("zoomed");
-
-      const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-      const transX =
-        e.clientX -
-        ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
-          2 +
-          (e.clientX -
-            (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
-            scale);
-      const transY =
-        e.clientY -
-        ((window.innerHeight -
-          carousel.getBoundingClientRect().height * scale) /
-          2 +
-          (e.clientY -
-            (window.innerHeight - carousel.getBoundingClientRect().height) /
-              2) *
-            scale);
-
-      carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
-    }
+    imgZoom(e);
   } else {
     carouselImg.classList.remove("touched");
   }
