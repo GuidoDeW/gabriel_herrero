@@ -89,50 +89,6 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-document.body.addEventListener("keydown", (e) => {
-  if (carouselContainer.classList.contains("carousel-show")) {
-    if (e.key === 39 || e.keyCode === 39) {
-      newImg();
-    }
-
-    if (e.key === 37 || e.keyCode === 37) {
-      newImg("prev");
-    }
-
-    if (e.key === 27 || e.keyCode === 27) {
-      closeCarousel();
-    }
-  }
-});
-
-//Swipe event handler (configured for a swipe across at least 25% of viewport width)
-carousel.addEventListener("touchstart", (e) => {
-  if (e.target !== closeBtn && e.target !== nextBtn && e.target !== prevBtn) {
-    e.preventDefault();
-    swipeParams.setSwipeStart(e.touches[0].clientX);
-    document.addEventListener(
-      "touchend",
-      (e) => {
-        e.preventDefault();
-        swipeParams.setSwipeEnd(e.changedTouches[0].clientX);
-        if (
-          swipeParams.getSwipeStart() - swipeParams.getSwipeEnd() >
-          document.body.clientWidth / 4
-        ) {
-          newImg();
-        }
-        if (
-          swipeParams.getSwipeEnd() - swipeParams.getSwipeStart() >
-          document.body.clientWidth / 4
-        ) {
-          newImg("prev");
-        }
-      },
-      { once: true }
-    );
-  }
-});
-
 closeBtn.addEventListener("click", closeCarousel);
 
 prevBtn.addEventListener("click", () => {
@@ -151,28 +107,86 @@ galleryItems.forEach((item, index) =>
   })
 );
 
+document.body.addEventListener("keydown", (e) => {
+  if (carouselContainer.classList.contains("carousel-show")) {
+    if (e.key === 39 || e.keyCode === 39) {
+      newImg();
+    }
+
+    if (e.key === 37 || e.keyCode === 37) {
+      newImg("prev");
+    }
+
+    if (e.key === 27 || e.keyCode === 27) {
+      closeCarousel();
+    }
+  }
+});
+
+//Swipe event handler (configured for a swipe across at least 25% of viewport width)
+document.addEventListener("touchstart", (e) => {
+  carouselImg.classList.add("touched");
+  if (carouselContainer.classList.contains("carousel-show")) {
+    const carouselCoordinates = carousel.getBoundingClientRect();
+    if (
+      e.touches[0].clientY >= carouselCoordinates.top &&
+      e.touches[0].clientX <= carouselCoordinates.right &&
+      e.touches[0].clientY <= carouselCoordinates.bottom &&
+      e.touches[0].clientX >= carouselCoordinates.left
+    ) {
+      swipeParams.setSwipeStart(e.touches[0].clientX);
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          swipeParams.setSwipeEnd(e.changedTouches[0].clientX);
+          if (
+            swipeParams.getSwipeStart() - swipeParams.getSwipeEnd() >
+            document.body.clientWidth / 4
+          ) {
+            newImg();
+          }
+          if (
+            swipeParams.getSwipeEnd() - swipeParams.getSwipeStart() >
+            document.body.clientWidth / 4
+          ) {
+            newImg("prev");
+          }
+        },
+
+        { once: true }
+      );
+    }
+  }
+});
+
 carouselImg.addEventListener("click", (e) => {
-  if (carouselImg.classList.contains("zoomed")) {
-    zoomOut();
+  if (!carouselImg.classList.contains("touched")) {
+    if (carouselImg.classList.contains("zoomed")) {
+      zoomOut();
+    } else {
+      carouselImg.classList.add("zoomed");
+
+      const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+      const transX =
+        e.clientX -
+        ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
+          2 +
+          (e.clientX -
+            (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
+            scale);
+      const transY =
+        e.clientY -
+        ((window.innerHeight -
+          carousel.getBoundingClientRect().height * scale) /
+          2 +
+          (e.clientY -
+            (window.innerHeight - carousel.getBoundingClientRect().height) /
+              2) *
+            scale);
+
+      carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+    }
   } else {
-    carouselImg.classList.add("zoomed");
-
-    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-    const transX =
-      e.clientX -
-      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
-        2 +
-        (e.clientX -
-          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
-          scale);
-    const transY =
-      e.clientY -
-      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
-        2 +
-        (e.clientY -
-          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
-          scale);
-
-    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+    carouselImg.classList.remove("touched");
   }
 });
