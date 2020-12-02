@@ -33,40 +33,6 @@ const galleryIndex = (function () {
   };
 })();
 
-const swipeParams = (function () {
-  let swipeStart = 0;
-  let swipeEnd = 0;
-  return {
-    setSwipeStart: (startPoint) => {
-      swipeStart = startPoint;
-    },
-    getSwipeStart: () => {
-      return swipeStart;
-    },
-    setSwipeEnd: (endPoint) => {
-      swipeEnd = endPoint;
-    },
-    getSwipeEnd: () => {
-      return swipeEnd;
-    },
-  };
-})();
-
-const tapParams = (function () {
-  let isDblTap = false;
-  return {
-    elapse: () => {
-      isDblTap = false;
-    },
-    startTimeSpan: () => {
-      isDblTap = true;
-    },
-    checkDblTap: () => {
-      return isDblTap;
-    },
-  };
-})();
-
 function isInsideElement(e, element) {
   const elementCoordinates = element.getBoundingClientRect();
   if (
@@ -176,74 +142,50 @@ document.body.addEventListener("keydown", (e) => {
   }
 });
 
-// Disable swipe while zoomed in?
+// Disable swipe while zoomed in? (Or zoom out on swipe on zoomed img, then browse on swipe on normal img)
 document.addEventListener("touchend", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
     if (isInsideElement(e, carousel)) {
       if (carouselImg.classList.contains("zoomed")) {
         zoomOut();
-      } else if (tapParams.checkDblTap()) {
-        imgZoom(e);
-        tapParams.elapse();
       } else {
-        tapParams.startTimeSpan();
-        setTimeout(() => {
-          tapParams.elapse();
-        }, 300);
+        const firstTouch = new Date().getTime();
+        document.addEventListener(
+          "touchend",
+          (e) => {
+            const secondTouch = new Date().getTime();
+            if (
+              isInsideElement(e, carousel) &&
+              secondTouch - firstTouch <= 300
+            ) {
+              imgZoom(e);
+            }
+          },
+          { once: true }
+        );
       }
     }
   }
 });
 
-// document.addEventListener("touchend", (e) => {
-//   if (carouselContainer.classList.contains("carousel-show")) {
-//     if (isInsideElement(e, carousel)) {
-//       if (carouselImg.classList.contains("zoomed")) {
-//         zoomOut();
-//       } else {
-//         const firstTouch = new Date().getTime();
-//         document.addEventListener(
-//           "touchend",
-//           (e) => {
-//             const secondTouch = new Date().getTime();
-//             if (
-//               isInsideElement(e, carousel) &&
-//               secondTouch - firstTouch <= 300
-//             ) {
-//               imgZoom(e);
-//             }
-//           },
-//           { once: true }
-//         );
-//       }
-//     }
-//   }
-// });
-
 //Swipe event handler (configured for a swipe across at least 25% of viewport width)
+//Maybe capture vertical displacement too, to disqualify steep diagonal movements
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
   if (carouselContainer.classList.contains("carousel-show")) {
     if (isInsideElement(e, carousel)) {
-      swipeParams.setSwipeStart(e.touches[0].clientX);
+      const swipeStart = e.touches[0].clientX;
       document.addEventListener(
         "touchend",
         (e) => {
-          swipeParams.setSwipeEnd(e.changedTouches[0].clientX);
-          if (
-            swipeParams.getSwipeStart() - swipeParams.getSwipeEnd() >
-            document.body.clientWidth / 4
-          ) {
+          const swipeEnd = e.changedTouches[0].clientX;
+          if (swipeStart - swipeEnd > document.body.clientWidth / 4) {
             newImg();
           }
-          if (
-            swipeParams.getSwipeEnd() - swipeParams.getSwipeStart() >
-            document.body.clientWidth / 4
-          ) {
+          if (swipeEnd - swipeStart > document.body.clientWidth / 4) {
             newImg("prev");
           }
         },
-
         { once: true }
       );
     }
