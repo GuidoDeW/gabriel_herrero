@@ -49,8 +49,8 @@ function imgZoom(e) {
   if (carouselImg.classList.contains("zoomed")) {
     zoomOut();
   } else {
+    carouselImg.classList.add("zoom-transition");
     carouselImg.classList.add("zoomed");
-
     const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
     const transX =
       (e.clientX || e.changedTouches[0].clientX) -
@@ -89,6 +89,7 @@ function closeCarousel() {
 }
 
 function newImg(direction) {
+  carouselImg.classList.remove("zoom-transition");
   if (direction === "prev") {
     galleryIndex.current() > 0
       ? galleryIndex.decrease()
@@ -121,7 +122,7 @@ nextBtn.addEventListener("click", () => {
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
     galleryIndex.set(index);
-    // carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+
     openCarousel();
   })
 );
@@ -172,17 +173,18 @@ document.addEventListener("touchend", (e) => {
 //Maybe capture vertical displacement too, to disqualify steep diagonal movements
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
-  if (carouselContainer.classList.contains("carousel-show")) {
-    if (isInsideElement(e, carousel)) {
-      const swipeStart = e.touches[0].clientX;
+
+  if (isInsideElement(e, carousel)) {
+    const swipeStartX = e.touches[0].clientX;
+    if (!carouselImg.classList.contains("zoomed")) {
       document.addEventListener(
         "touchend",
         (e) => {
-          const swipeEnd = e.changedTouches[0].clientX;
-          if (swipeStart - swipeEnd > document.body.clientWidth / 4) {
+          const swipeEndX = e.changedTouches[0].clientX;
+
+          if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
             newImg();
-          }
-          if (swipeEnd - swipeStart > document.body.clientWidth / 4) {
+          } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
             newImg("prev");
           }
         },
