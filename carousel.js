@@ -188,13 +188,11 @@ document.addEventListener("touchstart", (e) => {
         { once: true }
       );
     }
-  } else {
+  } else if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
     document.addEventListener(
       "touchend",
-      (e) => {
-        if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
-          zoomOut();
-        }
+      () => {
+        zoomOut();
       },
       { once: true }
     );
