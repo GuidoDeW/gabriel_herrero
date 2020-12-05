@@ -74,8 +74,8 @@ function zoomOut() {
   carouselImg.style.transform = "";
 }
 
-function openCarousel(index) {
-  carouselImg.setAttribute("src", imgSources[index]);
+function openCarousel(attr) {
+  carouselImg.setAttribute("src", attr);
   gallery.classList.add("carousel-show");
   carouselContainer.classList.add("carousel-show");
 }
@@ -118,7 +118,7 @@ nextBtn.addEventListener("click", newImg);
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
     galleryIndex.set(index);
-    openCarousel(galleryIndex.current());
+    openCarousel(imgSources[galleryIndex.current()]);
   })
 );
 
@@ -142,24 +142,17 @@ document.addEventListener("touchend", (e) => {
       !isInsideElement(e, prevBtn) &&
       !isInsideElement(e, nextBtn)
     ) {
-      if (carouselImg.classList.contains("zoomed")) {
-        zoomOut();
-      } else {
-        const firstTouch = new Date().getTime();
-        document.addEventListener(
-          "touchend",
-          (e) => {
-            const secondTouch = new Date().getTime();
-            if (
-              isInsideElement(e, carousel) &&
-              secondTouch - firstTouch <= 300
-            ) {
-              imgZoom(e);
-            }
-          },
-          { once: true }
-        );
-      }
+      const firstTouch = new Date().getTime();
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          const secondTouch = new Date().getTime();
+          if (isInsideElement(e, carousel) && secondTouch - firstTouch <= 300) {
+            imgZoom(e);
+          }
+        },
+        { once: true }
+      );
     }
   }
 });
@@ -185,9 +178,10 @@ document.addEventListener("touchstart", (e) => {
         { once: true }
       );
     }
-  } else if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
-    document.addEventListener("touchend", zoomOut, { once: true });
   }
+  // else if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
+  //   document.addEventListener("touchend", zoomOut, { once: true });
+  // }
 });
 
 carouselImg.addEventListener("click", (e) => {
