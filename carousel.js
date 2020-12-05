@@ -168,24 +168,23 @@ document.addEventListener("touchend", (e) => {
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
 
-  if (
-    isInsideElement(e, carousel) &&
-    !carouselImg.classList.contains("zoomed")
-  ) {
-    const swipeStartX = e.touches[0].clientX;
-    document.addEventListener(
-      "touchend",
-      (e) => {
-        const swipeEndX = e.changedTouches[0].clientX;
-        if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
-          newImg();
-        } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
-          newImg("prev");
-        }
-      },
-      { once: true }
-    );
-  } else if (carouselImg.classList.contains("zoomed")) {
+  if (!carouselImg.classList.contains("zoomed")) {
+    if (isInsideElement(e, carousel)) {
+      const swipeStartX = e.touches[0].clientX;
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          const swipeEndX = e.changedTouches[0].clientX;
+          if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
+            newImg();
+          } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
+            newImg("prev");
+          }
+        },
+        { once: true }
+      );
+    }
+  } else {
     document.addEventListener(
       "touchend",
       () => {
