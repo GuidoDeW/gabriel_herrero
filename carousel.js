@@ -74,8 +74,8 @@ function zoomOut() {
   carouselImg.style.transform = "";
 }
 
-function openCarousel() {
-  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+function openCarousel(index) {
+  carouselImg.setAttribute("src", imgSources[index]);
   gallery.classList.add("carousel-show");
   carouselContainer.classList.add("carousel-show");
 }
@@ -113,15 +113,12 @@ prevBtn.addEventListener("click", () => {
   newImg("prev");
 });
 
-nextBtn.addEventListener("click", () => {
-  newImg();
-});
+nextBtn.addEventListener("click", newImg);
 
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
     galleryIndex.set(index);
-
-    openCarousel();
+    openCarousel(galleryIndex.current());
   })
 );
 
@@ -189,13 +186,7 @@ document.addEventListener("touchstart", (e) => {
       );
     }
   } else if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
-    document.addEventListener(
-      "touchend",
-      () => {
-        zoomOut();
-      },
-      { once: true }
-    );
+    document.addEventListener("touchend", zoomOut, { once: true });
   }
 });
 
