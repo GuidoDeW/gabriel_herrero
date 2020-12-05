@@ -34,15 +34,13 @@ const galleryIndex = (function () {
 })();
 
 function isInsideElement(e, element) {
-  const elementCoordinates = element.getBoundingClientRect();
-  if (
-    (e.changedTouches[0].clientY || e.clientY) >= elementCoordinates.top &&
-    (e.changedTouches[0].clientX || e.clientX) <= elementCoordinates.right &&
-    (e.changedTouches[0].clientY || e.clientY) <= elementCoordinates.bottom &&
-    (e.changedTouches[0].clientX || e.clientX) >= elementCoordinates.left
-  ) {
-    return true;
-  }
+  const boundaries = element.getBoundingClientRect();
+  return (
+    (e.changedTouches[0].clientY || e.clientY) >= boundaries.top &&
+    (e.changedTouches[0].clientX || e.clientX) <= boundaries.right &&
+    (e.changedTouches[0].clientY || e.clientY) <= boundaries.bottom &&
+    (e.changedTouches[0].clientX || e.clientX) >= boundaries.left
+  );
 }
 
 function imgZoom(e) {
@@ -131,13 +129,9 @@ document.body.addEventListener("keydown", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
     if (e.key === 39 || e.keyCode === 39) {
       newImg();
-    }
-
-    if (e.key === 37 || e.keyCode === 37) {
+    } else if (e.key === 37 || e.keyCode === 37) {
       newImg("prev");
-    }
-
-    if (e.key === 27 || e.keyCode === 27) {
+    } else if (e.key === 27 || e.keyCode === 27) {
       closeCarousel();
     }
   }
@@ -174,30 +168,36 @@ document.addEventListener("touchend", (e) => {
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
 
-  if (isInsideElement(e, carousel)) {
+  if (
+    isInsideElement(e, carousel) &&
+    !carouselImg.classList.contains("zoomed")
+  ) {
     const swipeStartX = e.touches[0].clientX;
-    if (!carouselImg.classList.contains("zoomed")) {
-      document.addEventListener(
-        "touchend",
-        (e) => {
-          const swipeEndX = e.changedTouches[0].clientX;
-
-          if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
-            newImg();
-          } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
-            newImg("prev");
-          }
-        },
-        { once: true }
-      );
-    }
+    document.addEventListener(
+      "touchend",
+      (e) => {
+        const swipeEndX = e.changedTouches[0].clientX;
+        if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
+          newImg();
+        } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
+          newImg("prev");
+        }
+      },
+      { once: true }
+    );
+  } else if (carouselImg.classList.contains("zoomed")) {
+    document.addEventListener(
+      "touchend",
+      () => {
+        zoomOut();
+      },
+      { once: true }
+    );
   }
 });
 
 carouselImg.addEventListener("click", (e) => {
-  if (!carouselImg.classList.contains("touched")) {
-    imgZoom(e);
-  } else {
-    carouselImg.classList.remove("touched");
-  }
+  carouselImg.classList.contains("touched")
+    ? carouselImg.classList.remove("touched")
+    : imgZoom(e);
 });
