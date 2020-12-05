@@ -140,7 +140,11 @@ document.body.addEventListener("keydown", (e) => {
 // Disable swipe while zoomed in? (Or zoom out on swipe on zoomed img, then browse on swipe on normal img)
 document.addEventListener("touchend", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
-    if (isInsideElement(e, carousel)) {
+    if (
+      isInsideElement(e, carousel) &&
+      !isInsideElement(e, prevBtn) &&
+      !isInsideElement(e, nextBtn)
+    ) {
       if (carouselImg.classList.contains("zoomed")) {
         zoomOut();
       } else {
@@ -187,8 +191,10 @@ document.addEventListener("touchstart", (e) => {
   } else {
     document.addEventListener(
       "touchend",
-      () => {
-        zoomOut();
+      (e) => {
+        if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
+          zoomOut();
+        }
       },
       { once: true }
     );
