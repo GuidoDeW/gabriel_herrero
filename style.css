@@ -440,7 +440,7 @@ h2 {
 .nav {
   height: 3rem;
   position: absolute;
-  width: 100%;
+  min-width: 100%;
   background-color: var(--dark-shade);
 }
 
@@ -493,7 +493,7 @@ h2 {
   opacity: 0;
   min-height: calc(50vh - 3rem);
   max-height: calc(50vh - 3rem);
-  width: 100%;
+  /* width: 100%; */
   transition: opacity var(--swift-color-change) 0s;
   -webkit-transition: opacity var(--swift-color-change) 0s;
   -moz-transition: opacity var(--swift-color-change) 0s;

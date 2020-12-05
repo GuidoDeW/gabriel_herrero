@@ -33,68 +33,49 @@ const galleryIndex = (function () {
   };
 })();
 
-const swipeParams = (function () {
-  let swipeStart = 0;
-  let swipeEnd = 0;
-  return {
-    setSwipeStart: (startPoint) => {
-      swipeStart = startPoint;
-    },
-    getSwipeStart: () => {
-      return swipeStart;
-    },
-    setSwipeEnd: (endPoint) => {
-      swipeEnd = endPoint;
-    },
-    getSwipeEnd: () => {
-      return swipeEnd;
-    },
-  };
-})();
+function isInsideElement(e, element) {
+  const boundaries = element.getBoundingClientRect();
+  return (
+    (e.changedTouches[0].clientY || e.clientY) >= boundaries.top &&
+    (e.changedTouches[0].clientX || e.clientX) <= boundaries.right &&
+    (e.changedTouches[0].clientY || e.clientY) <= boundaries.bottom &&
+    (e.changedTouches[0].clientX || e.clientX) >= boundaries.left
+  );
+}
 
-// function changeImg(callback) {
-//   carousel.classList.remove("transparent");
-//   carouselImg.classList.remove("transparent");
-//   callback();
-// }
+function imgZoom(e) {
+  if (carouselImg.classList.contains("zoomed")) {
+    zoomOut();
+  } else {
+    carouselImg.classList.add("zoom-transition");
+    carouselImg.classList.add("zoomed");
+    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
+    const transX =
+      (e.clientX || e.changedTouches[0].clientX) -
+      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
+        2 +
+        ((e.clientX || e.changedTouches[0].clientX) -
+          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
+          scale);
+    const transY =
+      (e.clientY || e.changedTouches[0].clientY) -
+      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
+        2 +
+        ((e.clientY || e.changedTouches[0].clientY) -
+          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
+          scale);
+
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+  }
+}
 
 function zoomOut() {
   carouselImg.classList.remove("zoomed");
   carouselImg.style.transform = "";
 }
 
-function newImg(direction) {
-  // carouselImg.classList.add("transparent");
-  if (direction === "prev") {
-    galleryIndex.current() > 0
-      ? galleryIndex.decrease()
-      : galleryIndex.set(imgSources.length - 1);
-  } else {
-    galleryIndex.current() < imgSources.length - 1
-      ? galleryIndex.increase()
-      : galleryIndex.reset();
-  }
-
-  const newSrc = imgSources[galleryIndex.current()];
-  // carouselImg.classList.add("transparent");
-  carousel.classList.add("transparent");
-
-  setTimeout(() => {
-    zoomOut();
-    carouselImg.setAttribute("src", newSrc);
-    // carouselImg.classList.remove("transparent");
-    carousel.classList.remove("transparent");
-  }, 300);
-
-  // setTimeout(() => {
-  //   zoomOut();
-  //   changeImg(() => {
-  //     carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-  //   });
-  // }, 300);
-}
-
 function openCarousel() {
+  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
   gallery.classList.add("carousel-show");
   carouselContainer.classList.add("carousel-show");
 }
@@ -105,57 +86,24 @@ function closeCarousel() {
   zoomOut();
 }
 
+function newImg(direction) {
+  carouselImg.classList.remove("zoom-transition");
+  if (direction === "prev") {
+    galleryIndex.current() > 0
+      ? galleryIndex.decrease()
+      : galleryIndex.set(imgSources.length - 1);
+  } else {
+    galleryIndex.current() < imgSources.length - 1
+      ? galleryIndex.increase()
+      : galleryIndex.reset();
+  }
+  zoomOut();
+  carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+}
+
 document.body.addEventListener("click", (e) => {
-  if (
-    e.target === closeBtn ||
-    (!carousel.contains(e.target) &&
-      !e.target.classList.contains("gallery-item-text"))
-  ) {
+  if (e.target === closeBtn || e.target === carouselContainer) {
     closeCarousel();
-  }
-});
-
-document.body.addEventListener("keydown", (e) => {
-  if (carouselContainer.classList.contains("carousel-show")) {
-    if (e.key === 39 || e.keyCode === 39) {
-      newImg();
-    }
-
-    if (e.key === 37 || e.keyCode === 37) {
-      newImg("prev");
-    }
-
-    if (e.key === 27 || e.keyCode === 27) {
-      closeCarousel();
-    }
-  }
-});
-
-//Swipe event handler (configured for a swipe across at least 25% of viewport width)
-carousel.addEventListener("touchstart", (e) => {
-  if (e.target !== closeBtn && e.target !== nextBtn && e.target !== prevBtn) {
-    e.preventDefault();
-    swipeParams.setSwipeStart(e.touches[0].clientX);
-    document.addEventListener(
-      "touchend",
-      (e) => {
-        e.preventDefault();
-        swipeParams.setSwipeEnd(e.changedTouches[0].clientX);
-        if (
-          swipeParams.getSwipeStart() - swipeParams.getSwipeEnd() >
-          document.body.clientWidth / 4
-        ) {
-          newImg();
-        }
-        if (
-          swipeParams.getSwipeEnd() - swipeParams.getSwipeStart() >
-          document.body.clientWidth / 4
-        ) {
-          newImg("prev");
-        }
-      },
-      { once: true }
-    );
   }
 });
 
@@ -171,34 +119,88 @@ nextBtn.addEventListener("click", () => {
 
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
-    openCarousel();
     galleryIndex.set(index);
-    carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+
+    openCarousel();
   })
 );
 
-carouselImg.addEventListener("click", (e) => {
-  if (carouselImg.classList.contains("zoomed")) {
-    zoomOut();
-  } else {
-    carouselImg.classList.add("zoomed");
-
-    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-    const transX =
-      e.clientX -
-      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
-        2 +
-        (e.clientX -
-          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
-          scale);
-    const transY =
-      e.clientY -
-      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
-        2 +
-        (e.clientY -
-          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
-          scale);
-
-    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+document.body.addEventListener("keydown", (e) => {
+  if (carouselContainer.classList.contains("carousel-show")) {
+    if (e.key === 39 || e.keyCode === 39) {
+      newImg();
+    } else if (e.key === 37 || e.keyCode === 37) {
+      newImg("prev");
+    } else if (e.key === 27 || e.keyCode === 27) {
+      closeCarousel();
+    }
   }
+});
+
+// Disable swipe while zoomed in? (Or zoom out on swipe on zoomed img, then browse on swipe on normal img)
+document.addEventListener("touchend", (e) => {
+  if (carouselContainer.classList.contains("carousel-show")) {
+    if (
+      isInsideElement(e, carousel) &&
+      !isInsideElement(e, prevBtn) &&
+      !isInsideElement(e, nextBtn)
+    ) {
+      if (carouselImg.classList.contains("zoomed")) {
+        zoomOut();
+      } else {
+        const firstTouch = new Date().getTime();
+        document.addEventListener(
+          "touchend",
+          (e) => {
+            const secondTouch = new Date().getTime();
+            if (
+              isInsideElement(e, carousel) &&
+              secondTouch - firstTouch <= 300
+            ) {
+              imgZoom(e);
+            }
+          },
+          { once: true }
+        );
+      }
+    }
+  }
+});
+
+//Swipe event handler (configured for a swipe across at least 25% of viewport width)
+//Maybe capture vertical displacement too, to disqualify steep diagonal movements
+document.addEventListener("touchstart", (e) => {
+  carouselImg.classList.add("touched");
+
+  if (!carouselImg.classList.contains("zoomed")) {
+    if (isInsideElement(e, carousel)) {
+      const swipeStartX = e.touches[0].clientX;
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          const swipeEndX = e.changedTouches[0].clientX;
+          if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
+            newImg();
+          } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
+            newImg("prev");
+          }
+        },
+        { once: true }
+      );
+    }
+  } else if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
+    document.addEventListener(
+      "touchend",
+      () => {
+        zoomOut();
+      },
+      { once: true }
+    );
+  }
+});
+
+carouselImg.addEventListener("click", (e) => {
+  carouselImg.classList.contains("touched")
+    ? carouselImg.classList.remove("touched")
+    : imgZoom(e);
 });
