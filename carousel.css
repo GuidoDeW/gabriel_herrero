@@ -45,10 +45,6 @@
   transition: transform 0s;
   --webkit-transition: transform 0s;
   --moz-transition: transform 0s;
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none;
 }
 
 #carousel-img.zoom-transition {
