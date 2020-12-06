@@ -161,27 +161,21 @@ document.addEventListener("touchend", (e) => {
 //Maybe capture vertical displacement too, to disqualify steep diagonal movements
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
-
-  if (!carouselImg.classList.contains("zoomed")) {
-    if (isInsideElement(e, carousel)) {
-      const swipeStartX = e.touches[0].clientX;
-      document.addEventListener(
-        "touchend",
-        (e) => {
-          const swipeEndX = e.changedTouches[0].clientX;
-          if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
-            newImg();
-          } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
-            newImg("prev");
-          }
-        },
-        { once: true }
-      );
-    }
+  if (isInsideElement(e, carousel)) {
+    const swipeStartX = e.touches[0].clientX;
+    document.addEventListener(
+      "touchend",
+      (e) => {
+        const swipeEndX = e.changedTouches[0].clientX;
+        if (swipeStartX - swipeEndX > document.body.clientWidth / 4) {
+          carouselImg.classList.contains("zoomed") ? zoomOut() : newImg();
+        } else if (swipeEndX - swipeStartX > document.body.clientWidth / 4) {
+          carouselImg.classList.contains("zoomed") ? zoomOut() : newImg("prev");
+        }
+      },
+      { once: true }
+    );
   }
-  // else if (!isInsideElement(e, prevBtn) && !isInsideElement(e, nextBtn)) {
-  //   document.addEventListener("touchend", zoomOut, { once: true });
-  // }
 });
 
 carouselImg.addEventListener("click", (e) => {
