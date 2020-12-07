@@ -1,12 +1,26 @@
 const dropdownMenu = document.getElementById("dropdown-menu"),
   hamburgerBtn = document.getElementById("hamburger-btn"),
   exploreBtn = document.getElementById("explore-btn"),
-  inPageLinks = document.querySelectorAll("a"),
-  inPageDestinations = [];
+  inPageLinks = Array.from(document.querySelectorAll("a")).filter((link) => {
+    return document.getElementById(`${link.getAttribute("href").substring(1)}`);
+  });
+
+function smoothScroll(e, destination) {
+  e.preventDefault();
+  scroll({
+    top: destination.offsetTop,
+    behavior: "smooth",
+  });
+}
 
 inPageLinks.forEach((link) => {
-  if (document.getElementById(`${link.getAttribute("href").substring(1)}`)) {
-    inPageDestinations.push(link.getAttribute("href"));
+  const inPageLink = document.getElementById(
+    `${link.getAttribute("href").substring(1)}`
+  );
+  if (inPageLink !== null) {
+    link.addEventListener("click", (e) => {
+      smoothScroll(e, inPageLink);
+    });
   }
 });
 
