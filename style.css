@@ -222,6 +222,32 @@ h2 {
 }
 
 /* Margin classes */
+.my-h {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.mx-h {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.mt-h {
+  margin-top: 0.5rem;
+}
+
+.mb-h {
+  margin-bottom: 0.5rem;
+}
+
+.ml-h {
+  margin-left: 0.5rem;
+}
+
+.mr-h {
+  margin-right: 0.5rem;
+}
+
 .my-1 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -562,9 +588,9 @@ h2 {
   line-height: 2rem;
 } */
 
-.info h3 {
+/* .info h3 {
   margin-bottom: 0.5rem;
-}
+} */
 
 .info div div,
 .info div img {
