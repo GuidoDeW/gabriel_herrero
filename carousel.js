@@ -35,62 +35,55 @@ const galleryIndex = (function () {
 
 function isInsideElement(e, element) {
   const boundaries = element.getBoundingClientRect();
+  const eventX = e.changedTouches[0].clientX || e.clientX;
+  const eventY = e.changedTouches[0].clientY || e.clientY;
   return (
-    (e.changedTouches[0].clientY || e.clientY) >= boundaries.top &&
-    (e.changedTouches[0].clientX || e.clientX) <= boundaries.right &&
-    (e.changedTouches[0].clientY || e.clientY) <= boundaries.bottom &&
-    (e.changedTouches[0].clientX || e.clientX) >= boundaries.left
+    eventY >= boundaries.top &&
+    eventX <= boundaries.right &&
+    eventY <= boundaries.bottom &&
+    eventX >= boundaries.left
   );
 }
 
-//Clues:
-// -zoom fails entirely  on very small windows - formula only seems to work upwards from a certain size
-// - Math.min has the same effect as current code (see transX in transform), but inverts the problem: the utter left
-// border of the img cannot be brought into view
-// -Try replacing the distance caluclation with carouselImg.getBoundingClientRect().left (although these should be numerically identical)
-// -Scale is the only variable in which the window plays no part whatsoever (it is simply the ratio of the real height to the rendered height),
-// so this might be the problem (the scale is a factor in the translation, so it might not suit the window dimensions).
-// The key might be to calculate some sort of maximal ratio the img may have to the window, and zoom based on that rather than
-// stictly based on natural dimensions
-// - the swan img produces  no problem
 function imgZoom(e) {
   if (carouselImg.classList.contains("zoomed")) {
     zoomOut();
   } else {
     carouselImg.classList.add("zoom-transition");
     carouselImg.classList.add("zoomed");
+    const targetX = e.clientX || e.changedTouches[0].clientX;
+    const targetY = e.clientY || e.changedTouches[0].clientY;
+    const renderedDimensions = carouselImg.getBoundingClientRect();
     const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-    const transX =
-      (e.clientX || e.changedTouches[0].clientX) -
-      ((window.innerWidth - carouselImg.getBoundingClientRect().width * scale) /
-        2 +
-        ((e.clientX || e.changedTouches[0].clientX) -
-          (window.innerWidth - carouselImg.getBoundingClientRect().width) / 2) *
-          scale);
-    const transY =
-      (e.clientY || e.changedTouches[0].clientY) -
-      ((window.innerHeight -
-        carouselImg.getBoundingClientRect().height * scale) /
-        2 +
-        ((e.clientY || e.changedTouches[0].clientY) -
-          (window.innerHeight - carouselImg.getBoundingClientRect().height) /
-            2) *
-          scale);
+    const transX = Math.min(
+      targetX -
+        ((window.innerWidth - renderedDimensions.width * scale) / 2 +
+          (targetX - (window.innerWidth - renderedDimensions.width) / 2) *
+            scale),
+      (window.innerWidth -
+        renderedDimensions.width -
+        (window.innerWidth - carouselImg.naturalWidth)) /
+        2
+    );
+    const transY = Math.min(
+      targetY -
+        ((window.innerHeight - renderedDimensions.height * scale) / 2 +
+          (targetY - (window.innerHeight - renderedDimensions.height) / 2) *
+            scale),
+      (window.innerHeight -
+        renderedDimensions.height -
+        (window.innerHeight - carouselImg.naturalHeight)) /
+        2
+    );
 
-    console.log(transX);
-    console.log(transX / scale);
-    console.log(carouselImg.getBoundingClientRect().left);
-    console.log(carouselImg.getBoundingClientRect().left * scale);
-
-    carouselImg.style.transform = `translate(${
-      transX > carouselImg.getBoundingClientRect().left
-        ? transX - (transX - carouselImg.getBoundingClientRect().left) / scale
-        : transX
-    }px, ${transY}px) scale(${scale})`;
+    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
   }
 }
 
-function zoomOut() {
+function zoomOut(transition) {
+  if (transition === "fast") {
+    carouselImg.classList.remove("zoom-transition");
+  }
   carouselImg.classList.remove("zoomed");
   carouselImg.style.transform = "";
 }
@@ -108,7 +101,6 @@ function closeCarousel() {
 }
 
 function newImg(direction) {
-  carouselImg.classList.remove("zoom-transition");
   if (direction === "prev") {
     galleryIndex.current() > 0
       ? galleryIndex.decrease()
@@ -118,7 +110,7 @@ function newImg(direction) {
       ? galleryIndex.increase()
       : galleryIndex.reset();
   }
-  zoomOut();
+  zoomOut("fast");
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
 }
 
@@ -142,6 +134,10 @@ galleryItems.forEach((item, index) =>
     openCarousel(imgSources[galleryIndex.current()]);
   })
 );
+
+window.addEventListener("resize", () => {
+  zoomOut("fast");
+});
 
 document.body.addEventListener("keydown", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
