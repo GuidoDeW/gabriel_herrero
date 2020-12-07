@@ -43,6 +43,16 @@ function isInsideElement(e, element) {
   );
 }
 
+//Clues:
+// -zoom fails entirely  on very small windows - formula only seems to work upwards from a certain size
+// - Math.min has the same effect as current code (see transX in transform), but inverts the problem: the utter left
+// border of the img cannot be brought into view
+// -Try replacing the distance caluclation with carouselImg.getBoundingClientRect().left (although these should be numerically identical)
+// -Scale is the only variable in which the window plays no part whatsoever (it is simply the ratio of the real height to the rendered height),
+// so this might be the problem (the scale is a factor in the translation, so it might not suit the window dimensions).
+// The key might be to calculate some sort of maximal ratio the img may have to the window, and zoom based on that rather than
+// stictly based on natural dimensions
+// - the swan img produces  no problem
 function imgZoom(e) {
   if (carouselImg.classList.contains("zoomed")) {
     zoomOut();
@@ -52,20 +62,31 @@ function imgZoom(e) {
     const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
     const transX =
       (e.clientX || e.changedTouches[0].clientX) -
-      ((window.innerWidth - carousel.getBoundingClientRect().width * scale) /
+      ((window.innerWidth - carouselImg.getBoundingClientRect().width * scale) /
         2 +
         ((e.clientX || e.changedTouches[0].clientX) -
-          (window.innerWidth - carousel.getBoundingClientRect().width) / 2) *
+          (window.innerWidth - carouselImg.getBoundingClientRect().width) / 2) *
           scale);
     const transY =
       (e.clientY || e.changedTouches[0].clientY) -
-      ((window.innerHeight - carousel.getBoundingClientRect().height * scale) /
+      ((window.innerHeight -
+        carouselImg.getBoundingClientRect().height * scale) /
         2 +
         ((e.clientY || e.changedTouches[0].clientY) -
-          (window.innerHeight - carousel.getBoundingClientRect().height) / 2) *
+          (window.innerHeight - carouselImg.getBoundingClientRect().height) /
+            2) *
           scale);
 
-    carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
+    console.log(transX);
+    console.log(transX / scale);
+    console.log(carouselImg.getBoundingClientRect().left);
+    console.log(carouselImg.getBoundingClientRect().left * scale);
+
+    carouselImg.style.transform = `translate(${
+      transX > carouselImg.getBoundingClientRect().left
+        ? transX - (transX - carouselImg.getBoundingClientRect().left) / scale
+        : transX
+    }px, ${transY}px) scale(${scale})`;
   }
 }
 
@@ -134,11 +155,10 @@ document.body.addEventListener("keydown", (e) => {
   }
 });
 
-// Disable swipe while zoomed in? (Or zoom out on swipe on zoomed img, then browse on swipe on normal img)
 document.addEventListener("touchend", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
     if (
-      isInsideElement(e, carousel) &&
+      isInsideElement(e, carouselImg) &&
       !isInsideElement(e, prevBtn) &&
       !isInsideElement(e, nextBtn)
     ) {
@@ -147,7 +167,10 @@ document.addEventListener("touchend", (e) => {
         "touchend",
         (e) => {
           const secondTouch = new Date().getTime();
-          if (isInsideElement(e, carousel) && secondTouch - firstTouch <= 300) {
+          if (
+            isInsideElement(e, carouselImg) &&
+            secondTouch - firstTouch <= 300
+          ) {
             imgZoom(e);
           }
         },
@@ -157,11 +180,9 @@ document.addEventListener("touchend", (e) => {
   }
 });
 
-//Swipe event handler (configured for a swipe across at least 25% of viewport width)
-//Maybe capture vertical displacement too, to disqualify steep diagonal movements
 document.addEventListener("touchstart", (e) => {
   carouselImg.classList.add("touched");
-  if (isInsideElement(e, carousel)) {
+  if (isInsideElement(e, carouselImg)) {
     const swipeStartX = e.touches[0].clientX;
     document.addEventListener(
       "touchend",
