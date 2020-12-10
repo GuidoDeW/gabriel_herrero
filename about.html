@@ -34,24 +34,30 @@
         class="display-flex flex-turner-s-col flex-jc-sb list-st-none"
       >
         <li class="light-text">
-          <a href="index.html" class="navlink light-text swift-color-change"
+          <a
+            href="index.html"
+            class="navlink light-text swift-color-change no-select"
             >Home</a
           >
         </li>
         <li class="light-text">
-          <a href="gallery.html" class="navlink light-text swift-color-change"
+          <a
+            href="gallery.html"
+            class="navlink light-text swift-color-change no-select"
             >Work</a
           >
         </li>
         <li class="light-text">
           <a
             href="about.html"
-            class="navlink light-text swift-color-change current"
+            class="navlink light-text swift-color-change no-select current"
             >About</a
           >
         </li>
         <li class="light-text">
-          <a href="contact.html" class="navlink light-text swift-color-change"
+          <a
+            href="contact.html"
+            class="navlink light-text swift-color-change no-select"
             >Contact</a
           >
         </li>
@@ -60,15 +66,16 @@
     <header id="header" class="display-flex flex-column flex-jc-c flex-ac">
       <!-- Add "hide" class when hamburger menu drops down-->
       <div id="welcome">
-        <h1 class="light-text my-2 not-main">About Me</h1>
+        <h1 class="light-text my-2 not-main no-select">About Me</h1>
       </div>
     </header>
-    <h2 class="text-ac my-1">My Story</h2>
+    <!-- <h2 class="text-ac my-1">My Story</h2> -->
     <section
       id="about-info"
       class="info dark-text display-flex flex-column flex-jc flex-ac my-1"
     >
       <!-- h3 { line-height: 2rem }-->
+      <h2 class="flex-w flex-total-width text-ac mb-1">My Story</h2>
       <div class="display-flex flex-turner-m-col flex-ac flex-jc-se">
         <img
           src="./personal-img/gabriel_closeup.jpg"
@@ -83,7 +90,11 @@
             with incredible surroundings. From a very young age, I developed an
             interest in recording these wonderful natural sights. I began
             researching everything I could about the art and myriad technical
-            aspects of photography, and got my first photography job at 16.
+            aspects of photography, and got my first photography job at 16. I
+            have since developed a tried-and-tested work method, which you can
+            read more about
+            <a href="#work-method" class="no-decoration">below</a>
+            .
           </p>
         </div>
       </div>
@@ -100,67 +111,71 @@
             hiking and photography full-time, both in my home country and
             abroad. As you can see in my
             <a href="gallery.html" class="no-decoration">gallery</a>, some of my
-            favourite destinations so far include Scandinavia and Canada. I have
-            since developed a tried-and-tested work method, which you can read
-            more about below.
+            favourite destinations so far include Scandinavia and Canada.
+            Needless to say, I not only work to travel, but am also quite
+            prepared to travel for work, so wherever you are, feel free to
+            <a href="contact.html" class="no-decoration">send me a message</a>!
           </p>
         </div>
       </div>
     </section>
-    <h2 class="text-ac my-1">How I Work</h2>
+    <!-- <h2 class="text-ac my-1">How I Work</h2> -->
     <section
       id="work-method"
-      class="display-flex flex-turner-xl-col flex-ac flex-jc-se py-1"
+      class="display-flex flex-column flex-ac flex-jc-se py-1"
     >
-      <div
-        class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
-      >
-        <p class="work-method-text">
-          First, we discuss the <strong>concept</strong> of the project. If you
-          already know exactly what you need, great! If not, I will help you
-          outline a plan.
-        </p>
-        <div class="work-method-step">
-          <i class="far fa-comments fs-rem-2 pb-1"></i>
-          <!-- <i class="fas fa-comments"></i> -->
-          <p>Concept</p>
+      <h2 class="flex-w flex-total-width text-ac my-1">How I Work</h2>
+      <div class="display-flex flex-ac flex-jc-se flex-turner-xl-col">
+        <div
+          class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
+        >
+          <p class="work-method-text">
+            First, we discuss the <strong>concept</strong> of the project. If
+            you already know exactly what you need, great! If not, I will help
+            you outline a plan.
+          </p>
+          <div class="work-method-step">
+            <i class="far fa-comments fs-rem-2 pb-1"></i>
+            <!-- <i class="fas fa-comments"></i> -->
+            <p>Concept</p>
+          </div>
         </div>
-      </div>
-      <div
-        class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
-      >
-        <p class="work-method-text">
-          Next, we <strong>explore</strong> different ways to execute the
-          project. This may include visiting possible shooting locations.
-        </p>
-        <div class="work-method-step">
-          <i class="fas fa-hiking fs-rem-2 pb-1"></i>
-          <p>Exploration</p>
+        <div
+          class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
+        >
+          <p class="work-method-text">
+            Next, we <strong>explore</strong> different ways to execute the
+            project. This may include visiting possible shooting locations.
+          </p>
+          <div class="work-method-step">
+            <i class="fas fa-hiking fs-rem-2 pb-1"></i>
+            <p>Exploration</p>
+          </div>
         </div>
-      </div>
-      <div
-        class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
-      >
-        <p class="work-method-text">
-          <strong>Action</strong> may involve a single photoshoot or several
-          sessions, depending on your requirements and preferences.
-        </p>
-        <div class="work-method-step">
-          <i class="fas fa-photo-video fs-rem-2 pb-1"></i>
-          <p>Action</p>
+        <div
+          class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
+        >
+          <p class="work-method-text">
+            <strong>Action</strong> may involve a single photoshoot or several
+            sessions, depending on your requirements and preferences.
+          </p>
+          <div class="work-method-step">
+            <i class="fas fa-photo-video fs-rem-2 pb-1"></i>
+            <p>Action</p>
+          </div>
         </div>
-      </div>
-      <div
-        class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
-      >
-        <!-- <i class="fas fa-user-cog"></i> -->
-        <p class="work-method-text">
-          Finally, we make a selection and <strong>customize</strong> the
-          results, so they are precisely tailored to your specific needs.
-        </p>
-        <div class="work-method-step">
-          <i class="fas fa-users-cog fs-rem-2 pb-1"></i>
-          <p>Customization</p>
+        <div
+          class="py-1 px-1 my-1 flex-equal-flex flex-column text-ac work-method-item no-select"
+        >
+          <!-- <i class="fas fa-user-cog"></i> -->
+          <p class="work-method-text">
+            Finally, we make a selection and <strong>customize</strong> the
+            results, so they are precisely tailored to your specific needs.
+          </p>
+          <div class="work-method-step">
+            <i class="fas fa-users-cog fs-rem-2 pb-1"></i>
+            <p>Customization</p>
+          </div>
         </div>
       </div>
     </section>
