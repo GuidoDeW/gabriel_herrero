@@ -195,6 +195,10 @@ h2 {
   flex: 1 1 0;
 }
 
+.flex-total-width {
+  flex: 0 0 100%;
+}
+
 .flex-w {
   flex-wrap: wrap;
 }
@@ -673,10 +677,20 @@ h2 {
 }
 
 #work-method {
-  background: url("./personal-img/gabriel-at-work.jpg") no-repeat center / cover;
+  /* background: url("./personal-img/gabriel-at-work.jpg") no-repeat center / cover; */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-image: url("./personal-img/gabriel-at-work.jpg");
+  background-image: url("./personal-img/gabriel-at-work.jpg"),
+    linear-gradient(180deg, var(--light-bg), transparent 30%);
   background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: overlay;
   min-height: 100%;
+}
+
+#work-method div {
+  width: 100%;
 }
 
 .work-method-item {
@@ -854,9 +868,9 @@ the dropped-down menu not fitting within 50vh) */
     flex-direction: row;
   }
 
-  #about-info .flex-turner-m-col:nth-child(even) {
+  /* #about-info .flex-turner-m-col:nth-child(even) {
     flex-direction: row-reverse;
-  }
+  } */
 
   /* #specs div p {
     text-align: justify;
@@ -877,15 +891,15 @@ the dropped-down menu not fitting within 50vh) */
     max-width: 100%;
   }
 
-  .info .flex-turner-m-col:nth-child(even) {
+  .info .flex-turner-m-col:nth-child(odd) {
     flex-direction: row-reverse;
   }
 
-  .info div:nth-of-type(odd) div p {
+  .info div:nth-of-type(even) div p {
     border-left: solid 1px var(--dark-shade);
   }
 
-  .info div:nth-of-type(even) div p {
+  .info div:nth-of-type(odd) div p {
     border-right: solid 1px var(--dark-shade);
   }
 
@@ -913,10 +927,6 @@ the dropped-down menu not fitting within 50vh) */
   }
   /* Work method styling */
 
-  #work-method {
-    background-position-y: 70%;
-  }
-
   .work-method-item {
     min-width: 50vw;
     max-width: 50vw;
@@ -924,6 +934,10 @@ the dropped-down menu not fitting within 50vh) */
 }
 
 @media screen and (min-width: 1024px) {
+  /* .info div img {
+    max-height: 25vw;
+  } */
+
   /* Gallery styling */
   .gallery-item {
     min-height: 20vw;
@@ -933,10 +947,11 @@ the dropped-down menu not fitting within 50vh) */
   }
 
   #work-method {
-    margin-top: 1rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    background-position: 0 68%;
+    /* margin-top: 1rem; */
+    /* padding-top: 3rem; */
+    /* padding-bottom: 3rem; */
+    /* background-position-y: 70%; */
+    background-position-y: 68%;
   }
 
   .flex-turner-l-col {
@@ -947,6 +962,12 @@ the dropped-down menu not fitting within 50vh) */
 @media screen and (min-width: 1224px) {
   .flex-turner-xl-col {
     flex-direction: row;
+  }
+
+  #work-method {
+    background-image: url("./personal-img/gabriel-at-work.jpg");
+    background-image: url("./personal-img/gabriel-at-work.jpg"),
+      linear-gradient(180deg, var(--light-bg), transparent 5%);
   }
 
   .work-method-item {
