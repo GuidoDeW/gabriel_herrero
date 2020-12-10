@@ -17,8 +17,6 @@
   --intermediate-color-change: 0.5s;
   --swift-transform: 0.2s;
   --intermediate-transform: 0.5s;
-  /* --swift-transition: 0.2s;
-  --intermediate-transition: 0.5s; */
 }
 
 * {
@@ -78,6 +76,7 @@ h2 {
 .max-height-50 {
   max-height: 50vh;
 }
+
 /* Display classes */
 .display-none {
   display: none;
@@ -442,7 +441,6 @@ h2 {
 
 /* Button styling */
 .btn {
-  /* display: none; */
   text-decoration: none;
   padding: 1rem 2rem;
   font-size: 1rem;
