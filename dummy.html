@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap"
+    />
+    <style>
+      * {
+        font-family: "Raleway", sans-serif;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background: url("./img/playa_del_silencio.jpg") no-repeat center / cover;
+        background-color: rgba(255, 255, 255, 0.7);
+        background-blend-mode: overlay;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+      }
+
+      .container p {
+        text-align: justify;
+      }
+
+      .container a {
+        text-decoration: none;
+      }
+
+      .container h2 {
+        margin-bottom: 1rem;
+      }
+
+      @media screen and (min-width: 568px) {
+        div {
+          max-width: 50vw;
+        }
+      } ;
+    </style>
+    <title>About The Author</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Thank you for visiting!</h2>
+      <p>
+        It seems you've clicked a link on Gabriel Herrero's fascinating
+        photography website. Unfortunately, he is entirely fictional, and
+        therefore incapable of running a blog or organizing adventurous hiking
+        tours. However, if you like to pretend that he's real after all,
+        <a href="index.html">click here</a> to head back to his web page.
+        Alternatively, have a look at
+        <a href="https://github.com/GuidoDeW">Guido's Github profile</a>. (He
+        may not be as cool as a globetrotting photographer, but at least he
+        exists.)
+      </p>
+    </div>
+  </body>
+</html>

@@ -13,17 +13,6 @@ function smoothScroll(e, destination) {
   });
 }
 
-inPageLinks.forEach((link) => {
-  const inPageLink = document.getElementById(
-    `${link.getAttribute("href").substring(1)}`
-  );
-  if (inPageLink !== null) {
-    link.addEventListener("click", (e) => {
-      smoothScroll(e, inPageLink);
-    });
-  }
-});
-
 document.body.addEventListener("click", (e) => {
   if (
     dropdownMenu.classList.contains("show") &&
@@ -42,4 +31,15 @@ hamburgerBtn.addEventListener("click", () => {
   hamburgerBtn.classList.toggle("fa-bars");
   hamburgerBtn.classList.toggle("fa-times");
   hamburgerBtn.classList.toggle("open");
+});
+
+inPageLinks.forEach((link) => {
+  const inPageLink = document.getElementById(
+    `${link.getAttribute("href").substring(1)}`
+  );
+  if (inPageLink !== null) {
+    link.addEventListener("click", (e) => {
+      smoothScroll(e, inPageLink);
+    });
+  }
 });

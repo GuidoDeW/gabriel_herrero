@@ -36,7 +36,6 @@
 .navlink {
   line-height: 3rem;
   font-size: 1.2rem;
-  pointer-events: none;
   text-decoration: none;
   text-decoration-color: transparent;
   transition: color var(--swift-color-change) 0s;
@@ -47,6 +46,7 @@
 }
 
 .navlink.current {
+  pointer-events: none;
   text-decoration: underline;
 }
 
