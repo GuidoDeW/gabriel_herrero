@@ -318,12 +318,12 @@ input[type="number"] {
 }
 
 #submission-msg {
-  position: absolute;
+  padding: 20vh;
 }
 
 #submission-msg.form-pending,
 #contact-form.form-submitted {
-  visibility: hidden;
+  display: none;
 }
 
 #contact-form.form-submitted *,
