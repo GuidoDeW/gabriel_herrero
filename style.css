@@ -154,6 +154,10 @@
   max-width: 100%;
 }
 
+#gallery-intro {
+  width: 90vw;
+}
+
 .gallery-item {
   position: relative;
   overflow: hidden;
