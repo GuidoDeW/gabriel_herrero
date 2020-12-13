@@ -114,13 +114,14 @@ function newImg(direction) {
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
 }
 
-document.body.addEventListener("click", (e) => {
+document.body.addEventListener("touchstart", (e) => {
+  const carouselSpace = carousel.getBoundingClientRect();
+  const targetSpace = e.touches[0];
   if (
-    e.target !== prevBtn &&
-    e.target !== nextBtn &&
-    e.target !== carousel &&
-    e.target !== carouselImg &&
-    (e.target === closeBtn || carouselContainer.contains(e.target))
+    targetSpace.clientX < carouselSpace.left ||
+    targetSpace.clientX > carouselSpace.right ||
+    targetSpace.clientY > carouselSpace.bottom ||
+    targetSpace.clientY < carouselSpace.top
   ) {
     closeCarousel();
   }
