@@ -115,7 +115,13 @@ function newImg(direction) {
 }
 
 document.body.addEventListener("click", (e) => {
-  if (e.target === closeBtn || e.target === carouselContainer) {
+  if (
+    e.target !== prevBtn &&
+    e.target !== nextBtn &&
+    e.target !== carousel &&
+    e.target !== carouselImg &&
+    (e.target === closeBtn || carouselContainer.contains(e.target))
+  ) {
     closeCarousel();
   }
 });

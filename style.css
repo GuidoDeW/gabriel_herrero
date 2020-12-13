@@ -261,7 +261,19 @@
   -moz-transition: opacity var(--intermediate-color-change);
 }
 
-.work-method-item:hover,
+@media (hover: hover) {
+  .work-method-item:hover {
+    background-color: var(--select-text-shade);
+    color: var(--dark-text);
+    border-color: var(--dark-shade);
+    cursor: pointer;
+  }
+
+  .work-method-item:hover .work-method-step {
+    opacity: 0.2;
+  }
+}
+
 .work-method-item.highlighted {
   background-color: var(--select-text-shade);
   color: var(--dark-text);
@@ -273,7 +285,6 @@
   opacity: 0;
 }
 
-.work-method-item:hover .work-method-step,
 .work-method-item.highlighted .work-method-step {
   opacity: 0.2;
 }
