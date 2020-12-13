@@ -25,12 +25,15 @@
   cursor: pointer;
 }
 
-.hamburger-btn:hover {
-  color: var(--select-text);
+@media (hover: hover) {
+  .hamburger-btn:hover {
+    color: var(--select-text);
+  }
 }
 
 .hamburger-btn.open {
   transform: rotateZ(-90deg);
+  color: var(--select-text);
 }
 
 .navlink {
@@ -327,7 +330,7 @@ input[type="number"] {
   transition: all 0s;
 }
 
-/*Media queries*/
+/*Responsiveness*/
 @media screen and (min-width: 568px) {
   /* Navbar styling */
   #hamburger-btn {
