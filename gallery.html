@@ -163,12 +163,16 @@
       id="gallery"
       class="display-flex flex-row flex-ac flex-jc-c flex-w my-1"
     >
-      <h2
-        class="flex-w flex-total-width text-ac mb-1"
-        style="flex-wrap: wrap; flex: 0 0 100%"
+      <div
+        class="display-flex flex-column flex-ac flex-w flex-total-width text-ac px-1"
       >
-        Gallery
-      </h2>
+        <h2 class="mb-1">Gallery</h2>
+        <p class="py-1 text-aj">
+          This is a small selection of my favourite works. Hover over any photo
+          to see its title, and click or tap it to have a closer look.
+        </p>
+      </div>
+
       <div class="gallery-item mx-1 my-1 flex-equal-flex">
         <p class="gallery-item-text text-ac no-select">Frost</p>
         <img
@@ -340,9 +344,7 @@
           ></a>
         </li>
       </ul>
-      <span style="font-size: 1rem" class="display-flex flex-jc-c"
-        >&copy; Gabriel Herrero</span
-      >
+      <span class="display-flex flex-jc-c">&copy; Gabriel Herrero</span>
     </footer>
   </body>
 </html>

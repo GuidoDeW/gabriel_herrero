@@ -405,6 +405,10 @@ input[type="number"] {
     flex-direction: row;
   }
 
+  .text-a-turner {
+    text-align: center;
+  }
+
   #specs div div {
     border-bottom-color: transparent;
   }
