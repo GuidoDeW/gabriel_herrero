@@ -118,10 +118,12 @@ document.body.addEventListener("touchstart", (e) => {
   const carouselSpace = carousel.getBoundingClientRect();
   const targetSpace = e.touches[0];
   if (
-    targetSpace.clientX < carouselSpace.left ||
-    targetSpace.clientX > carouselSpace.right ||
-    targetSpace.clientY > carouselSpace.bottom ||
-    targetSpace.clientY < carouselSpace.top
+    (targetSpace.clientX < carouselSpace.left ||
+      targetSpace.clientX > carouselSpace.right ||
+      targetSpace.clientY > carouselSpace.bottom ||
+      targetSpace.clientY < carouselSpace.top) &&
+    e.target !== prevBtn &&
+    e.target !== nextBtn
   ) {
     closeCarousel();
   }
