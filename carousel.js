@@ -45,7 +45,7 @@ function isInsideElement(e, element) {
     eventX >= boundaries.left
   );
 }
-
+/*
 function checkOverlap() {
   const carouselBoundaries = carousel.getBoundingClientRect();
   for (let i = 0; i < navBtns.length; i++) {
@@ -69,25 +69,26 @@ function checkOverlap() {
     }
   }
 }
+*/
 
-// function checkOverlap() {
-//   const carouselBoundaries = carousel.getBoundingClientRect();
-//   navBtns.forEach((btn) => {
-//     const btnBoundaries = btn.getBoundingClientRect();
-//     if (
-//       !(
-//         btnBoundaries.top > carouselBoundaries.bottom ||
-//         btnBoundaries.bottom < carouselBoundaries.top ||
-//         btnBoundaries.right < carouselBoundaries.left ||
-//         btnBoundaries.left > carouselBoundaries.right
-//       )
-//     ) {
-//       navBtns.forEach((btn) => btn.classList.add("overlap"));
-//     } else {
-//       btn.classList.remove("overlap");
-//     }
-//   });
-// }
+function checkOverlap() {
+  const carouselBoundaries = carousel.getBoundingClientRect();
+  navBtns.forEach((btn) => {
+    const btnBoundaries = btn.getBoundingClientRect();
+    if (
+      !(
+        btnBoundaries.top > carouselBoundaries.bottom ||
+        btnBoundaries.bottom < carouselBoundaries.top ||
+        btnBoundaries.right < carouselBoundaries.left ||
+        btnBoundaries.left > carouselBoundaries.right
+      )
+    ) {
+      navBtns.forEach((btn) => btn.classList.add("overlap"));
+    } else {
+      btn.classList.remove("overlap");
+    }
+  });
+}
 
 function imgZoom(e) {
   if (carouselImg.classList.contains("zoomed")) {
