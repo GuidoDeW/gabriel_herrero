@@ -10,7 +10,8 @@ const galleryItems = document.querySelectorAll(".gallery-item"),
   carouselImg = document.getElementById("carousel-img"),
   prevBtn = document.getElementById("carousel-prev-btn"),
   nextBtn = document.getElementById("carousel-next-btn"),
-  closeBtn = document.getElementById("carousel-close-btn");
+  closeBtn = document.getElementById("carousel-close-btn"),
+  navBtns = document.querySelectorAll(".carousel-btn");
 
 const galleryIndex = (function () {
   let currentImage = 0;
@@ -35,14 +36,57 @@ const galleryIndex = (function () {
 
 function isInsideElement(e, element) {
   const boundaries = element.getBoundingClientRect();
-  const eventX = e.changedTouches[0].clientX || e.clientX;
-  const eventY = e.changedTouches[0].clientY || e.clientY;
+  const eventX = e.clientX || e.changedTouches[0].clientX;
+  const eventY = e.clientY || e.changedTouches[0].clientY;
   return (
     eventY >= boundaries.top &&
     eventX <= boundaries.right &&
     eventY <= boundaries.bottom &&
     eventX >= boundaries.left
   );
+}
+
+// function checkOverlap() {
+//   const carouselBoundaries = carousel.getBoundingClientRect();
+//   for (let i = 0; i < navBtns.length; i++) {
+//     const btnBoundaries = navBtns[i].getBoundingClientRect();
+//     if (
+//       !(
+//         btnBoundaries.top > carouselBoundaries.bottom ||
+//         btnBoundaries.bottom < carouselBoundaries.top ||
+//         btnBoundaries.right < carouselBoundaries.left ||
+//         btnBoundaries.left > carouselBoundaries.right
+//       )
+//     ) {
+//       navBtns.forEach((btn) => btn.classList.add("overlap"));
+//       console.log("overlap detected");
+//       return;
+//     } else {
+//       console.log("overlap removal loop ran");
+//       navBtns.forEach((btn) => {
+//         btn.classList.remove("overlap");
+//       });
+//     }
+//   }
+// }
+
+function checkOverlap() {
+  const carouselBoundaries = carousel.getBoundingClientRect();
+  navBtns.forEach((btn) => {
+    const btnBoundaries = btn.getBoundingClientRect();
+    if (
+      !(
+        btnBoundaries.top > carouselBoundaries.bottom ||
+        btnBoundaries.bottom < carouselBoundaries.top ||
+        btnBoundaries.right < carouselBoundaries.left ||
+        btnBoundaries.left > carouselBoundaries.right
+      )
+    ) {
+      navBtns.forEach((btn) => btn.classList.add("overlap"));
+    } else {
+      btn.classList.remove("overlap");
+    }
+  });
 }
 
 function imgZoom(e) {
@@ -92,6 +136,7 @@ function openCarousel(attr) {
   carouselImg.setAttribute("src", attr);
   gallery.classList.add("carousel-show");
   carouselContainer.classList.add("carousel-show");
+  checkOverlap();
 }
 
 function closeCarousel() {
@@ -112,6 +157,7 @@ function newImg(direction) {
   }
   zoomOut("fast");
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
+  checkOverlap();
 }
 
 document.body.addEventListener("touchstart", (e) => {
@@ -129,6 +175,29 @@ document.body.addEventListener("touchstart", (e) => {
   }
 });
 
+/*
+carouselContainer.addEventListener("mousemove", (e) => {
+  e.preventDefault();
+  if (
+    [...carouselNavBtns].filter((btn) => {
+      return btn.classList.contains("fade-in");
+    }).length === 0 &&
+    !isInsideElement(e, carouselImg)
+  ) {
+    carouselNavBtns.forEach((btn) => {
+      btn.classList.add("fade-in");
+      // setTimeout(() => {
+      //   btn.classList.remove("fade-in");
+      // }, 600);
+    });
+    // setTimeout(() => {
+    //   carouselNavBtns.forEach((btn) => {
+    //     btn.classList.remove("fade-in");
+    //   }, 300);
+    // });
+  }
+});
+*/
 closeBtn.addEventListener("click", closeCarousel);
 
 prevBtn.addEventListener("click", () => {
@@ -146,6 +215,7 @@ galleryItems.forEach((item, index) =>
 
 window.addEventListener("resize", () => {
   zoomOut("fast");
+  checkOverlap();
 });
 
 document.body.addEventListener("keydown", (e) => {

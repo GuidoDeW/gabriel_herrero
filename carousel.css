@@ -74,16 +74,24 @@
 
 .carousel-btn {
   z-index: 2;
-  color: transparent;
+  color: var(--dark-shade);
+  opacity: 0.5;
   margin: 1rem;
   font-size: 3rem;
-  transition: color var(--swift-color-change);
-  --webkit-transition: color var(--swift-color-change);
-  --moz-transition: color var(--swift-color-change);
+  transition: opacity var(--swift-color-change);
+  --webkit-transition: opacity var(--swift-color-change);
+  --moz-transition: opacity var(--swift-color-change);
+}
+
+.carousel-btn.overlap:not(:hover) {
+  transition: opacity 0;
+  --webkit-transition: opacity 0;
+  --moz-transition: opacity 0;
+  opacity: 0;
 }
 
 .carousel-btn:hover {
-  color: var(--dark-shade);
+  opacity: 1;
   cursor: pointer;
 }
 
