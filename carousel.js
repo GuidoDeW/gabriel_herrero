@@ -46,34 +46,10 @@ function isInsideElement(e, element) {
   );
 }
 
-// function checkOverlap() {
-//   const carouselBoundaries = carousel.getBoundingClientRect();
-//   for (let i = 0; i < navBtns.length; i++) {
-//     const btnBoundaries = navBtns[i].getBoundingClientRect();
-//     if (
-//       !(
-//         btnBoundaries.top > carouselBoundaries.bottom ||
-//         btnBoundaries.bottom < carouselBoundaries.top ||
-//         btnBoundaries.right < carouselBoundaries.left ||
-//         btnBoundaries.left > carouselBoundaries.right
-//       )
-//     ) {
-//       navBtns.forEach((btn) => btn.classList.add("overlap"));
-//       console.log("overlap detected");
-//       return;
-//     } else {
-//       console.log("overlap removal loop ran");
-//       navBtns.forEach((btn) => {
-//         btn.classList.remove("overlap");
-//       });
-//     }
-//   }
-// }
-
 function checkOverlap() {
   const carouselBoundaries = carousel.getBoundingClientRect();
-  navBtns.forEach((btn) => {
-    const btnBoundaries = btn.getBoundingClientRect();
+  for (let i = 0; i < navBtns.length; i++) {
+    const btnBoundaries = navBtns[i].getBoundingClientRect();
     if (
       !(
         btnBoundaries.top > carouselBoundaries.bottom ||
@@ -83,11 +59,35 @@ function checkOverlap() {
       )
     ) {
       navBtns.forEach((btn) => btn.classList.add("overlap"));
+      // console.log("overlap detected");
+      return;
     } else {
-      btn.classList.remove("overlap");
+      // console.log("overlap removal loop ran");
+      navBtns.forEach((btn) => {
+        btn.classList.remove("overlap");
+      });
     }
-  });
+  }
 }
+
+// function checkOverlap() {
+//   const carouselBoundaries = carousel.getBoundingClientRect();
+//   navBtns.forEach((btn) => {
+//     const btnBoundaries = btn.getBoundingClientRect();
+//     if (
+//       !(
+//         btnBoundaries.top > carouselBoundaries.bottom ||
+//         btnBoundaries.bottom < carouselBoundaries.top ||
+//         btnBoundaries.right < carouselBoundaries.left ||
+//         btnBoundaries.left > carouselBoundaries.right
+//       )
+//     ) {
+//       navBtns.forEach((btn) => btn.classList.add("overlap"));
+//     } else {
+//       btn.classList.remove("overlap");
+//     }
+//   });
+// }
 
 function imgZoom(e) {
   if (carouselImg.classList.contains("zoomed")) {
