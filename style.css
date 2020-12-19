@@ -274,7 +274,15 @@
   }
 
   .work-method-item:hover .work-method-step {
-    opacity: 0.2;
+    opacity: 0.1;
+  }
+
+  .work-method-item:hover .work-method-step p {
+    opacity: 0;
+  }
+
+  .work-method-item:hover .work-method-text {
+    opacity: 1;
   }
 }
 
@@ -290,7 +298,7 @@
 }
 
 .work-method-item.highlighted .work-method-step {
-  opacity: 0.2;
+  opacity: 0.1;
 }
 
 .work-method-item.highlighted .work-method-text {
