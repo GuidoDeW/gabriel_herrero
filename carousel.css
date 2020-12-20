@@ -83,10 +83,17 @@
   --moz-transition: opacity var(--swift-color-change);
 }
 
-.carousel-btn.overlap:not(:hover) {
+/* .carousel-btn.overlap:not(:hover) {
   transition: opacity 0;
   --webkit-transition: opacity 0;
   --moz-transition: opacity 0;
+  opacity: 0;
+} */
+
+.carousel-btn.overlap {
+  /* transition: opacity 0;
+  --webkit-transition: opacity 0;
+  --moz-transition: opacity 0; */
   opacity: 0;
 }
 

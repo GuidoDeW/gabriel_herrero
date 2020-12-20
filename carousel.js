@@ -75,18 +75,12 @@ function checkOverlap() {
   const carouselBoundaries = carousel.getBoundingClientRect();
   navBtns.forEach((btn) => {
     const btnBoundaries = btn.getBoundingClientRect();
-    if (
-      !(
-        btnBoundaries.top > carouselBoundaries.bottom ||
-        btnBoundaries.bottom < carouselBoundaries.top ||
-        btnBoundaries.right < carouselBoundaries.left ||
-        btnBoundaries.left > carouselBoundaries.right
-      )
-    ) {
-      navBtns.forEach((btn) => btn.classList.add("overlap"));
-    } else {
-      btn.classList.remove("overlap");
-    }
+    btnBoundaries.top > carouselBoundaries.bottom ||
+    btnBoundaries.bottom < carouselBoundaries.top ||
+    btnBoundaries.right < carouselBoundaries.left ||
+    btnBoundaries.left > carouselBoundaries.right
+      ? btn.classList.remove("overlap")
+      : btn.classList.add("overlap");
   });
 }
 
@@ -137,7 +131,7 @@ function openCarousel(attr) {
   carouselImg.setAttribute("src", attr);
   gallery.classList.add("carousel-show");
   carouselContainer.classList.add("carousel-show");
-  checkOverlap();
+  window.requestAnimationFrame(checkOverlap);
 }
 
 function closeCarousel() {
@@ -157,8 +151,10 @@ function newImg(direction) {
       : galleryIndex.reset();
   }
   zoomOut("fast");
+
   carouselImg.setAttribute("src", imgSources[galleryIndex.current()]);
-  checkOverlap();
+
+  window.requestAnimationFrame(checkOverlap);
 }
 
 document.body.addEventListener("touchstart", (e) => {
@@ -207,6 +203,16 @@ prevBtn.addEventListener("click", () => {
 
 nextBtn.addEventListener("click", newImg);
 
+// Stop touchend form triggering click e when btns overlap
+// (allow zoom on space occupied by btn)
+navBtns.forEach((btn) => {
+  btn.addEventListener("touchend", (e) => {
+    if (btn.classList.contains("overlap")) {
+      e.preventDefault();
+    }
+  });
+});
+
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
     galleryIndex.set(index);
@@ -233,11 +239,9 @@ document.body.addEventListener("keydown", (e) => {
 
 document.addEventListener("touchend", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
-    if (
-      isInsideElement(e, carouselImg) &&
-      !isInsideElement(e, prevBtn) &&
-      !isInsideElement(e, nextBtn)
-    ) {
+    // Remove check if e is NOT inside prevBtn or nextBtn, because
+    // touch navigation on overlapping btns is cancelled below
+    if (isInsideElement(e, carouselImg)) {
       const firstTouch = new Date().getTime();
       document.addEventListener(
         "touchend",
