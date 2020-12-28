@@ -45,31 +45,6 @@ function isInsideElement(e, element) {
     eventX >= boundaries.left
   );
 }
-/*
-function checkOverlap() {
-  const carouselBoundaries = carousel.getBoundingClientRect();
-  for (let i = 0; i < navBtns.length; i++) {
-    const btnBoundaries = navBtns[i].getBoundingClientRect();
-    if (
-      !(
-        btnBoundaries.top > carouselBoundaries.bottom ||
-        btnBoundaries.bottom < carouselBoundaries.top ||
-        btnBoundaries.right < carouselBoundaries.left ||
-        btnBoundaries.left > carouselBoundaries.right
-      )
-    ) {
-      navBtns.forEach((btn) => btn.classList.add("overlap"));
-      // console.log("overlap detected");
-      return;
-    } else {
-      // console.log("overlap removal loop ran");
-      navBtns.forEach((btn) => {
-        btn.classList.remove("overlap");
-      });
-    }
-  }
-}
-*/
 
 function checkOverlap() {
   const carouselBoundaries = carousel.getBoundingClientRect();
@@ -90,30 +65,30 @@ function imgZoom(e) {
   } else {
     carouselImg.classList.add("zoom-transition");
     carouselImg.classList.add("zoomed");
-    const targetX = e.clientX || e.changedTouches[0].clientX;
-    const targetY = e.clientY || e.changedTouches[0].clientY;
-    const renderedDimensions = carouselImg.getBoundingClientRect();
-    const scale = carouselImg.naturalHeight / carouselImg.offsetHeight;
-    const transX = Math.min(
-      targetX -
-        ((window.innerWidth - renderedDimensions.width * scale) / 2 +
-          (targetX - (window.innerWidth - renderedDimensions.width) / 2) *
-            scale),
-      (window.innerWidth -
-        renderedDimensions.width -
-        (window.innerWidth - carouselImg.naturalWidth)) /
-        2
-    );
-    const transY = Math.min(
-      targetY -
-        ((window.innerHeight - renderedDimensions.height * scale) / 2 +
-          (targetY - (window.innerHeight - renderedDimensions.height) / 2) *
-            scale),
-      (window.innerHeight -
-        renderedDimensions.height -
-        (window.innerHeight - carouselImg.naturalHeight)) /
-        2
-    );
+    const targetX = e.clientX || e.changedTouches[0].clientX,
+      targetY = e.clientY || e.changedTouches[0].clientY,
+      renderedDimensions = carouselImg.getBoundingClientRect(),
+      scale = carouselImg.naturalHeight / carouselImg.offsetHeight,
+      transX = Math.min(
+        targetX -
+          ((window.innerWidth - renderedDimensions.width * scale) / 2 +
+            (targetX - (window.innerWidth - renderedDimensions.width) / 2) *
+              scale),
+        (window.innerWidth -
+          renderedDimensions.width -
+          (window.innerWidth - carouselImg.naturalWidth)) /
+          2
+      ),
+      transY = Math.min(
+        targetY -
+          ((window.innerHeight - renderedDimensions.height * scale) / 2 +
+            (targetY - (window.innerHeight - renderedDimensions.height) / 2) *
+              scale),
+        (window.innerHeight -
+          renderedDimensions.height -
+          (window.innerHeight - carouselImg.naturalHeight)) /
+          2
+      );
 
     carouselImg.style.transform = `translate(${transX}px, ${transY}px) scale(${scale})`;
   }
@@ -172,29 +147,6 @@ document.body.addEventListener("touchstart", (e) => {
   }
 });
 
-/*
-carouselContainer.addEventListener("mousemove", (e) => {
-  e.preventDefault();
-  if (
-    [...carouselNavBtns].filter((btn) => {
-      return btn.classList.contains("fade-in");
-    }).length === 0 &&
-    !isInsideElement(e, carouselImg)
-  ) {
-    carouselNavBtns.forEach((btn) => {
-      btn.classList.add("fade-in");
-      // setTimeout(() => {
-      //   btn.classList.remove("fade-in");
-      // }, 600);
-    });
-    // setTimeout(() => {
-    //   carouselNavBtns.forEach((btn) => {
-    //     btn.classList.remove("fade-in");
-    //   }, 300);
-    // });
-  }
-});
-*/
 closeBtn.addEventListener("click", closeCarousel);
 
 prevBtn.addEventListener("click", () => {
@@ -202,16 +154,6 @@ prevBtn.addEventListener("click", () => {
 });
 
 nextBtn.addEventListener("click", newImg);
-
-// Stop touchend form triggering click e when btns overlap
-// (allow zoom on space occupied by btn)
-navBtns.forEach((btn) => {
-  btn.addEventListener("touchend", (e) => {
-    if (btn.classList.contains("overlap")) {
-      e.preventDefault();
-    }
-  });
-});
 
 galleryItems.forEach((item, index) =>
   item.querySelector(".gallery-item-text").addEventListener("click", () => {
@@ -239,19 +181,16 @@ document.body.addEventListener("keydown", (e) => {
 
 document.addEventListener("touchend", (e) => {
   if (carouselContainer.classList.contains("carousel-show")) {
-    // Remove check if e is NOT inside prevBtn or nextBtn, because
-    // touch navigation on overlapping btns is cancelled below
     if (isInsideElement(e, carouselImg)) {
       const firstTouch = new Date().getTime();
       document.addEventListener(
         "touchend",
         (e) => {
-          const secondTouch = new Date().getTime();
-          if (
-            isInsideElement(e, carouselImg) &&
-            secondTouch - firstTouch <= 300
-          ) {
-            imgZoom(e);
+          if (isInsideElement(e, carouselImg)) {
+            const secondTouch = new Date().getTime();
+            if (secondTouch - firstTouch <= 300) {
+              imgZoom(e);
+            }
           }
         },
         { once: true }

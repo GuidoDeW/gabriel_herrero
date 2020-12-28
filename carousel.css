@@ -83,23 +83,19 @@
   --moz-transition: opacity var(--swift-color-change);
 }
 
-/* .carousel-btn.overlap:not(:hover) {
-  transition: opacity 0;
-  --webkit-transition: opacity 0;
-  --moz-transition: opacity 0;
-  opacity: 0;
-} */
-
 .carousel-btn.overlap {
-  /* transition: opacity 0;
-  --webkit-transition: opacity 0;
-  --moz-transition: opacity 0; */
   opacity: 0;
 }
 
-.carousel-btn:hover {
+.carousel-btn:active {
   opacity: 1;
-  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .carousel-btn:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 
 .carousel-prev {
