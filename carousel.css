@@ -33,10 +33,6 @@
   --moz-transition: opacity 0.3s;
 }
 
-.transparent {
-  opacity: 0;
-}
-
 #carousel-img {
   object-fit: contain;
   display: block;

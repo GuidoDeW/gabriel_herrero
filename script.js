@@ -1,7 +1,11 @@
 const dropdownMenu = document.getElementById("dropdown-menu"),
   hamburgerBtn = document.getElementById("hamburger-btn"),
   exploreBtn = document.getElementById("explore-btn"),
-  inPageLinks = Array.from(document.querySelectorAll("a")).filter((link) => {
+  navBar = document.querySelector("nav"),
+  header = document.getElementById("header"),
+  navLinks = document.querySelectorAll(".navlink"),
+  headerDiv = document.getElementById("header").querySelector("div"),
+  inPageLinks = [...document.querySelectorAll("a")].filter((link) => {
     return document.getElementById(`${link.getAttribute("href").substring(1)}`);
   });
 
@@ -42,4 +46,21 @@ inPageLinks.forEach((link) => {
       smoothScroll(e, inPageLink);
     });
   }
+});
+
+[...navLinks, headerDiv].forEach((element) => {
+  window.addEventListener("resize", () => {
+    element.getBoundingClientRect().bottom >=
+    header.getBoundingClientRect().bottom
+      ? element.classList.add("transparent")
+      : element.classList.remove("transparent");
+  });
+});
+
+window.addEventListener("resize", () => {
+  header.style.minHeight =
+    header.getBoundingClientRect().bottom <=
+    navBar.getBoundingClientRect().bottom
+      ? `${navBar.getBoundingClientRect().height}px`
+      : (header.style.minHeight = "50vh");
 });

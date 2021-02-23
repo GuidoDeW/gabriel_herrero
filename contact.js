@@ -25,21 +25,23 @@ inputFields.forEach((field) => {
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   const incorrectFields = [];
+  const inputFieldsArray = [...inputFields];
 
   inputFields.forEach((field) => {
+    errorMsgs[inputFieldsArray.indexOf(field)].innerHTML = "&nbsp;";
     if (
       field.classList.contains("required-field") &&
       field.value.trim().length === 0
     ) {
       incorrectFields.push(field);
-      errorMsgs[[...inputFields].indexOf(field)].innerText =
+      errorMsgs[inputFieldsArray.indexOf(field)].innerText =
         "Please fill out this field.";
     } else if (
       field.name === "email" &&
       !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(field.value)
     ) {
       incorrectFields.push(field);
-      errorMsgs[[...inputFields].indexOf(field)].innerText =
+      errorMsgs[inputFieldsArray.indexOf(field)].innerText =
         "Please enter a valid email address.";
     } else if (
       field.name === "phone" &&
@@ -47,7 +49,7 @@ submitBtn.addEventListener("click", (e) => {
       !/^\+?([\.\s\-\(]*\d+[\.\s\-\)]*)+$/g.test(field.value)
     ) {
       incorrectFields.push(field);
-      errorMsgs[[...inputFields].indexOf(field)].innerText =
+      errorMsgs[inputFieldsArray.indexOf(field)].innerText =
         "Please enter a valid phone number.";
     }
   });
@@ -55,7 +57,7 @@ submitBtn.addEventListener("click", (e) => {
   if (incorrectFields.length > 0) {
     incorrectFields.forEach((field) => {
       field.classList.add("incorrect-field");
-      localStorage.removeItem(`input-${[...inputFields].indexOf(field)}`);
+      localStorage.removeItem(`input-${inputFieldsArray.indexOf(field)}`);
     });
   } else {
     errorMsgs.forEach((msg) => (msg.innerHTML = "&nbsp;"));
@@ -64,10 +66,10 @@ submitBtn.addEventListener("click", (e) => {
     inputFields.forEach((field) => {
       field.value = "";
       if (
-        localStorage.getItem(`input-${[...inputFields].indexOf(field)}`) !==
+        localStorage.getItem(`input-${inputFieldsArray.indexOf(field)}`) !==
         null
       ) {
-        localStorage.removeItem(`input-${[...inputFields].indexOf(field)}`);
+        localStorage.removeItem(`input-${inputFieldsArray.indexOf(field)}`);
       }
     });
   }

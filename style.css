@@ -58,6 +58,7 @@
   opacity: 0;
   min-height: calc(50vh - 3rem);
   max-height: calc(50vh - 3rem);
+  overflow: hidden;
   transition: opacity var(--swift-color-change) 0s;
   -webkit-transition: opacity var(--swift-color-change) 0s;
   -moz-transition: opacity var(--swift-color-change) 0s;
@@ -75,6 +76,7 @@
 
 #dropdown-menu li {
   opacity: 0;
+  visibility: hidden;
 }
 
 #dropdown-menu.show {
@@ -83,6 +85,7 @@
 
 #dropdown-menu.show li {
   opacity: 1;
+  visibility: visible;
 }
 
 #dropdown-menu.show li .navlink {
@@ -91,6 +94,22 @@
 
 #explore-btn {
   display: none;
+}
+
+/*Header styling*/
+#header {
+  min-height: 50vh;
+  max-height: 50vh;
+  min-width: 100vw;
+  background: url("./img/playa_del_silencio.jpg") no-repeat center / cover;
+  overflow: hidden;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#welcome h1 {
+  text-shadow: 0 0 2px var(--select-text);
 }
 
 /* Specs styling */
@@ -382,6 +401,7 @@ input[type="number"] {
   #dropdown-menu li {
     margin: 0 1rem;
     opacity: 1;
+    visibility: visible;
   }
 
   #dropdown-menu li:last-child {
