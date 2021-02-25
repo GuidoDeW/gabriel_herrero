@@ -7,7 +7,7 @@
 }
 
 .nav:first-child {
-  height: 3rem;
+  min-height: 3rem;
   text-align: center;
 }
 
@@ -98,10 +98,11 @@
 
 /*Header styling*/
 #header {
-  min-height: 50vh;
-  max-height: 50vh;
+  min-height: 3rem;
+  height: 50vh;
   min-width: 100vw;
-  background: url("./img/playa_del_silencio.jpg") no-repeat center / cover;
+  background: url("./img/original/playa_del_silencio.jpg") no-repeat center /
+    cover;
   overflow: hidden;
   text-align: center;
   align-items: center;
@@ -240,8 +241,8 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: url("./personal-img/gabriel-at-work.jpg");
-  background-image: url("./personal-img/gabriel-at-work.jpg"),
+  background-image: url("./personal-img/original/gabriel-at-work.jpg");
+  background-image: url("./personal-img/original/gabriel-at-work.jpg"),
     linear-gradient(180deg, var(--light-bg), transparent 30%);
   background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: overlay;
@@ -394,6 +395,7 @@ input[type="number"] {
   #dropdown-menu {
     opacity: 1;
     background-color: transparent;
+    overflow: visible;
     min-height: inherit;
     max-height: inherit;
   }
@@ -522,8 +524,8 @@ input[type="number"] {
   }
 
   #work-method {
-    background-image: url("./personal-img/gabriel-at-work.jpg");
-    background-image: url("./personal-img/gabriel-at-work.jpg"),
+    background-image: url("./personal-img/original/gabriel-at-work.jpg");
+    background-image: url("./personal-img/original/gabriel-at-work.jpg"),
       linear-gradient(180deg, var(--light-bg), transparent 5%);
   }
 

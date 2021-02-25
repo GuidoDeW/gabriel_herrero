@@ -1,7 +1,7 @@
 const galleryItems = document.querySelectorAll(".gallery-item"),
   imgSources = Array.from(document.querySelectorAll(".gallery-img")).map(
     (img) => {
-      return img.attributes.src.value;
+      return img.attributes.src.value.replace("compressed", "original");
     }
   ),
   gallery = document.getElementById("gallery"),
