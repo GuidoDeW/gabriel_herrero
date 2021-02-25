@@ -44,3 +44,14 @@ inPageLinks.forEach((link) => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("img").forEach((img) => {
+    if (img.hasAttribute("src")) {
+      const imgSrc = img.attributes.src.value;
+      if (imgSrc.includes("compressed")) {
+        img.setAttribute("src", imgSrc.replace("compressed", "original"));
+      }
+    }
+  });
+});

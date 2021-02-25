@@ -1,8 +1,9 @@
 const galleryItems = document.querySelectorAll(".gallery-item"),
-  galleryImgs = document.querySelectorAll(".gallery-img"),
-  imgSources = Array.from(galleryImgs).map((img) => {
-    return img.attributes.src.value.replace("compressed", "original");
-  }),
+  imgSources = Array.from(document.querySelectorAll(".gallery-img")).map(
+    (img) => {
+      return img.attributes.src.value.replace("compressed", "original");
+    }
+  ),
   gallery = document.getElementById("gallery"),
   carouselContainer = document.getElementById("carousel-container"),
   carousel = document.getElementById("img-carousel"),
@@ -221,10 +222,4 @@ carouselImg.addEventListener("click", (e) => {
   carouselImg.classList.contains("touched")
     ? carouselImg.classList.remove("touched")
     : imgZoom(e);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  galleryImgs.forEach((img, index) => {
-    img.setAttribute("src", imgSources[index]);
-  });
 });
