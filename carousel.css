@@ -1,3 +1,6 @@
+:root {
+  --img-border-width: 5px;
+}
 /* Carousel styling */
 #carousel-container {
   display: flex;
@@ -27,7 +30,7 @@
   height: fit-content;
   width: fit-content;
   overflow: hidden;
-  border: 5px solid var(--dark-shade);
+  border: var(--img-border-width) solid var(--dark-shade);
   transition: opacity 0.3s;
   --webkit-transition: opacity 0.3s;
   --moz-transition: opacity 0.3s;
@@ -117,4 +120,14 @@
 
 #carousel-close-btn:hover {
   transform: rotateZ(-90deg);
+}
+
+@media screen and (orientation: portrait) {
+  .carousel-nav.carousel-prev {
+    padding-left: var(--img-border-width);
+  }
+
+  .carousel-nav.carousel-next {
+    padding-right: var(--img-border-width);
+  }
 }

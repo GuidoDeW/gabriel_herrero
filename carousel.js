@@ -165,6 +165,7 @@ galleryItems.forEach((item, index) =>
 window.addEventListener("resize", () => {
   zoomOut("fast");
   checkOverlap();
+  navBtns.forEach((btn) => btn.classList.remove("hasactive"));
 });
 
 document.body.addEventListener("keydown", (e) => {
