@@ -363,6 +363,10 @@ input[type="number"] {
   color: rgba(255, 0, 0, 0.8);
 }
 
+#submission-msg {
+  min-height: 25vh;
+}
+
 #submission-msg.form-pending,
 #contact-form.form-submitted {
   display: none;
